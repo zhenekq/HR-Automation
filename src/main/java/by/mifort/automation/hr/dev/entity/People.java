@@ -24,7 +24,16 @@ public class People {
     private String status;
 
     @OneToMany(mappedBy = "human")
-    private Set<PeopleUpdate> peopleUpdates ;
+    private Set<PeopleUpdate> humanUpdates ;
+
+    @OneToMany(mappedBy = "human")
+    private Set<Keyword> humanKeywords;
+
+    @OneToMany(mappedBy = "human")
+    private Set<CommunicationHistory> communicationHistory;
+
+    @OneToMany(mappedBy = "human")
+    private Set<PeopleAttributes> humanAttributes;
 
     public People(){}
 
@@ -34,9 +43,14 @@ public class People {
         this.status = status;
     }
 
-    public People(Timestamp lastContact, String status) {
+    public People(String id, Timestamp lastContact, String status, Set<PeopleUpdate> humanUpdates, Set<Keyword> humanKeywords, Set<CommunicationHistory> communicationHistory, Set<PeopleAttributes> humanAttributes) {
+        this.id = id;
         this.lastContact = lastContact;
         this.status = status;
+        this.humanUpdates = humanUpdates;
+        this.humanKeywords = humanKeywords;
+        this.communicationHistory = communicationHistory;
+        this.humanAttributes = humanAttributes;
     }
 
     public String getId() {
@@ -63,17 +77,49 @@ public class People {
         this.status = status;
     }
 
+    public Set<PeopleUpdate> getHumanUpdates() {
+        return humanUpdates;
+    }
+
+    public void setHumanUpdates(Set<PeopleUpdate> humanUpdates) {
+        this.humanUpdates = humanUpdates;
+    }
+
+    public Set<Keyword> getHumanKeywords() {
+        return humanKeywords;
+    }
+
+    public void setHumanKeywords(Set<Keyword> humanKeywords) {
+        this.humanKeywords = humanKeywords;
+    }
+
+    public Set<CommunicationHistory> getCommunicationHistory() {
+        return communicationHistory;
+    }
+
+    public void setCommunicationHistory(Set<CommunicationHistory> communicationHistory) {
+        this.communicationHistory = communicationHistory;
+    }
+
+    public Set<PeopleAttributes> getHumanAttributes() {
+        return humanAttributes;
+    }
+
+    public void setHumanAttributes(Set<PeopleAttributes> humanAttributes) {
+        this.humanAttributes = humanAttributes;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         People people = (People) o;
-        return id.equals(people.id) && lastContact.equals(people.lastContact) && status.equals(people.status);
+        return id.equals(people.id) && lastContact.equals(people.lastContact) && status.equals(people.status) && humanUpdates.equals(people.humanUpdates) && humanKeywords.equals(people.humanKeywords) && communicationHistory.equals(people.communicationHistory) && humanAttributes.equals(people.humanAttributes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, lastContact, status);
+        return Objects.hash(id, lastContact, status, humanUpdates, humanKeywords, communicationHistory, humanAttributes);
     }
 
     @Override
@@ -82,6 +128,10 @@ public class People {
                 "id='" + id + '\'' +
                 ", lastContact=" + lastContact +
                 ", status='" + status + '\'' +
+                ", humanUpdates=" + humanUpdates +
+                ", humanKeywords=" + humanKeywords +
+                ", communicationHistory=" + communicationHistory +
+                ", humanAttributes=" + humanAttributes +
                 '}';
     }
 }
