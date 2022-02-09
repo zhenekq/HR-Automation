@@ -4,9 +4,9 @@ import by.mifort.automation.hr.dev.util.StringPrefixedSequenceIdGenerator;
 import com.sun.istack.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -24,7 +24,7 @@ public class People {
     private String status;
 
     @OneToMany(mappedBy = "human")
-    private Set<PeopleUpdate> humanUpdates ;
+    private Set<PeopleUpdate> humanUpdates;
 
     @OneToMany(mappedBy = "human")
     private Set<Keyword> humanKeywords;
@@ -35,7 +35,8 @@ public class People {
     @OneToMany(mappedBy = "human")
     private Set<PeopleAttributes> humanAttributes;
 
-    public People(){}
+    public People() {
+    }
 
     public People(String id, Timestamp lastContact, String status) {
         this.id = id;
