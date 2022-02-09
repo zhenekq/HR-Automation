@@ -6,6 +6,9 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -19,6 +22,9 @@ public class People {
 
     @Column(name = "status")
     private String status;
+
+    @OneToMany(mappedBy = "human")
+    private Set<PeopleUpdate> peopleUpdates ;
 
     public People(){}
 
@@ -55,5 +61,27 @@ public class People {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        People people = (People) o;
+        return id.equals(people.id) && lastContact.equals(people.lastContact) && status.equals(people.status);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, lastContact, status);
+    }
+
+    @Override
+    public String toString() {
+        return "People{" +
+                "id='" + id + '\'' +
+                ", lastContact=" + lastContact +
+                ", status='" + status + '\'' +
+                '}';
     }
 }
