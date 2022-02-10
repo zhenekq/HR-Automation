@@ -5,6 +5,7 @@ import by.mifort.automation.hr.dev.entity.People;
 import by.mifort.automation.hr.dev.entity.PeopleAttributes;
 import by.mifort.automation.hr.dev.repository.PeopleRepository;
 import by.mifort.automation.hr.dev.service.PeopleService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,22 +29,22 @@ public class PeopleServiceImpl implements PeopleService {
     }
 
     @Override
-    public People getHumanById(String uuid) {
-        return peopleRepository.findById(uuid).get();
+    public People getHumanById(@NotNull String id) {
+        return peopleRepository.findById(id).get();
     }
 
     @Override
-    public void addNewHuman(People people) {
+    public void addNewHuman(@NotNull People people) {
         peopleRepository.save(people);
     }
 
     @Override
-    public Set<People> findPeopleByKeywords(Set<Keyword> keywords) {
-        return null;
+    public List<People> findPeopleByKeywords(@NotNull Set<Keyword> keywords) {
+        return new ArrayList<>();
     }
 
     @Override
-    public Set<People> findPeopleByHumanAttributes(Set<PeopleAttributes> attributes) {
-        return null;
+    public List<People> findPeopleByHumanAttributes(@NotNull Set<PeopleAttributes> attributes) {
+        return new ArrayList<>();
     }
 }

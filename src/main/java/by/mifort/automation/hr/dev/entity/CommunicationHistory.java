@@ -1,8 +1,17 @@
 package by.mifort.automation.hr.dev.entity;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Objects;
+
+/**
+ * Communication history with candidate
+ * @author yauheni_vozny
+ * @version 1.0
+ */
 
 @Entity
 @Table(name = "communication_history")
@@ -77,25 +86,16 @@ public class CommunicationHistory {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CommunicationHistory that = (CommunicationHistory) o;
-        return id.equals(that.id) && createDate.equals(that.createDate) && updateDate.equals(that.updateDate) && comment.equals(that.comment) && human.equals(that.human);
+        return EqualsBuilder.reflectionEquals(this, o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, createDate, updateDate, comment, human);
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public String toString() {
-        return "CommunicationHistory{" +
-                "id=" + id +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", comment='" + comment + '\'' +
-                ", human=" + human +
-                '}';
+        return ToStringBuilder.reflectionToString(this);
     }
 }

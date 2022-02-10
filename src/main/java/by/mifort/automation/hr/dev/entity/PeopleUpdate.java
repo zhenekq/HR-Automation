@@ -1,23 +1,19 @@
 package by.mifort.automation.hr.dev.entity;
 
-import by.mifort.automation.hr.dev.service.PeopleService;
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
-import com.vladmihalcea.hibernate.type.json.JsonStringType;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
-
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Objects;
+
+/**
+ * Updates about candidate
+ * @author yauheni_vozny
+ * @version 1.0
+ * */
 
 @Entity
 @Table(name = "peopleupdates")
-@TypeDefs({
-        @TypeDef(name = "json", typeClass = JsonStringType.class)
-        ,
-        @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-})
 public class PeopleUpdate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +25,7 @@ public class PeopleUpdate {
     @Column(name = "updatedate")
     private Timestamp updateDate;
 
-    @Type(type = "jsonb")
-    @Column(name = "changeset")
+    @Column(name = "changeset", columnDefinition = "json")
     private String changeSet;
 
     @ManyToOne
@@ -90,25 +85,16 @@ public class PeopleUpdate {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PeopleUpdate that = (PeopleUpdate) o;
-        return id.equals(that.id) && source.equals(that.source) && updateDate.equals(that.updateDate) && changeSet.equals(that.changeSet);
+        return EqualsBuilder.reflectionEquals(this, o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, source, updateDate, changeSet);
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public String toString() {
-        return "PeopleUpdate{" +
-                "id=" + id +
-                ", source='" + source + '\'' +
-                ", updateDate=" + updateDate +
-                ", changeSet='" + changeSet + '\'' +
-                ", human=" + human +
-                '}';
+        return ToStringBuilder.reflectionToString(this);
     }
 }

@@ -1,7 +1,17 @@
 package by.mifort.automation.hr.dev.entity;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.persistence.*;
-import java.util.Objects;
+
+/**
+ * People attributes that connected with candidate
+ * @see AttributeTypes connected attributes with types
+ * @author yauheni_vozny
+ * @version 1.0
+ */
 
 @Entity
 @Table(name = "peopleattributes")
@@ -9,9 +19,6 @@ public class PeopleAttributes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column(name = "type")
-    private Integer type;
 
     @Column(name = "value")
     private String name;
@@ -23,12 +30,15 @@ public class PeopleAttributes {
     @JoinColumn(name = "userId", nullable = false)
     private People human;
 
+    @ManyToOne
+    @JoinColumn(name = "type", nullable = false)
+    private AttributeTypes attributeTypes;
+
     public PeopleAttributes() {
     }
 
     public PeopleAttributes(Integer id, Integer type, String name, Integer valueSource, People human) {
         this.id = id;
-        this.type = type;
         this.name = name;
         this.valueSource = valueSource;
         this.human = human;
@@ -40,14 +50,6 @@ public class PeopleAttributes {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
     }
 
     public String getName() {
@@ -76,25 +78,17 @@ public class PeopleAttributes {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PeopleAttributes that = (PeopleAttributes) o;
-        return id.equals(that.id) && type.equals(that.type) && name.equals(that.name) && valueSource.equals(that.valueSource) && human.equals(that.human);
+        return EqualsBuilder.reflectionEquals(this, o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, name, valueSource, human);
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public String toString() {
-        return "PeopleAttributes{" +
-                "id=" + id +
-                ", type=" + type +
-                ", name='" + name + '\'' +
-                ", valueSource=" + valueSource +
-                ", human=" + human +
-                '}';
+        return ToStringBuilder.reflectionToString(this);
     }
+
 }

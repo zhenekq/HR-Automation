@@ -1,7 +1,17 @@
 package by.mifort.automation.hr.dev.entity;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.persistence.*;
-import java.util.Objects;
+import java.util.Set;
+
+/**
+ * Attribute types of people attributes
+ * @author yauheni_vozny
+ * @version 1.0
+ */
 
 @Entity
 @Table(name = "attributetypes")
@@ -22,11 +32,8 @@ public class AttributeTypes {
     @Column(name = "isidentifier")
     private Boolean isIdentifier;
 
-    /*Is primary key for this table,
-      will use like a foreign key,
-      that connected with table peopleattributes
-       with field "type" ???
-    */
+    @OneToMany(mappedBy = "attributeTypes")
+    private Set<PeopleAttributes> peopleAttributes;
 
     public AttributeTypes() {
     }
@@ -81,25 +88,16 @@ public class AttributeTypes {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AttributeTypes that = (AttributeTypes) o;
-        return id.equals(that.id) && name.equals(that.name) && basicType.equals(that.basicType) && validation.equals(that.validation) && isIdentifier.equals(that.isIdentifier);
+        return EqualsBuilder.reflectionEquals(this, o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, basicType, validation, isIdentifier);
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public String toString() {
-        return "AttributeTypes{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", basicType='" + basicType + '\'' +
-                ", validation='" + validation + '\'' +
-                ", isIdentifier=" + isIdentifier +
-                '}';
+        return ToStringBuilder.reflectionToString(this);
     }
 }

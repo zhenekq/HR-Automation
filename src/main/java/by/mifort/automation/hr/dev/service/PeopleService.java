@@ -7,11 +7,41 @@ import by.mifort.automation.hr.dev.entity.PeopleAttributes;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Service layer for validation and business logic for PeopleRepository
+ * @see by.mifort.automation.hr.dev.repository.PeopleRepository
+ * @author yauheni_vozny
+ * @version 1.0
+ */
+
 public interface PeopleService {
 
+    /**
+     * @return List of all exists candidates
+     */
     List<People> getAllPeople();
-    People getHumanById(String uuid);
+
+    /**
+     * @return information about candidate
+     * @param id identifier of candidate
+     */
+    People getHumanById(String id);
+
+    /**
+     * Create new candidate in database
+     * @param people body of our candidate
+     */
     void addNewHuman(People people);
-    Set<People> findPeopleByKeywords(Set<Keyword> keywords);
-    Set<People> findPeopleByHumanAttributes(Set<PeopleAttributes> attributes);
+
+    /**
+     * @return List of candidate by keyword(s)
+     * @param keywords keywords that connected with candidate
+     */
+    List<People> findPeopleByKeywords(Set<Keyword> keywords);
+
+    /**
+     * @return List of candidate by attribute(s)
+     * @param attributes attributes that connected with candidate
+     */
+    List<People> findPeopleByHumanAttributes(Set<PeopleAttributes> attributes);
 }

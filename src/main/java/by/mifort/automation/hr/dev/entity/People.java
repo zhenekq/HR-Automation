@@ -1,19 +1,24 @@
 package by.mifort.automation.hr.dev.entity;
 
-import by.mifort.automation.hr.dev.util.StringPrefixedSequenceIdGenerator;
-import com.sun.istack.NotNull;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+
+/**
+ * Head entity "people" that has all information
+ * @author yauheni_vozny
+ * @version 1.0
+ */
 
 @Entity
 @Table(name = "people")
 public class People {
+
     @Id
     private String id = UUID.randomUUID().toString();
 
@@ -23,15 +28,31 @@ public class People {
     @Column(name = "status")
     private String status;
 
+    /**
+     * Information about candidate updates
+     * @see PeopleUpdate
+     */
     @OneToMany(mappedBy = "human")
     private Set<PeopleUpdate> humanUpdates;
 
+    /**
+     * Keyboards that connection with candidate
+     * @see Keyword
+     */
     @OneToMany(mappedBy = "human")
     private Set<Keyword> humanKeywords;
 
+    /**
+     * Communication history with candidate
+     * @see CommunicationHistory
+     */
     @OneToMany(mappedBy = "human")
     private Set<CommunicationHistory> communicationHistory;
 
+    /**
+     * Attributes that connected with candidate
+     * @see PeopleAttributes
+     */
     @OneToMany(mappedBy = "human")
     private Set<PeopleAttributes> humanAttributes;
 
@@ -42,16 +63,6 @@ public class People {
         this.id = id;
         this.lastContact = lastContact;
         this.status = status;
-    }
-
-    public People(String id, Timestamp lastContact, String status, Set<PeopleUpdate> humanUpdates, Set<Keyword> humanKeywords, Set<CommunicationHistory> communicationHistory, Set<PeopleAttributes> humanAttributes) {
-        this.id = id;
-        this.lastContact = lastContact;
-        this.status = status;
-        this.humanUpdates = humanUpdates;
-        this.humanKeywords = humanKeywords;
-        this.communicationHistory = communicationHistory;
-        this.humanAttributes = humanAttributes;
     }
 
     public String getId() {
@@ -112,27 +123,16 @@ public class People {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        People people = (People) o;
-        return id.equals(people.id) && lastContact.equals(people.lastContact) && status.equals(people.status) && humanUpdates.equals(people.humanUpdates) && humanKeywords.equals(people.humanKeywords) && communicationHistory.equals(people.communicationHistory) && humanAttributes.equals(people.humanAttributes);
+        return EqualsBuilder.reflectionEquals(this, o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, lastContact, status, humanUpdates, humanKeywords, communicationHistory, humanAttributes);
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public String toString() {
-        return "People{" +
-                "id='" + id + '\'' +
-                ", lastContact=" + lastContact +
-                ", status='" + status + '\'' +
-                ", humanUpdates=" + humanUpdates +
-                ", humanKeywords=" + humanKeywords +
-                ", communicationHistory=" + communicationHistory +
-                ", humanAttributes=" + humanAttributes +
-                '}';
+        return ToStringBuilder.reflectionToString(this);
     }
 }
