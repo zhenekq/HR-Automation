@@ -11,3 +11,17 @@ databaseChangeLog:
       file: db/changelog/changeset/create-people-attributes-table.yaml
   - include:
       file: db/changelog/changeset/create-attributes-types-table.yaml
+  - include:
+      file: db/changelog/changeset/delete-column-type-in-people-attributes.yaml
+  - include:
+      file: db/changelog/changeset/delete-column-userid-people-attribute.yaml
+  - include:
+      file: db/changelog/changeset/create-foreign-key-between-people-attributes-and-attribute-types.yaml
+  - include:
+      file: db/changelog/changeset/create-people-merge-candidates-table.yaml
+  - include:
+      file: db/changelog/changeset/change-timestamp-types-in-tables.yaml
+  - include:
+      file: db/changelog/changeset/change-changeset-type-in-people-updates-table.yaml
+  - include:
+      file: db/changelog/changeset/change-comment-type-in-communication-history-table.yaml
