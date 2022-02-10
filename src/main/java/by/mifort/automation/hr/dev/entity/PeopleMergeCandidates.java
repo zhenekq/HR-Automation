@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * People merge candidates entity
@@ -14,7 +15,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "people_merge_candidates")
-public class PeopleMergeCandidates {
+public class PeopleMergeCandidates implements Serializable {
 
     @EmbeddedId
     private MergeCandidates mergeCandidates;

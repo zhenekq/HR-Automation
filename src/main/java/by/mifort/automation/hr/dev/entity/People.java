@@ -6,6 +6,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +20,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "people")
-public class People {
+public class People implements Serializable {
 
     @Id
     private String id = UUID.randomUUID().toString();
@@ -83,6 +84,7 @@ public class People {
         this.id = id;
     }
 
+
     public Timestamp getLastContact() {
         return lastContact;
     }
@@ -99,6 +101,7 @@ public class People {
         this.status = status;
     }
 
+    @JsonIgnore
     public Set<PeopleUpdate> getHumanUpdates() {
         return humanUpdates;
     }
@@ -134,6 +137,7 @@ public class People {
         this.humanAttributes = humanAttributes;
     }
 
+    @JsonIgnore
     public Set<PeopleMergeCandidates> getCandidates() {
         return candidates;
     }
