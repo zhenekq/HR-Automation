@@ -1,11 +1,13 @@
 package by.mifort.automation.hr.dev.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -56,6 +58,14 @@ public class People {
     @OneToMany(mappedBy = "human")
     private Set<PeopleAttributes> humanAttributes;
 
+
+    /**
+     * Merged candidates
+     * @see PeopleMergeCandidates
+     * */
+    @OneToMany(mappedBy = "human")
+    private Set<PeopleMergeCandidates> candidates;
+
     public People() {
     }
 
@@ -97,6 +107,7 @@ public class People {
         this.humanUpdates = humanUpdates;
     }
 
+    @JsonIgnore
     public Set<Keyword> getHumanKeywords() {
         return humanKeywords;
     }
@@ -105,6 +116,7 @@ public class People {
         this.humanKeywords = humanKeywords;
     }
 
+    @JsonIgnore
     public Set<CommunicationHistory> getCommunicationHistory() {
         return communicationHistory;
     }
@@ -113,12 +125,21 @@ public class People {
         this.communicationHistory = communicationHistory;
     }
 
+    @JsonIgnore
     public Set<PeopleAttributes> getHumanAttributes() {
         return humanAttributes;
     }
 
     public void setHumanAttributes(Set<PeopleAttributes> humanAttributes) {
         this.humanAttributes = humanAttributes;
+    }
+
+    public Set<PeopleMergeCandidates> getCandidates() {
+        return candidates;
+    }
+
+    public void setCandidates(Set<PeopleMergeCandidates> candidates) {
+        this.candidates = candidates;
     }
 
     @Override
