@@ -5,6 +5,7 @@ import by.mifort.automation.hr.dev.entity.People;
 import by.mifort.automation.hr.dev.entity.PeopleAttributes;
 import by.mifort.automation.hr.dev.service.PeopleService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -34,6 +35,7 @@ public class PeopleController {
      * @param page number of page of candidates
      * @return Full list of candidates or by keyboards or attributes
      */
+    @ApiOperation("Get all users by page, on every page 20 users")
     @GetMapping
     public List<People> getAll(@RequestParam(required = false) Long page) {
         return peopleService.getAllPeople();
@@ -44,6 +46,7 @@ public class PeopleController {
      * @param id - unique identifier for searching
      * @return Candidate info by id
      */
+    @ApiOperation("Get full information about user by id")
     @GetMapping("/{id}")
     public People getHumanById(@PathVariable String id) {
         return peopleService.getHumanById(id);
@@ -53,7 +56,8 @@ public class PeopleController {
      * POST request to create candidate
      * @param people - candidate entity body
      */
-    @PostMapping
+    @ApiOperation("Create new user")
+    @PostMapping("/add")
     public String add(@RequestBody People people) {
         peopleService.addNewHuman(people);
         return people.getId();
