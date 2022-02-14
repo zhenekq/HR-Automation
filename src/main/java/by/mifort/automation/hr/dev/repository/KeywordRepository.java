@@ -12,5 +12,6 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface KeyboardRepository extends JpaRepository<Keyword, String> {
+public interface KeywordRepository extends JpaRepository<Keyword, String> {
+    Keyword findKeywordByHumanId(String id);
 }

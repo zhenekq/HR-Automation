@@ -1,9 +1,11 @@
 package by.mifort.automation.hr.dev.controller;
 
+import by.mifort.automation.hr.dev.dto.PeopleDto;
 import by.mifort.automation.hr.dev.entity.Keyword;
 import by.mifort.automation.hr.dev.entity.People;
 import by.mifort.automation.hr.dev.entity.PeopleAttributes;
 import by.mifort.automation.hr.dev.service.PeopleService;
+import by.mifort.automation.hr.dev.util.EntityMappingUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +50,9 @@ public class PeopleController {
      */
     @ApiOperation("Get full information about user by id")
     @GetMapping("/{id}")
-    public People getHumanById(@PathVariable String id) {
-        return peopleService.getHumanById(id);
+    public PeopleDto getHumanById(@PathVariable String id) {
+        People human = peopleService.getHumanById(id);
+        return EntityMappingUtils.convertToPeopleDto(human);
     }
 
     /**

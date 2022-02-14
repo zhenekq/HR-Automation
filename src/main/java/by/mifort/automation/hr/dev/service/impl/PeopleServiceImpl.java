@@ -30,7 +30,7 @@ public class PeopleServiceImpl implements PeopleService {
 
     @Override
     public People getHumanById(@NotNull String id) {
-        return peopleRepository.findById(id).get();
+        return peopleRepository.getById(id);
     }
 
     @Override

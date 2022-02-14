@@ -1,6 +1,7 @@
 package by.mifort.automation.hr.dev.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -19,7 +20,8 @@ import java.util.UUID;
  */
 
 @Entity
-@Table(name = "people")
+@Table(name = "people", schema = "public")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class People implements Serializable {
 
     @Id

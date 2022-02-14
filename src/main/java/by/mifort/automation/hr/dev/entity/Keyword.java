@@ -14,13 +14,13 @@ import java.util.UUID;
  */
 
 @Entity
-@Table(name = "keywords")
+@Table(name = "keywords", schema = "public")
 public class Keyword {
     @Id
     private String id = UUID.randomUUID().toString();
 
     @ManyToOne
-    @JoinColumn(name = "userId", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private People human;
 
     public Keyword() {

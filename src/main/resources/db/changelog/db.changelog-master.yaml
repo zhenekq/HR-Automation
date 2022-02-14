@@ -25,3 +25,13 @@ databaseChangeLog:
       file: db/changelog/changeset/change-changeset-type-in-people-updates-table.yaml
   - include:
       file: db/changelog/changeset/change-comment-type-in-communication-history-table.yaml
+  - include:
+      file: db/changelog/changeset/fill-people-table-logic-values.yaml
+  - include:
+      file: db/changelog/changeset/fill-people-keywords-table-logic-values.yaml
+  - include:
+      file: db/changelog/changeset/change-column-names-to-snake-case.yaml
+  - include:
+      file: db/changelog/changeset/change-column-names-to-snake-case-2.yaml
+  - include:
+      file: db/changelog/changeset/change-column-names-to-snake-case-3.yaml
