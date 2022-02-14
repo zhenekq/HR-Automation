@@ -1,7 +1,9 @@
 package by.mifort.automation.hr.dev.util.impl;
 
+import by.mifort.automation.hr.dev.dto.CommunicationHistoryDto;
 import by.mifort.automation.hr.dev.dto.KeywordDto;
 import by.mifort.automation.hr.dev.dto.PeopleDto;
+import by.mifort.automation.hr.dev.entity.CommunicationHistory;
 import by.mifort.automation.hr.dev.entity.Keyword;
 import by.mifort.automation.hr.dev.entity.People;
 import by.mifort.automation.hr.dev.util.MappingDtoComponentConverter;
@@ -40,9 +42,19 @@ public class MappingDtoComponentConverterImpl implements MappingDtoComponentConv
     }
 
     @Override
-    public Set<KeywordDto> convertToListKeywordDto(Set<Keyword> keywords) {
-        Set<KeywordDto> list = new HashSet<>();
+    public List<KeywordDto> convertToListKeywordDto(List<Keyword> keywords) {
+        List<KeywordDto> list = new ArrayList<>();
         keywords.forEach((el) -> list.add(convertToKeywordDto(el)));
         return list;
+    }
+
+    @Override
+    public CommunicationHistoryDto convertToCommunicationHistoryDto(CommunicationHistory communicationHistory) {
+        return null;
+    }
+
+    @Override
+    public List<CommunicationHistoryDto> convertToListCommunicationHistoryDto(List<CommunicationHistory> communicationHistoryList) {
+        return null;
     }
 }

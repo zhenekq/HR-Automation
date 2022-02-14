@@ -6,7 +6,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,11 +23,11 @@ public class PeopleDto {
     private String id;
     private Timestamp lastContact;
     private String status;
-    private Set<PeopleUpdate> peopleUpdates = new HashSet<>();
-    private Set<KeywordDto> keywords = new HashSet<>();
-    private Set<CommunicationHistory> communicationHistory = new HashSet<>();
-    private Set<PeopleAttributes> peopleAttributes = new HashSet<>();
-    private Set<PeopleMergeCandidates> mergeCandidates = new HashSet<>();
+    private List<PeopleUpdate> peopleUpdates = new ArrayList<>();
+    private List<KeywordDto> keywords = new ArrayList<>();
+    private List<CommunicationHistory> communicationHistory = new ArrayList<>();
+    private List<PeopleAttributes> peopleAttributes = new ArrayList<>();
+    private List<PeopleMergeCandidates> mergeCandidates = new ArrayList<>();
 
     public PeopleDto() {
     }
@@ -54,43 +56,43 @@ public class PeopleDto {
         this.status = status;
     }
 
-    public Set<PeopleUpdate> getPeopleUpdates() {
+    public List<PeopleUpdate> getPeopleUpdates() {
         return peopleUpdates;
     }
 
-    public void setPeopleUpdates(Set<PeopleUpdate> peopleUpdates) {
+    public void setPeopleUpdates(List<PeopleUpdate> peopleUpdates) {
         this.peopleUpdates = peopleUpdates;
     }
 
-    public Set<KeywordDto> getKeywords() {
+    public List<KeywordDto> getKeywords() {
         return keywords;
     }
 
-    public void setKeywords(Set<KeywordDto> keywords) {
+    public void setKeywords(List<KeywordDto> keywords) {
         this.keywords = keywords;
     }
 
-    public Set<CommunicationHistory> getCommunicationHistory() {
+    public List<CommunicationHistory> getCommunicationHistory() {
         return communicationHistory;
     }
 
-    public void setCommunicationHistory(Set<CommunicationHistory> communicationHistory) {
+    public void setCommunicationHistory(List<CommunicationHistory> communicationHistory) {
         this.communicationHistory = communicationHistory;
     }
 
-    public Set<PeopleAttributes> getPeopleAttributes() {
+    public List<PeopleAttributes> getPeopleAttributes() {
         return peopleAttributes;
     }
 
-    public void setPeopleAttributes(Set<PeopleAttributes> peopleAttributes) {
+    public void setPeopleAttributes(List<PeopleAttributes> peopleAttributes) {
         this.peopleAttributes = peopleAttributes;
     }
 
-    public Set<PeopleMergeCandidates> getMergeCandidates() {
+    public List<PeopleMergeCandidates> getMergeCandidates() {
         return mergeCandidates;
     }
 
-    public void setMergeCandidates(Set<PeopleMergeCandidates> mergeCandidates) {
+    public void setMergeCandidates(List<PeopleMergeCandidates> mergeCandidates) {
         this.mergeCandidates = mergeCandidates;
     }
 

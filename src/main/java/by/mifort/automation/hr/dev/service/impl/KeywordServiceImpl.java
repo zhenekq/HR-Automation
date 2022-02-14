@@ -1,6 +1,5 @@
 package by.mifort.automation.hr.dev.service.impl;
 
-import by.mifort.automation.hr.dev.dto.KeywordDto;
 import by.mifort.automation.hr.dev.entity.Keyword;
 import by.mifort.automation.hr.dev.repository.KeywordRepository;
 import by.mifort.automation.hr.dev.service.KeywordService;
@@ -24,7 +23,7 @@ public class KeywordServiceImpl implements KeywordService {
 
     @Override
     public List<Keyword> getAllKeywords(Integer page) {
-        if(page == null){
+        if (page == null) {
             return repository.findAll();
         }
         Pageable pageable = PageRequest.of(page - 1, AMOUNT_OF_RESULTS_ON_ONE_PAGE);

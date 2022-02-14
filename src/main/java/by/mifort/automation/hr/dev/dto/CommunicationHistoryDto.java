@@ -21,6 +21,7 @@ public class CommunicationHistoryDto {
     private Timestamp createDate;
     private Timestamp updateDate;
     private String comment;
+    private PeopleDto human;
 
     public CommunicationHistoryDto(){}
 

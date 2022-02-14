@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -38,28 +39,28 @@ public class People implements Serializable {
      * @see PeopleUpdate
      */
     @OneToMany(mappedBy = "human")
-    private Set<PeopleUpdate> humanUpdates;
+    private List<PeopleUpdate> humanUpdates;
 
     /**
      * Keyboards that connection with candidate
      * @see Keyword
      */
     @OneToMany(mappedBy = "human")
-    private Set<Keyword> humanKeywords;
+    private List<Keyword> humanKeywords;
 
     /**
      * Communication history with candidate
      * @see CommunicationHistory
      */
     @OneToMany(mappedBy = "human")
-    private Set<CommunicationHistory> communicationHistory;
+    private List<CommunicationHistory> communicationHistory;
 
     /**
      * Attributes that connected with candidate
      * @see PeopleAttributes
      */
     @OneToMany(mappedBy = "human")
-    private Set<PeopleAttributes> humanAttributes;
+    private List<PeopleAttributes> humanAttributes;
 
 
     /**
@@ -67,7 +68,7 @@ public class People implements Serializable {
      * @see PeopleMergeCandidates
      * */
     @OneToMany(mappedBy = "human")
-    private Set<PeopleMergeCandidates> candidates;
+    private List<PeopleMergeCandidates> candidates;
 
     public People() {
     }
@@ -104,47 +105,47 @@ public class People implements Serializable {
     }
 
     @JsonIgnore
-    public Set<PeopleUpdate> getHumanUpdates() {
+    public List<PeopleUpdate> getHumanUpdates() {
         return humanUpdates;
     }
 
-    public void setHumanUpdates(Set<PeopleUpdate> humanUpdates) {
+    public void setHumanUpdates(List<PeopleUpdate> humanUpdates) {
         this.humanUpdates = humanUpdates;
     }
 
     @JsonIgnore
-    public Set<Keyword> getHumanKeywords() {
+    public List<Keyword> getHumanKeywords() {
         return humanKeywords;
     }
 
-    public void setHumanKeywords(Set<Keyword> humanKeywords) {
+    public void setHumanKeywords(List<Keyword> humanKeywords) {
         this.humanKeywords = humanKeywords;
     }
 
     @JsonIgnore
-    public Set<CommunicationHistory> getCommunicationHistory() {
+    public List<CommunicationHistory> getCommunicationHistory() {
         return communicationHistory;
     }
 
-    public void setCommunicationHistory(Set<CommunicationHistory> communicationHistory) {
+    public void setCommunicationHistory(List<CommunicationHistory> communicationHistory) {
         this.communicationHistory = communicationHistory;
     }
 
     @JsonIgnore
-    public Set<PeopleAttributes> getHumanAttributes() {
+    public List<PeopleAttributes> getHumanAttributes() {
         return humanAttributes;
     }
 
-    public void setHumanAttributes(Set<PeopleAttributes> humanAttributes) {
+    public void setHumanAttributes(List<PeopleAttributes> humanAttributes) {
         this.humanAttributes = humanAttributes;
     }
 
     @JsonIgnore
-    public Set<PeopleMergeCandidates> getCandidates() {
+    public List<PeopleMergeCandidates> getCandidates() {
         return candidates;
     }
 
-    public void setCandidates(Set<PeopleMergeCandidates> candidates) {
+    public void setCandidates(List<PeopleMergeCandidates> candidates) {
         this.candidates = candidates;
     }
 
