@@ -27,7 +27,7 @@ public class PeopleAttributes {
     private Integer valueSource;
 
     @ManyToOne
-    @JoinColumn(name = "userId", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private People human;
 
     @ManyToOne

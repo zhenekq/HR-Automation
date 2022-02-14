@@ -30,7 +30,7 @@ public class CommunicationHistory {
     private String comment;
 
     @ManyToOne
-    @JoinColumn(name = "userId", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private People human;
 
     public CommunicationHistory() {

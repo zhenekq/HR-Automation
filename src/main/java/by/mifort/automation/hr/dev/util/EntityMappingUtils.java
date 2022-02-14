@@ -40,7 +40,7 @@ public class EntityMappingUtils {
         peopleDto.setStatus(people.getStatus());
         peopleDto.setLastContact(people.getLastContact());
         peopleDto.setKeywords(convertToListKeywordDto(people.getHumanKeywords()));
-        peopleDto.setCommunicationHistory(new HashSet<>());
+        peopleDto.setCommunicationHistory(people.getCommunicationHistory());
         return peopleDto;
     }
 

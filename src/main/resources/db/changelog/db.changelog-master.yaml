@@ -35,3 +35,5 @@ databaseChangeLog:
       file: db/changelog/changeset/change-column-names-to-snake-case-2.yaml
   - include:
       file: db/changelog/changeset/change-column-names-to-snake-case-3.yaml
+  - include:
+      file: db/changelog/changeset/fill-people-communication-history-table-logic-values.yaml
