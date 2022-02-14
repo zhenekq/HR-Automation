@@ -1,19 +1,14 @@
 package by.mifort.automation.hr.dev.controller;
 
 import by.mifort.automation.hr.dev.dto.PeopleDto;
-import by.mifort.automation.hr.dev.entity.Keyword;
 import by.mifort.automation.hr.dev.entity.People;
-import by.mifort.automation.hr.dev.entity.PeopleAttributes;
 import by.mifort.automation.hr.dev.service.PeopleService;
-import by.mifort.automation.hr.dev.util.EntityMappingUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Controller that handles requests about candidates

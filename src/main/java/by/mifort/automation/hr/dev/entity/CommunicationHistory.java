@@ -1,5 +1,6 @@
 package by.mifort.automation.hr.dev.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -76,6 +77,7 @@ public class CommunicationHistory {
         this.comment = comment;
     }
 
+    @JsonIgnore
     public People getHuman() {
         return human;
     }

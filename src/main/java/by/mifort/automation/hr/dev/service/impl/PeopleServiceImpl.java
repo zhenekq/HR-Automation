@@ -6,7 +6,7 @@ import by.mifort.automation.hr.dev.entity.People;
 import by.mifort.automation.hr.dev.entity.PeopleAttributes;
 import by.mifort.automation.hr.dev.repository.PeopleRepository;
 import by.mifort.automation.hr.dev.service.PeopleService;
-import by.mifort.automation.hr.dev.util.EntityMappingUtils;
+import by.mifort.automation.hr.dev.util.MappingDtoComponentConverter;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -22,11 +22,13 @@ import java.util.Set;
 public class PeopleServiceImpl implements PeopleService {
 
     private final PeopleRepository peopleRepository;
+    private final MappingDtoComponentConverter converter;
     private final Integer AMOUNT_OF_RESULTS_ON_ONE_PAGE = 2;
 
     @Autowired
-    public PeopleServiceImpl(PeopleRepository peopleRepository) {
+    public PeopleServiceImpl(PeopleRepository peopleRepository, MappingDtoComponentConverter converter) {
         this.peopleRepository = peopleRepository;
+        this.converter = converter;
     }
 
     @Override
@@ -34,17 +36,17 @@ public class PeopleServiceImpl implements PeopleService {
         List<People> peopleList = new ArrayList<>();
         if(page == null){
             peopleList = peopleRepository.findAll();
-            return EntityMappingUtils.convertToListPeopleDto(peopleList);
+            return converter.convertToListPeopleDto(peopleList);
         }
         Pageable pageable = PageRequest.of(page - 1, AMOUNT_OF_RESULTS_ON_ONE_PAGE);
         peopleList = peopleRepository.findAllPeople(pageable).toList();
-        return EntityMappingUtils.convertToListPeopleDto(peopleList);
+        return converter.convertToListPeopleDto(peopleList);
     }
 
     @Override
     public PeopleDto getHumanById(@NotNull String id) {
         People people = peopleRepository.getById(id);
-        return EntityMappingUtils.convertToPeopleDto(people);
+        return converter.convertToPeopleDto(people);
     }
 
     @Override
