@@ -10,6 +10,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.awt.*;
 import java.util.List;
 import java.util.Set;
 
@@ -37,10 +39,10 @@ public class PeopleController {
      * @param page number of page of candidates
      * @return Full list of candidates or by keyboards or attributes
      */
-    @ApiOperation("Get all users by page, on every page 20 users")
+    @ApiOperation("Get all users by page, on every page 2 users")
     @GetMapping
-    public List<People> getAll(@RequestParam(required = false) Long page) {
-        return peopleService.getAllPeople();
+    public List<PeopleDto> getAll(@RequestParam(required = false) Integer page) {
+        return peopleService.getAllPeople(page);
     }
 
     /**
@@ -51,8 +53,8 @@ public class PeopleController {
     @ApiOperation("Get full information about user by id")
     @GetMapping("/{id}")
     public PeopleDto getHumanById(@PathVariable String id) {
-        People human = peopleService.getHumanById(id);
-        return EntityMappingUtils.convertToPeopleDto(human);
+        PeopleDto human = peopleService.getHumanById(id);
+        return human;
     }
 
     /**

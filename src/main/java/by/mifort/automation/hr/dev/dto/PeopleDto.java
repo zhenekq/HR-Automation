@@ -9,13 +9,20 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Data transfer object for entity People
+ * @see People
+ * @author yauheni_vozny
+ * @version 1.0
+ */
+
 public class PeopleDto {
 
     private String id;
     private Timestamp lastContact;
     private String status;
     private Set<PeopleUpdate> peopleUpdates = new HashSet<>();
-    private Set<Keyword> keywords = new HashSet<>();
+    private Set<KeywordDto> keywords = new HashSet<>();
     private Set<CommunicationHistory> communicationHistory = new HashSet<>();
     private Set<PeopleAttributes> peopleAttributes = new HashSet<>();
     private Set<PeopleMergeCandidates> mergeCandidates = new HashSet<>();
@@ -55,11 +62,11 @@ public class PeopleDto {
         this.peopleUpdates = peopleUpdates;
     }
 
-    public Set<Keyword> getKeywords() {
+    public Set<KeywordDto> getKeywords() {
         return keywords;
     }
 
-    public void setKeywords(Set<Keyword> keywords) {
+    public void setKeywords(Set<KeywordDto> keywords) {
         this.keywords = keywords;
     }
 

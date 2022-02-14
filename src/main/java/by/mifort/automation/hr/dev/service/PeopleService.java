@@ -1,5 +1,6 @@
 package by.mifort.automation.hr.dev.service;
 
+import by.mifort.automation.hr.dev.dto.PeopleDto;
 import by.mifort.automation.hr.dev.entity.Keyword;
 import by.mifort.automation.hr.dev.entity.People;
 import by.mifort.automation.hr.dev.entity.PeopleAttributes;
@@ -17,15 +18,16 @@ import java.util.Set;
 public interface PeopleService {
 
     /**
-     * @return List of all exists candidates
+     * @return List of all exists paginated candidates
+     * @param page number of page to see candidates
      */
-    List<People> getAllPeople();
+    List<PeopleDto> getAllPeople(Integer page);
 
     /**
      * @return information about candidate
      * @param id identifier of candidate
      */
-    People getHumanById(String id);
+    PeopleDto getHumanById(String id);
 
     /**
      * Create new candidate in database
