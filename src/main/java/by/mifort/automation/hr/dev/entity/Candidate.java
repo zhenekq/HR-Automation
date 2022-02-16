@@ -9,9 +9,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -23,7 +21,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "people", schema = "public")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class People implements Serializable {
+public class Candidate implements Serializable {
 
     @Id
     private String id = UUID.randomUUID().toString();
@@ -36,10 +34,10 @@ public class People implements Serializable {
 
     /**
      * Information about candidate updates
-     * @see PeopleUpdate
+     * @see CandidateUpdate
      */
     @OneToMany(mappedBy = "human")
-    private List<PeopleUpdate> humanUpdates;
+    private List<CandidateUpdate> humanUpdates;
 
     /**
      * Keyboards that connection with candidate
@@ -57,23 +55,23 @@ public class People implements Serializable {
 
     /**
      * Attributes that connected with candidate
-     * @see PeopleAttributes
+     * @see CandidateAttributes
      */
     @OneToMany(mappedBy = "human")
-    private List<PeopleAttributes> humanAttributes;
+    private List<CandidateAttributes> humanAttributes;
 
 
     /**
      * Merged candidates
-     * @see PeopleMergeCandidates
-     * */
+     * @see CandidateMergeCandidates
+     */
     @OneToMany(mappedBy = "human")
-    private List<PeopleMergeCandidates> candidates;
+    private List<CandidateMergeCandidates> candidates;
 
-    public People() {
+    public Candidate() {
     }
 
-    public People(String id, Timestamp lastContact, String status) {
+    public Candidate(String id, Timestamp lastContact, String status) {
         this.id = id;
         this.lastContact = lastContact;
         this.status = status;
@@ -105,11 +103,11 @@ public class People implements Serializable {
     }
 
     @JsonIgnore
-    public List<PeopleUpdate> getHumanUpdates() {
+    public List<CandidateUpdate> getHumanUpdates() {
         return humanUpdates;
     }
 
-    public void setHumanUpdates(List<PeopleUpdate> humanUpdates) {
+    public void setHumanUpdates(List<CandidateUpdate> humanUpdates) {
         this.humanUpdates = humanUpdates;
     }
 
@@ -132,20 +130,20 @@ public class People implements Serializable {
     }
 
     @JsonIgnore
-    public List<PeopleAttributes> getHumanAttributes() {
+    public List<CandidateAttributes> getHumanAttributes() {
         return humanAttributes;
     }
 
-    public void setHumanAttributes(List<PeopleAttributes> humanAttributes) {
+    public void setHumanAttributes(List<CandidateAttributes> humanAttributes) {
         this.humanAttributes = humanAttributes;
     }
 
     @JsonIgnore
-    public List<PeopleMergeCandidates> getCandidates() {
+    public List<CandidateMergeCandidates> getCandidates() {
         return candidates;
     }
 
-    public void setCandidates(List<PeopleMergeCandidates> candidates) {
+    public void setCandidates(List<CandidateMergeCandidates> candidates) {
         this.candidates = candidates;
     }
 

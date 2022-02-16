@@ -15,7 +15,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "people_merge_candidates")
-public class PeopleMergeCandidates implements Serializable {
+public class CandidateMergeCandidates implements Serializable {
 
     @EmbeddedId
     private MergeCandidates mergeCandidates;
@@ -30,7 +30,7 @@ public class PeopleMergeCandidates implements Serializable {
     private String reasonComment;
 
     /**
-     * @see People Join 2 primary keys like a foreign key for 1 primary key
+     * @see Candidate Join 2 primary keys like a foreign key for 1 primary key
      * */
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -50,11 +50,11 @@ public class PeopleMergeCandidates implements Serializable {
                     updatable = false
             )
     })
-    private People human;
+    private Candidate human;
 
-    public PeopleMergeCandidates() {}
+    public CandidateMergeCandidates() {}
 
-    public PeopleMergeCandidates(MergeCandidates mergeCandidates, String status, String reason, String reasonComment) {
+    public CandidateMergeCandidates(MergeCandidates mergeCandidates, String status, String reason, String reasonComment) {
         this.mergeCandidates = mergeCandidates;
         this.status = status;
         this.reason = reason;
@@ -93,11 +93,11 @@ public class PeopleMergeCandidates implements Serializable {
         this.reasonComment = reasonComment;
     }
 
-    public People getHuman() {
+    public Candidate getHuman() {
         return human;
     }
 
-    public void setHuman(People human) {
+    public void setHuman(Candidate human) {
         this.human = human;
     }
 

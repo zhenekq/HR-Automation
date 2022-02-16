@@ -15,7 +15,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "peopleattributes")
-public class PeopleAttributes {
+public class CandidateAttributes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -28,16 +28,16 @@ public class PeopleAttributes {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private People human;
+    private Candidate human;
 
     @ManyToOne
     @JoinColumn(name = "type", nullable = false)
     private AttributeTypes attributeTypes;
 
-    public PeopleAttributes() {
+    public CandidateAttributes() {
     }
 
-    public PeopleAttributes(Integer id, Integer type, String name, Integer valueSource, People human) {
+    public CandidateAttributes(Integer id, Integer type, String name, Integer valueSource, Candidate human) {
         this.id = id;
         this.name = name;
         this.valueSource = valueSource;
@@ -68,11 +68,11 @@ public class PeopleAttributes {
         this.valueSource = valueSource;
     }
 
-    public People getHuman() {
+    public Candidate getHuman() {
         return human;
     }
 
-    public void setHuman(People human) {
+    public void setHuman(Candidate human) {
         this.human = human;
     }
 

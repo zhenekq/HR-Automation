@@ -7,29 +7,28 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Data transfer object for entity People
- * @see People
+ *
  * @author yauheni_vozny
  * @version 1.0
+ * @see Candidate
  */
 
-public class PeopleDto {
+public class CandidateDto {
 
     private String id;
     private Timestamp lastContact;
     private String status;
-    private List<PeopleUpdate> peopleUpdates = new ArrayList<>();
+    private List<CandidateUpdate> candidateUpdates = new ArrayList<>();
     private List<KeywordDto> keywords = new ArrayList<>();
     private List<CommunicationHistory> communicationHistory = new ArrayList<>();
-    private List<PeopleAttributes> peopleAttributes = new ArrayList<>();
-    private List<PeopleMergeCandidates> mergeCandidates = new ArrayList<>();
+    private List<CandidateAttributes> candidateAttributes = new ArrayList<>();
+    private List<CandidateMergeCandidates> mergeCandidates = new ArrayList<>();
 
-    public PeopleDto() {
+    public CandidateDto() {
     }
 
     public String getId() {
@@ -56,12 +55,12 @@ public class PeopleDto {
         this.status = status;
     }
 
-    public List<PeopleUpdate> getPeopleUpdates() {
-        return peopleUpdates;
+    public List<CandidateUpdate> getPeopleUpdates() {
+        return candidateUpdates;
     }
 
-    public void setPeopleUpdates(List<PeopleUpdate> peopleUpdates) {
-        this.peopleUpdates = peopleUpdates;
+    public void setPeopleUpdates(List<CandidateUpdate> candidateUpdates) {
+        this.candidateUpdates = candidateUpdates;
     }
 
     public List<KeywordDto> getKeywords() {
@@ -80,19 +79,19 @@ public class PeopleDto {
         this.communicationHistory = communicationHistory;
     }
 
-    public List<PeopleAttributes> getPeopleAttributes() {
-        return peopleAttributes;
+    public List<CandidateAttributes> getPeopleAttributes() {
+        return candidateAttributes;
     }
 
-    public void setPeopleAttributes(List<PeopleAttributes> peopleAttributes) {
-        this.peopleAttributes = peopleAttributes;
+    public void setPeopleAttributes(List<CandidateAttributes> candidateAttributes) {
+        this.candidateAttributes = candidateAttributes;
     }
 
-    public List<PeopleMergeCandidates> getMergeCandidates() {
+    public List<CandidateMergeCandidates> getMergeCandidates() {
         return mergeCandidates;
     }
 
-    public void setMergeCandidates(List<PeopleMergeCandidates> mergeCandidates) {
+    public void setMergeCandidates(List<CandidateMergeCandidates> mergeCandidates) {
         this.mergeCandidates = mergeCandidates;
     }
 

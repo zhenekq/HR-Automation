@@ -1,49 +1,50 @@
 package by.mifort.automation.hr.dev.service;
 
-import by.mifort.automation.hr.dev.dto.PeopleDto;
+import by.mifort.automation.hr.dev.dto.CandidateDto;
 import by.mifort.automation.hr.dev.entity.Keyword;
-import by.mifort.automation.hr.dev.entity.People;
-import by.mifort.automation.hr.dev.entity.PeopleAttributes;
+import by.mifort.automation.hr.dev.entity.Candidate;
+import by.mifort.automation.hr.dev.entity.CandidateAttributes;
+import by.mifort.automation.hr.dev.repository.CandidateRepository;
 
 import java.util.List;
 import java.util.Set;
 
 /**
  * Service layer for validation and business logic for PeopleRepository
- * @see by.mifort.automation.hr.dev.repository.PeopleRepository
+ * @see CandidateRepository
  * @author yauheni_vozny
  * @version 1.0
  */
 
-public interface PeopleService {
+public interface CandidateService {
 
     /**
      * @return List of all exists paginated candidates
      * @param page number of page to see candidates
      */
-    List<PeopleDto> getAllPeople(Integer page);
+    List<CandidateDto> getAllPeople(Integer page, Integer amount, String keyword);
 
     /**
      * @return information about candidate
      * @param id identifier of candidate
      */
-    PeopleDto getHumanById(String id);
+    CandidateDto getHumanById(String id);
 
     /**
      * Create new candidate in database
-     * @param people body of our candidate
+     * @param candidate body of our candidate
      */
-    void addNewHuman(People people);
+    void addNewHuman(Candidate candidate);
 
     /**
      * @return List of candidate by keyword(s)
      * @param keywords keywords that connected with candidate
      */
-    List<People> findPeopleByKeywords(Set<Keyword> keywords);
+    List<Candidate> findPeopleByKeywords(Set<Keyword> keywords);
 
     /**
      * @return List of candidate by attribute(s)
      * @param attributes attributes that connected with candidate
      */
-    List<People> findPeopleByHumanAttributes(Set<PeopleAttributes> attributes);
+    List<Candidate> findPeopleByHumanAttributes(Set<CandidateAttributes> attributes);
 }

@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  * People merge primary keys
- * @see PeopleMergeCandidates connected attributes with id
+ * @see CandidateMergeCandidates connected attributes with id
  * @author yauheni_vozny
  * @version 1.0
  */

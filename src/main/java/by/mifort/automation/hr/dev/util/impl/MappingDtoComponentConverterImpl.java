@@ -2,36 +2,34 @@ package by.mifort.automation.hr.dev.util.impl;
 
 import by.mifort.automation.hr.dev.dto.CommunicationHistoryDto;
 import by.mifort.automation.hr.dev.dto.KeywordDto;
-import by.mifort.automation.hr.dev.dto.PeopleDto;
+import by.mifort.automation.hr.dev.dto.CandidateDto;
 import by.mifort.automation.hr.dev.entity.CommunicationHistory;
 import by.mifort.automation.hr.dev.entity.Keyword;
-import by.mifort.automation.hr.dev.entity.People;
+import by.mifort.automation.hr.dev.entity.Candidate;
 import by.mifort.automation.hr.dev.util.MappingDtoComponentConverter;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Component
 public class MappingDtoComponentConverterImpl implements MappingDtoComponentConverter {
     @Override
-    public PeopleDto convertToPeopleDto(People people) {
-        PeopleDto peopleDto = new PeopleDto();
-        peopleDto.setId(people.getId());
-        peopleDto.setStatus(people.getStatus());
-        peopleDto.setLastContact(people.getLastContact());
-        peopleDto.setKeywords(convertToListKeywordDto(people.getHumanKeywords()));
-        peopleDto.setCommunicationHistory(people.getCommunicationHistory());
-        return peopleDto;
+    public CandidateDto convertToPeopleDto(Candidate candidate) {
+        CandidateDto candidateDto = new CandidateDto();
+        candidateDto.setId(candidate.getId());
+        candidateDto.setStatus(candidate.getStatus());
+        candidateDto.setLastContact(candidate.getLastContact());
+        candidateDto.setKeywords(convertToListKeywordDto(candidate.getHumanKeywords()));
+        candidateDto.setCommunicationHistory(candidate.getCommunicationHistory());
+        return candidateDto;
     }
 
     @Override
-    public List<PeopleDto> convertToListPeopleDto(List<People> people) {
-        List<PeopleDto> peopleDtoList = new ArrayList<>();
-        people.forEach((el) -> peopleDtoList.add(convertToPeopleDto(el)));
-        return peopleDtoList;
+    public List<CandidateDto> convertToListPeopleDto(List<Candidate> people) {
+        List<CandidateDto> candidateDtoList = new ArrayList<>();
+        people.forEach((el) -> candidateDtoList.add(convertToPeopleDto(el)));
+        return candidateDtoList;
     }
 
     @Override
@@ -50,11 +48,22 @@ public class MappingDtoComponentConverterImpl implements MappingDtoComponentConv
 
     @Override
     public CommunicationHistoryDto convertToCommunicationHistoryDto(CommunicationHistory communicationHistory) {
-        return null;
+        CommunicationHistoryDto dto = new CommunicationHistoryDto();
+        dto.setId(communicationHistory.getId());
+        dto.setComment(communicationHistory.getComment());
+        dto.setCreateDate(communicationHistory.getCreateDate());
+        dto.setUpdateDate(communicationHistory.getUpdateDate());
+        dto.setHuman(convertToPeopleDto(communicationHistory.getHuman()));
+
+        return dto;
     }
 
     @Override
     public List<CommunicationHistoryDto> convertToListCommunicationHistoryDto(List<CommunicationHistory> communicationHistoryList) {
-        return null;
+        List<CommunicationHistoryDto> dtoList = new ArrayList<>();
+        communicationHistoryList.forEach(
+                (p) -> dtoList.add(convertToCommunicationHistoryDto(p))
+        );
+        return dtoList;
     }
 }

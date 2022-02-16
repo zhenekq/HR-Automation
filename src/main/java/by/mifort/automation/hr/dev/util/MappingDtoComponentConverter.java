@@ -2,13 +2,12 @@ package by.mifort.automation.hr.dev.util;
 
 import by.mifort.automation.hr.dev.dto.CommunicationHistoryDto;
 import by.mifort.automation.hr.dev.dto.KeywordDto;
-import by.mifort.automation.hr.dev.dto.PeopleDto;
+import by.mifort.automation.hr.dev.dto.CandidateDto;
 import by.mifort.automation.hr.dev.entity.CommunicationHistory;
 import by.mifort.automation.hr.dev.entity.Keyword;
-import by.mifort.automation.hr.dev.entity.People;
+import by.mifort.automation.hr.dev.entity.Candidate;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Dto converter to entities
@@ -18,9 +17,9 @@ import java.util.Set;
 
 public interface MappingDtoComponentConverter {
 
-    PeopleDto convertToPeopleDto(People people);
+    CandidateDto convertToPeopleDto(Candidate candidate);
 
-    List<PeopleDto> convertToListPeopleDto(List<People> people);
+    List<CandidateDto> convertToListPeopleDto(List<Candidate> people);
 
     KeywordDto convertToKeywordDto(Keyword keyword);
 

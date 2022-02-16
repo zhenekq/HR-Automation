@@ -1,18 +1,18 @@
 package by.mifort.automation.hr.dev.dto;
 
-import by.mifort.automation.hr.dev.entity.CommunicationHistory;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.sql.Timestamp;
-import java.util.Objects;
 
 /**
  * Data transfer object for entity CommunicationHistory
- * @see by.mifort.automation.hr.dev.entity.CommunicationHistory
+ *
  * @author yauheni_vozny
  * @version 1.0
+ * @see by.mifort.automation.hr.dev.entity.CommunicationHistory
  */
 
 public class CommunicationHistoryDto {
@@ -21,9 +21,10 @@ public class CommunicationHistoryDto {
     private Timestamp createDate;
     private Timestamp updateDate;
     private String comment;
-    private PeopleDto human;
+    private CandidateDto human;
 
-    public CommunicationHistoryDto(){}
+    public CommunicationHistoryDto() {
+    }
 
     public Integer getId() {
         return id;
@@ -55,6 +56,15 @@ public class CommunicationHistoryDto {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    @JsonIgnore
+    public CandidateDto getHuman() {
+        return human;
+    }
+
+    public void setHuman(CandidateDto human) {
+        this.human = human;
     }
 
     @Override

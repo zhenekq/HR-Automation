@@ -32,12 +32,12 @@ public class CommunicationHistory {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private People human;
+    private Candidate human;
 
     public CommunicationHistory() {
     }
 
-    public CommunicationHistory(Integer id, Timestamp createDate, Timestamp updateDate, String comment, People human) {
+    public CommunicationHistory(Integer id, Timestamp createDate, Timestamp updateDate, String comment, Candidate human) {
         this.id = id;
         this.createDate = createDate;
         this.updateDate = updateDate;
@@ -78,11 +78,11 @@ public class CommunicationHistory {
     }
 
     @JsonIgnore
-    public People getHuman() {
+    public Candidate getHuman() {
         return human;
     }
 
-    public void setHuman(People human) {
+    public void setHuman(Candidate human) {
         this.human = human;
     }
 

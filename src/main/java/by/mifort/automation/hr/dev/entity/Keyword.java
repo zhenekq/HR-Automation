@@ -21,12 +21,12 @@ public class Keyword {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private People human;
+    private Candidate human;
 
     public Keyword() {
     }
 
-    public Keyword(String id, People human) {
+    public Keyword(String id, Candidate human) {
         this.id = id;
         this.human = human;
     }
@@ -39,11 +39,11 @@ public class Keyword {
         this.id = id;
     }
 
-    public People getHuman() {
+    public Candidate getHuman() {
         return human;
     }
 
-    public void setHuman(People human) {
+    public void setHuman(Candidate human) {
         this.human = human;
     }
 

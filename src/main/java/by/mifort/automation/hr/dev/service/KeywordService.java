@@ -1,6 +1,5 @@
 package by.mifort.automation.hr.dev.service;
 
-import by.mifort.automation.hr.dev.dto.KeywordDto;
 import by.mifort.automation.hr.dev.entity.Keyword;
 
 import java.util.List;

@@ -1,5 +1,6 @@
 package by.mifort.automation.hr.dev.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -14,7 +15,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "peopleupdates")
-public class PeopleUpdate {
+public class CandidateUpdate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -30,12 +31,12 @@ public class PeopleUpdate {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private People human;
+    private Candidate human;
 
-    public PeopleUpdate() {
+    public CandidateUpdate() {
     }
 
-    public PeopleUpdate(Integer id, String source, Timestamp updateDate, String changeSet, People human) {
+    public CandidateUpdate(Integer id, String source, Timestamp updateDate, String changeSet, Candidate human) {
         this.id = id;
         this.source = source;
         this.updateDate = updateDate;
@@ -75,11 +76,12 @@ public class PeopleUpdate {
         this.changeSet = changeSet;
     }
 
-    public People getHuman() {
+    @JsonIgnore
+    public Candidate getHuman() {
         return human;
     }
 
-    public void setHuman(People human) {
+    public void setHuman(Candidate human) {
         this.human = human;
     }
 

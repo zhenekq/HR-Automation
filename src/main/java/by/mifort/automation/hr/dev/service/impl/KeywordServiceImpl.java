@@ -20,7 +20,7 @@ public class KeywordServiceImpl implements KeywordService {
     public KeywordServiceImpl(KeywordRepository repository) {
         this.repository = repository;
     }
-
+    
     @Override
     public List<Keyword> getAllKeywords(Integer page) {
         if (page == null) {

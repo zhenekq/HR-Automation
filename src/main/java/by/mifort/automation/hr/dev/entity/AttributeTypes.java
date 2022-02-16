@@ -33,7 +33,7 @@ public class AttributeTypes {
     private Boolean isIdentifier;
 
     @OneToMany(mappedBy = "attributeTypes")
-    private Set<PeopleAttributes> peopleAttributes;
+    private Set<CandidateAttributes> candidateAttributes;
 
     public AttributeTypes() {
     }
