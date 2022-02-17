@@ -42,7 +42,7 @@ public class CandidateController {
     @GetMapping
     public List<CandidateDto> getAll(FilterDto filterDto,
                                      @RequestParam(required = false) String keyword) {
-        return candidateService.getAllPeople(filterDto, keyword);
+        return candidateService.getAll(filterDto, keyword);
     }
 
     /**
@@ -53,7 +53,7 @@ public class CandidateController {
     @ApiOperation("Get full information about user by id")
     @GetMapping("/{id}")
     public CandidateDto getById(@PathVariable String id) {
-        return candidateService.getHumanById(id);
+        return candidateService.getById(id);
     }
 
     /**

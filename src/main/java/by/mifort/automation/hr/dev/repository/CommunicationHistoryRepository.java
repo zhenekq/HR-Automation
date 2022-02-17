@@ -23,7 +23,7 @@ public interface CommunicationHistoryRepository extends JpaRepository<Communicat
      * @param pageable value for pagination
      * @return page of communication history with all candidates
      * */
-    @Query("select h from CommunicationHistory h")
+
     Page<CommunicationHistory> findAllHistory(Pageable pageable);
 
     /**

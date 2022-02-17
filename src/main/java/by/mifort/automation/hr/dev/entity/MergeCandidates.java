@@ -14,7 +14,6 @@ import java.io.Serializable;
  * @author yauheni_vozny
  * @version 1.0
  */
-
 @Embeddable
 public class MergeCandidates implements Serializable {
 

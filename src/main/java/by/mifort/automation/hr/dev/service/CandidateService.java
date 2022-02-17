@@ -24,13 +24,13 @@ public interface CandidateService {
      * @param filterDto dto with pagination, sortTypes
      * @see FilterDto
      */
-    List<CandidateDto> getAllPeople(FilterDto filterDto, String keyword);
+    List<CandidateDto> getAll(FilterDto filterDto, String keyword);
 
     /**
      * @return information about candidate
      * @param id identifier of candidate
      */
-    CandidateDto getHumanById(String id);
+    CandidateDto getById(String id);
 
     /**
      * Create new candidate in database
@@ -42,11 +42,11 @@ public interface CandidateService {
      * @return List of candidate by keyword(s)
      * @param keywords keywords that connected with candidate
      */
-    List<Candidate> findPeopleByKeywords(Set<Keyword> keywords);
+    List<Candidate> findByKeywords(Set<Keyword> keywords);
 
     /**
      * @return List of candidate by attribute(s)
      * @param attributes attributes that connected with candidate
      */
-    List<Candidate> findPeopleByHumanAttributes(Set<CandidateAttributes> attributes);
+    List<Candidate> findByAttributes(Set<CandidateAttributes> attributes);
 }

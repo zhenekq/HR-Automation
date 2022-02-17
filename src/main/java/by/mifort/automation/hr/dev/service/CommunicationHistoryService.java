@@ -20,26 +20,26 @@ public interface CommunicationHistoryService {
      * Get history of candidate by id
      * @param id candidate's identifier
      */
-    List<CommunicationHistoryDto> getHistoryByCandidateId(String id);
+    List<CommunicationHistoryDto> getByCandidateId(String id);
 
     /**
      * Create new communication history with candidate
      * @param id candidate's identifier
      * @param history body of history
      */
-    CommunicationHistoryDto createHistoryWithCandidate(String id, CommunicationHistory history);
+    CommunicationHistoryDto createByCandidateId(String id, CommunicationHistory history);
 
     /**
      * Update exists communication history with candidate
      * @param id candidate's identifier
      * @param history body of history
      */
-    CommunicationHistoryDto updateHistoryWithCandidate(String id, CommunicationHistory history);
+    CommunicationHistoryDto updateByCandidateId(String id, CommunicationHistory history);
 
     /**
      * Archive exists communication history with candidate
      * @param id candidate's identifier
      * @param history body of history
      */
-    CommunicationHistoryDto archiveHistoryWithCandidate(String id, CommunicationHistory history);
+    CommunicationHistoryDto archiveByCandidateId(String id, CommunicationHistory history);
 }

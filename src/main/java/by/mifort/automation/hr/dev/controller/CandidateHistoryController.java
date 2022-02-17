@@ -27,8 +27,8 @@ public class CandidateHistoryController {
      */
     @ApiOperation("Get history with candidate by his id")
     @GetMapping
-    public List<CommunicationHistoryDto> getCandidateHistory(@PathVariable String id) {
-        return service.getHistoryByCandidateId(id);
+    public List<CommunicationHistoryDto> getByCandidateId(@PathVariable String id) {
+        return service.getByCandidateId(id);
     }
 
     /**
@@ -39,9 +39,9 @@ public class CandidateHistoryController {
      */
     @ApiOperation("Create new history with candidate by his id")
     @PostMapping
-    public String createHistoryWithCandidate(@PathVariable String id,
+    public String createByCandidateId(@PathVariable String id,
                                              @RequestBody CommunicationHistory history) {
-        CommunicationHistoryDto dto = service.createHistoryWithCandidate(id, history);
+        CommunicationHistoryDto dto = service.createByCandidateId(id, history);
         return dto.getHuman().getId();
     }
 
@@ -53,9 +53,9 @@ public class CandidateHistoryController {
      */
     @ApiOperation("Update history with candidate by his id")
     @PatchMapping
-    public String updateHistoryWithCandidate(@PathVariable String id,
+    public String updateByCandidateId(@PathVariable String id,
                                              @RequestBody CommunicationHistory history) {
-        CommunicationHistoryDto dto = service.createHistoryWithCandidate(id, history);
+        CommunicationHistoryDto dto = service.updateByCandidateId(id, history);
         return dto.getHuman().getId();
     }
 
@@ -66,8 +66,10 @@ public class CandidateHistoryController {
      */
     @ApiOperation("Archive history with candidate with his id")
     @DeleteMapping
-    public String archiveHistoryWithCandidate(@PathVariable String id) {
-        return "History with candidate successfully archived";
+    public String archiveHistoryWithCandidate(@PathVariable String id,
+                                              @RequestBody CommunicationHistory history) {
+        CommunicationHistoryDto dto = service.archiveByCandidateId(id, history);
+        return dto.getHuman().getId();
     }
 
 }

@@ -19,7 +19,7 @@ import java.util.UUID;
 @Table(name = "keywords", schema = "public")
 public class Keyword {
     @Id
-    private String id = UUID.randomUUID().toString();
+    private String id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

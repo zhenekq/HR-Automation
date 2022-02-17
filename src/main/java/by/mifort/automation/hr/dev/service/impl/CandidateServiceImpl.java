@@ -34,10 +34,10 @@ public class CandidateServiceImpl implements CandidateService {
     }
 
     @Override
-    public List<CandidateDto> getAllPeople(FilterDto filterDto, String keyword) {
+    public List<CandidateDto> getAll(FilterDto filterDto, String keyword) {
         List<Candidate> candidateList;
-        Integer page = filterDto.getPage();
-        Integer amount = filterDto.getAmount();
+        Integer page = filterDto.getPageNumber();
+        Integer amount = filterDto.getPageSize();
         if (page == null || amount == null || page <= 0 || amount <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parameters cannot be nullable");
         }
@@ -51,7 +51,7 @@ public class CandidateServiceImpl implements CandidateService {
     }
 
     @Override
-    public CandidateDto getHumanById(@NotNull String id) {
+    public CandidateDto getById(@NotNull String id) {
         Candidate candidate = candidateRepository.getById(id);
         return converter.convertToPeopleDto(candidate);
     }
@@ -63,12 +63,12 @@ public class CandidateServiceImpl implements CandidateService {
     }
 
     @Override
-    public List<Candidate> findPeopleByKeywords(@NotNull Set<Keyword> keywords) {
+    public List<Candidate> findByKeywords(@NotNull Set<Keyword> keywords) {
         return new ArrayList<>();
     }
 
     @Override
-    public List<Candidate> findPeopleByHumanAttributes(@NotNull Set<CandidateAttributes> attributes) {
+    public List<Candidate> findByAttributes(@NotNull Set<CandidateAttributes> attributes) {
         return new ArrayList<>();
     }
 }

@@ -24,7 +24,7 @@ import java.util.UUID;
 public class Candidate implements Serializable {
 
     @Id
-    private String id = UUID.randomUUID().toString();
+    private String id;
 
     @Column(name = "lastcontact")
     private Timestamp lastContact;

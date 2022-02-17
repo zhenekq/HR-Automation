@@ -14,26 +14,26 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @JsonIgnoreProperties({"page", "amount"})
 public class PaginationDto {
 
-    private Integer page;
-    private Integer amount;
+    private Integer pageNumber;
+    private Integer pageSize;
 
     public PaginationDto() {
     }
 
-    public Integer getPage() {
-        return page;
+    public Integer getPageNumber() {
+        return pageNumber;
     }
 
-    public void setPage(Integer page) {
-        this.page = page;
+    public void setPageNumber(Integer pageNumber) {
+        this.pageNumber = pageNumber;
     }
 
-    public Integer getAmount() {
-        return amount;
+    public Integer getPageSize() {
+        return pageSize;
     }
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 
     @Override
