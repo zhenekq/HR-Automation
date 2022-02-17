@@ -1,5 +1,7 @@
 package by.mifort.automation.hr.dev.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -21,14 +23,14 @@ public class Keyword {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private Candidate human;
+    private Candidate candidate;
 
     public Keyword() {
     }
 
-    public Keyword(String id, Candidate human) {
+    public Keyword(String id, Candidate candidate) {
         this.id = id;
-        this.human = human;
+        this.candidate = candidate;
     }
 
     public String getId() {
@@ -39,12 +41,13 @@ public class Keyword {
         this.id = id;
     }
 
-    public Candidate getHuman() {
-        return human;
+    @JsonIgnore
+    public Candidate getCandidate() {
+        return candidate;
     }
 
-    public void setHuman(Candidate human) {
-        this.human = human;
+    public void setCandidate(Candidate candidate) {
+        this.candidate = candidate;
     }
 
     @Override

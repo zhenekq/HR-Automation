@@ -41,7 +41,8 @@ public class CandidateHistoryController {
     @PostMapping
     public String createHistoryWithCandidate(@PathVariable String id,
                                              @RequestBody CommunicationHistory history) {
-        return "History with candidate successfully created";
+        CommunicationHistoryDto dto = service.createHistoryWithCandidate(id, history);
+        return dto.getHuman().getId();
     }
 
     /**
@@ -54,7 +55,8 @@ public class CandidateHistoryController {
     @PatchMapping
     public String updateHistoryWithCandidate(@PathVariable String id,
                                              @RequestBody CommunicationHistory history) {
-        return "History with candidate successfully updated";
+        CommunicationHistoryDto dto = service.createHistoryWithCandidate(id, history);
+        return dto.getHuman().getId();
     }
 
     /**

@@ -1,7 +1,6 @@
 package by.mifort.automation.hr.dev.util.impl;
 
 import by.mifort.automation.hr.dev.dto.CommunicationHistoryDto;
-import by.mifort.automation.hr.dev.dto.KeywordDto;
 import by.mifort.automation.hr.dev.dto.CandidateDto;
 import by.mifort.automation.hr.dev.entity.CommunicationHistory;
 import by.mifort.automation.hr.dev.entity.Keyword;
@@ -20,8 +19,14 @@ public class MappingDtoComponentConverterImpl implements MappingDtoComponentConv
         candidateDto.setId(candidate.getId());
         candidateDto.setStatus(candidate.getStatus());
         candidateDto.setLastContact(candidate.getLastContact());
-        candidateDto.setKeywords(convertToListKeywordDto(candidate.getHumanKeywords()));
-        candidateDto.setCommunicationHistory(candidate.getCommunicationHistory());
+        if(candidate.getCandidateKeywords() != null)
+            candidateDto.setKeywords(candidate.getCandidateKeywords());
+        else
+            candidateDto.setKeywords(new ArrayList<>());
+        if(candidate.getCandidateCommunicationHistory() != null)
+            candidateDto.setCommunicationHistory(candidate.getCandidateCommunicationHistory());
+        else
+            candidateDto.setCommunicationHistory(new ArrayList<>());
         return candidateDto;
     }
 
@@ -33,27 +38,13 @@ public class MappingDtoComponentConverterImpl implements MappingDtoComponentConv
     }
 
     @Override
-    public KeywordDto convertToKeywordDto(Keyword keyword) {
-        KeywordDto keywordDto = new KeywordDto();
-        keywordDto.setId(keyword.getId());
-        return keywordDto;
-    }
-
-    @Override
-    public List<KeywordDto> convertToListKeywordDto(List<Keyword> keywords) {
-        List<KeywordDto> list = new ArrayList<>();
-        keywords.forEach((el) -> list.add(convertToKeywordDto(el)));
-        return list;
-    }
-
-    @Override
     public CommunicationHistoryDto convertToCommunicationHistoryDto(CommunicationHistory communicationHistory) {
         CommunicationHistoryDto dto = new CommunicationHistoryDto();
         dto.setId(communicationHistory.getId());
         dto.setComment(communicationHistory.getComment());
         dto.setCreateDate(communicationHistory.getCreateDate());
         dto.setUpdateDate(communicationHistory.getUpdateDate());
-        dto.setHuman(convertToPeopleDto(communicationHistory.getHuman()));
+        dto.setHuman(convertToPeopleDto(communicationHistory.getCandidate()));
 
         return dto;
     }

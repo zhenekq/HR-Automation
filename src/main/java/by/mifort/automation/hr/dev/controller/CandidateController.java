@@ -52,7 +52,7 @@ public class CandidateController {
      */
     @ApiOperation("Get full information about user by id")
     @GetMapping("/{id}")
-    public CandidateDto getHumanById(@PathVariable String id) {
+    public CandidateDto getById(@PathVariable String id) {
         return candidateService.getHumanById(id);
     }
 
@@ -61,10 +61,10 @@ public class CandidateController {
      * @param candidate - candidate entity body
      * @return Conversation of successful created candidate with id
      */
-    @ApiOperation("Create new user")
+    @ApiOperation("Create new candidate")
     @PostMapping
-    public String add(@RequestBody Candidate candidate) {
-        candidateService.addNewHuman(candidate);
-        return "Candidate successfully created: " + candidate.getId();
+    public String create(@RequestBody Candidate candidate) {
+        candidateService.create(candidate);
+        return candidate.getId();
     }
 }

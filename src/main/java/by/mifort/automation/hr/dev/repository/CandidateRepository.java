@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Repository for working with it in database
+ * Repository for working with Candidate in database
  * @see Candidate
  * @author yauheni_vozny
  * @version 1.0
@@ -26,6 +26,6 @@ public interface CandidateRepository extends JpaRepository<Candidate, String> {
     @Query("select p from Candidate p")
     Page<Candidate> findAllPeople(Pageable pageable);
 
-    @Query("select p from Candidate p inner join p.humanKeywords kb where kb.id =:keyword")
+    @Query("select p from Candidate p inner join p.candidateKeywords kb where kb.id =:keyword")
     List<Candidate> findAllByHumanKeywords(String keyword, Pageable pageable);
 }

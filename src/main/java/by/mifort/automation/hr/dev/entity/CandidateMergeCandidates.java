@@ -50,7 +50,7 @@ public class CandidateMergeCandidates implements Serializable {
                     updatable = false
             )
     })
-    private Candidate human;
+    private Candidate candidate;
 
     public CandidateMergeCandidates() {}
 
@@ -93,12 +93,12 @@ public class CandidateMergeCandidates implements Serializable {
         this.reasonComment = reasonComment;
     }
 
-    public Candidate getHuman() {
-        return human;
+    public Candidate getCandidate() {
+        return candidate;
     }
 
-    public void setHuman(Candidate human) {
-        this.human = human;
+    public void setCandidate(Candidate candidate) {
+        this.candidate = candidate;
     }
 
     @Override

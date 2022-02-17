@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
- * Repository for working with it in database
+ * Repository for working with candidate's Keywords in database
  * @see Keyword
  * @author yauheni_vozny
  * @version 1.0

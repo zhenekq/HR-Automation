@@ -28,7 +28,7 @@ public class CandidateAttributes {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private Candidate human;
+    private Candidate candidate;
 
     @ManyToOne
     @JoinColumn(name = "type", nullable = false)
@@ -37,11 +37,11 @@ public class CandidateAttributes {
     public CandidateAttributes() {
     }
 
-    public CandidateAttributes(Integer id, Integer type, String name, Integer valueSource, Candidate human) {
+    public CandidateAttributes(Integer id, Integer type, String name, Integer valueSource, Candidate candidate) {
         this.id = id;
         this.name = name;
         this.valueSource = valueSource;
-        this.human = human;
+        this.candidate = candidate;
     }
 
     public Integer getId() {
@@ -68,12 +68,20 @@ public class CandidateAttributes {
         this.valueSource = valueSource;
     }
 
-    public Candidate getHuman() {
-        return human;
+    public Candidate getCandidate() {
+        return candidate;
     }
 
-    public void setHuman(Candidate human) {
-        this.human = human;
+    public void setCandidate(Candidate candidate) {
+        this.candidate = candidate;
+    }
+
+    public AttributeTypes getAttributeTypes() {
+        return attributeTypes;
+    }
+
+    public void setAttributeTypes(AttributeTypes attributeTypes) {
+        this.attributeTypes = attributeTypes;
     }
 
     @Override

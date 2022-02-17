@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Repository for working with it in database
+ * Repository for working with candidate's CandidateUpdate in database
  * @see CandidateUpdate
  * @author yauheni_vozny
  * @version 1.0

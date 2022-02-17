@@ -30,8 +30,8 @@ public interface CommunicationHistoryRepository extends JpaRepository<Communicat
      * @param id human id for find his communication history
      * @return page of communication history with candidate
      * */
-    List<CommunicationHistory> findCommunicationHistoriesByHumanId(String id);
-    
-    Boolean existsCommunicationHistoryByHumanId(String id);
+    List<CommunicationHistory> findCommunicationHistoriesByCandidateId(String id);
+
+    Boolean existsCommunicationHistoryByCandidateId(String id);
 
 }

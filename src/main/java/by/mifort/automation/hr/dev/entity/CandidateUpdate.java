@@ -1,6 +1,7 @@
 package by.mifort.automation.hr.dev.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -31,17 +32,17 @@ public class CandidateUpdate {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private Candidate human;
+    private Candidate candidate;
 
     public CandidateUpdate() {
     }
 
-    public CandidateUpdate(Integer id, String source, Timestamp updateDate, String changeSet, Candidate human) {
+    public CandidateUpdate(Integer id, String source, Timestamp updateDate, String changeSet, Candidate candidate) {
         this.id = id;
         this.source = source;
         this.updateDate = updateDate;
         this.changeSet = changeSet;
-        this.human = human;
+        this.candidate = candidate;
     }
 
     public Integer getId() {
@@ -77,12 +78,12 @@ public class CandidateUpdate {
     }
 
     @JsonIgnore
-    public Candidate getHuman() {
-        return human;
+    public Candidate getCandidate() {
+        return candidate;
     }
 
-    public void setHuman(Candidate human) {
-        this.human = human;
+    public void setCandidate(Candidate candidate) {
+        this.candidate = candidate;
     }
 
     @Override

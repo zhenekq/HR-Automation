@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 /**
- * Attribute types of people attributes
+ * Attribute types of candidate attributes
  * @author yauheni_vozny
  * @version 1.0
  */

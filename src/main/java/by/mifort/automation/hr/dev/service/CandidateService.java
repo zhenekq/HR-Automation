@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Service layer for validation and business logic for PeopleRepository
+ * Service layer for validation and business logic for CandidateRepository
  * @see CandidateRepository
  * @author yauheni_vozny
  * @version 1.0
@@ -36,7 +36,7 @@ public interface CandidateService {
      * Create new candidate in database
      * @param candidate body of our candidate
      */
-    void addNewHuman(Candidate candidate);
+    void create(Candidate candidate);
 
     /**
      * @return List of candidate by keyword(s)

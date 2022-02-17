@@ -36,36 +36,36 @@ public class Candidate implements Serializable {
      * Information about candidate updates
      * @see CandidateUpdate
      */
-    @OneToMany(mappedBy = "human")
-    private List<CandidateUpdate> humanUpdates;
+    @OneToMany(mappedBy = "candidate")
+    private List<CandidateUpdate> candidateUpdates;
 
     /**
      * Keyboards that connection with candidate
      * @see Keyword
      */
-    @OneToMany(mappedBy = "human")
-    private List<Keyword> humanKeywords;
+    @OneToMany(mappedBy = "candidate")
+    private List<Keyword> candidateKeywords;
 
     /**
      * Communication history with candidate
      * @see CommunicationHistory
      */
-    @OneToMany(mappedBy = "human")
-    private List<CommunicationHistory> communicationHistory;
+    @OneToMany(mappedBy = "candidate")
+    private List<CommunicationHistory> candidateCommunicationHistory;
 
     /**
      * Attributes that connected with candidate
      * @see CandidateAttributes
      */
-    @OneToMany(mappedBy = "human")
-    private List<CandidateAttributes> humanAttributes;
+    @OneToMany(mappedBy = "candidate")
+    private List<CandidateAttributes> candidateAttributes;
 
 
     /**
      * Merged candidates
      * @see CandidateMergeCandidates
      */
-    @OneToMany(mappedBy = "human")
+    @OneToMany(mappedBy = "candidate")
     private List<CandidateMergeCandidates> candidates;
 
     public Candidate() {
@@ -103,39 +103,39 @@ public class Candidate implements Serializable {
     }
 
     @JsonIgnore
-    public List<CandidateUpdate> getHumanUpdates() {
-        return humanUpdates;
+    public List<CandidateUpdate> getCandidateUpdates() {
+        return candidateUpdates;
     }
 
-    public void setHumanUpdates(List<CandidateUpdate> humanUpdates) {
-        this.humanUpdates = humanUpdates;
-    }
-
-    @JsonIgnore
-    public List<Keyword> getHumanKeywords() {
-        return humanKeywords;
-    }
-
-    public void setHumanKeywords(List<Keyword> humanKeywords) {
-        this.humanKeywords = humanKeywords;
+    public void setCandidateUpdates(List<CandidateUpdate> candidateUpdates) {
+        this.candidateUpdates = candidateUpdates;
     }
 
     @JsonIgnore
-    public List<CommunicationHistory> getCommunicationHistory() {
-        return communicationHistory;
+    public List<Keyword> getCandidateKeywords() {
+        return candidateKeywords;
     }
 
-    public void setCommunicationHistory(List<CommunicationHistory> communicationHistory) {
-        this.communicationHistory = communicationHistory;
+    public void setCandidateKeywords(List<Keyword> candidateKeywords) {
+        this.candidateKeywords = candidateKeywords;
     }
 
     @JsonIgnore
-    public List<CandidateAttributes> getHumanAttributes() {
-        return humanAttributes;
+    public List<CommunicationHistory> getCandidateCommunicationHistory() {
+        return candidateCommunicationHistory;
     }
 
-    public void setHumanAttributes(List<CandidateAttributes> humanAttributes) {
-        this.humanAttributes = humanAttributes;
+    public void setCandidateCommunicationHistory(List<CommunicationHistory> candidateCommunicationHistory) {
+        this.candidateCommunicationHistory = candidateCommunicationHistory;
+    }
+
+    @JsonIgnore
+    public List<CandidateAttributes> getCandidateAttributes() {
+        return candidateAttributes;
+    }
+
+    public void setCandidateAttributes(List<CandidateAttributes> candidateAttributes) {
+        this.candidateAttributes = candidateAttributes;
     }
 
     @JsonIgnore

@@ -58,7 +58,7 @@ public class CandidateServiceImpl implements CandidateService {
 
     @Override
     @Transactional
-    public void addNewHuman(@NotNull Candidate candidate) {
+    public void create(@NotNull Candidate candidate) {
         candidateRepository.save(candidate);
     }
 

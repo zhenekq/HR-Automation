@@ -23,7 +23,7 @@ public class CandidateDto {
     private Timestamp lastContact;
     private String status;
     private List<CandidateUpdate> candidateUpdates = new ArrayList<>();
-    private List<KeywordDto> keywords = new ArrayList<>();
+    private List<Keyword> keywords = new ArrayList<>();
     private List<CommunicationHistory> communicationHistory = new ArrayList<>();
     private List<CandidateAttributes> candidateAttributes = new ArrayList<>();
     private List<CandidateMergeCandidates> mergeCandidates = new ArrayList<>();
@@ -63,11 +63,11 @@ public class CandidateDto {
         this.candidateUpdates = candidateUpdates;
     }
 
-    public List<KeywordDto> getKeywords() {
+    public List<Keyword> getKeywords() {
         return keywords;
     }
 
-    public void setKeywords(List<KeywordDto> keywords) {
+    public void setKeywords(List<Keyword> keywords) {
         this.keywords = keywords;
     }
 
@@ -79,11 +79,19 @@ public class CandidateDto {
         this.communicationHistory = communicationHistory;
     }
 
-    public List<CandidateAttributes> getPeopleAttributes() {
+    public List<CandidateUpdate> getCandidateUpdates() {
+        return candidateUpdates;
+    }
+
+    public void setCandidateUpdates(List<CandidateUpdate> candidateUpdates) {
+        this.candidateUpdates = candidateUpdates;
+    }
+
+    public List<CandidateAttributes> getCandidateAttributes() {
         return candidateAttributes;
     }
 
-    public void setPeopleAttributes(List<CandidateAttributes> candidateAttributes) {
+    public void setCandidateAttributes(List<CandidateAttributes> candidateAttributes) {
         this.candidateAttributes = candidateAttributes;
     }
 
