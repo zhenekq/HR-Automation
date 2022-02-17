@@ -1,6 +1,7 @@
 package by.mifort.automation.hr.dev.controller;
 
 import by.mifort.automation.hr.dev.dto.CandidateDto;
+import by.mifort.automation.hr.dev.dto.FilterDto;
 import by.mifort.automation.hr.dev.entity.Candidate;
 import by.mifort.automation.hr.dev.service.CandidateService;
 import io.swagger.annotations.Api;
@@ -32,17 +33,16 @@ public class CandidateController {
     /**
      * GET request to receive all info about candidates
      * Also with filters such as keywords and attributes
-     * @param page number of page of candidates
-     * @param amount amount of candidates on one page
+     * @param filterDto entity with pageSize, pageNum, and other filter configuration
+     * @see FilterDto
      * @param keyword candidates with this keyword
      * @return Full list of candidates or by keyboards or not
      */
     @ApiOperation("Get paginated candidates, with amount of them on one page")
     @GetMapping
-    public List<CandidateDto> getAll(@RequestParam Integer page,
-                                     @RequestParam Integer amount,
+    public List<CandidateDto> getAll(FilterDto filterDto,
                                      @RequestParam(required = false) String keyword) {
-        return candidateService.getAllPeople(page, amount, keyword);
+        return candidateService.getAllPeople(filterDto, keyword);
     }
 
     /**

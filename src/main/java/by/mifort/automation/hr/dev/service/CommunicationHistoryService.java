@@ -25,9 +25,21 @@ public interface CommunicationHistoryService {
     /**
      * Create new communication history with candidate
      * @param id candidate's identifier
-     * @param history request body of
-     * */
-
+     * @param history body of history
+     */
     CommunicationHistoryDto createHistoryWithCandidate(String id, CommunicationHistory history);
 
+    /**
+     * Update exists communication history with candidate
+     * @param id candidate's identifier
+     * @param history body of history
+     */
+    CommunicationHistoryDto updateHistoryWithCandidate(String id, CommunicationHistory history);
+
+    /**
+     * Archive exists communication history with candidate
+     * @param id candidate's identifier
+     * @param history body of history
+     */
+    CommunicationHistoryDto archiveHistoryWithCandidate(String id, CommunicationHistory history);
 }

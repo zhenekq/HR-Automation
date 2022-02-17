@@ -1,6 +1,7 @@
 package by.mifort.automation.hr.dev.service.impl;
 
 import by.mifort.automation.hr.dev.dto.CandidateDto;
+import by.mifort.automation.hr.dev.dto.FilterDto;
 import by.mifort.automation.hr.dev.entity.Candidate;
 import by.mifort.automation.hr.dev.entity.CandidateAttributes;
 import by.mifort.automation.hr.dev.entity.Keyword;
@@ -33,8 +34,10 @@ public class CandidateServiceImpl implements CandidateService {
     }
 
     @Override
-    public List<CandidateDto> getAllPeople(Integer page, Integer amount, String keyword) {
+    public List<CandidateDto> getAllPeople(FilterDto filterDto, String keyword) {
         List<Candidate> candidateList;
+        Integer page = filterDto.getPage();
+        Integer amount = filterDto.getAmount();
         if (page == null || amount == null || page <= 0 || amount <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parameters cannot be nullable");
         }

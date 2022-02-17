@@ -31,5 +31,7 @@ public interface CommunicationHistoryRepository extends JpaRepository<Communicat
      * @return page of communication history with candidate
      * */
     List<CommunicationHistory> findCommunicationHistoriesByHumanId(String id);
+    
+    Boolean existsCommunicationHistoryByHumanId(String id);
 
 }

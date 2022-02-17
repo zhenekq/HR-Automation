@@ -1,6 +1,7 @@
 package by.mifort.automation.hr.dev.service;
 
 import by.mifort.automation.hr.dev.dto.CandidateDto;
+import by.mifort.automation.hr.dev.dto.FilterDto;
 import by.mifort.automation.hr.dev.entity.Keyword;
 import by.mifort.automation.hr.dev.entity.Candidate;
 import by.mifort.automation.hr.dev.entity.CandidateAttributes;
@@ -20,9 +21,10 @@ public interface CandidateService {
 
     /**
      * @return List of all exists paginated candidates
-     * @param page number of page to see candidates
+     * @param filterDto dto with pagination, sortTypes
+     * @see FilterDto
      */
-    List<CandidateDto> getAllPeople(Integer page, Integer amount, String keyword);
+    List<CandidateDto> getAllPeople(FilterDto filterDto, String keyword);
 
     /**
      * @return information about candidate
