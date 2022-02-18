@@ -33,9 +33,9 @@ public class MappingDtoComponentConverterImpl implements MappingDtoComponentConv
 
     @Override
     public List<CandidateDto> convertToListPeopleDto(List<Candidate> people) {
-        List<CandidateDto> candidateDtoList = new ArrayList<>();
-        people.forEach((el) -> candidateDtoList.add(convertToPeopleDto(el)));
-        return candidateDtoList;
+        return people.stream()
+                .map(this::convertToPeopleDto)
+                .toList();
     }
 
     @Override
@@ -51,10 +51,8 @@ public class MappingDtoComponentConverterImpl implements MappingDtoComponentConv
 
     @Override
     public List<CommunicationHistoryDto> convertToListCommunicationHistoryDto(List<CommunicationHistory> communicationHistoryList) {
-        List<CommunicationHistoryDto> dtoList = new ArrayList<>();
-        communicationHistoryList.forEach(
-                (p) -> dtoList.add(convertToCommunicationHistoryDto(p))
-        );
-        return dtoList;
+        return communicationHistoryList.stream()
+                .map(this::convertToCommunicationHistoryDto)
+                .toList();
     }
 }
