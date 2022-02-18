@@ -1,5 +1,6 @@
 package by.mifort.automation.hr.dev.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -21,7 +22,7 @@ public class CandidateAttributes {
     private Integer id;
 
     @Column(name = "value")
-    private String name;
+    private String value;
 
     @Column(name = "valuesource")
     private Integer valueSource;
@@ -37,9 +38,9 @@ public class CandidateAttributes {
     public CandidateAttributes() {
     }
 
-    public CandidateAttributes(Integer id, Integer type, String name, Integer valueSource, Candidate candidate) {
+    public CandidateAttributes(Integer id, Integer type, String value, Integer valueSource, Candidate candidate) {
         this.id = id;
-        this.name = name;
+        this.value = value;
         this.valueSource = valueSource;
         this.candidate = candidate;
     }
@@ -52,12 +53,12 @@ public class CandidateAttributes {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getValue() {
+        return value;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public Integer getValueSource() {
@@ -68,6 +69,7 @@ public class CandidateAttributes {
         this.valueSource = valueSource;
     }
 
+    @JsonIgnore
     public Candidate getCandidate() {
         return candidate;
     }
@@ -76,6 +78,7 @@ public class CandidateAttributes {
         this.candidate = candidate;
     }
 
+    @JsonIgnore
     public AttributeTypes getAttributeTypes() {
         return attributeTypes;
     }

@@ -1,5 +1,6 @@
 package by.mifort.automation.hr.dev.controller;
 
+import by.mifort.automation.hr.dev.dto.CandidateAttributesDto;
 import by.mifort.automation.hr.dev.entity.CandidateAttributes;
 import by.mifort.automation.hr.dev.service.CandidateAttributesService;
 import io.swagger.annotations.Api;
@@ -36,8 +37,8 @@ public class CandidateAttributeController {
      */
     @ApiOperation("Get attributes of candidate by his id")
     @GetMapping
-    public List<CandidateAttributes> getByCandidateId(@PathVariable String id) {
-        return null;
+    public List<CandidateAttributesDto> getByCandidateId(@PathVariable String id) {
+        return service.getByCandidateId(id);
     }
 
     /**

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Data transfer object for entity People
+ * Data transfer object for entity Candidate
  *
  * @author yauheni_vozny
  * @version 1.0

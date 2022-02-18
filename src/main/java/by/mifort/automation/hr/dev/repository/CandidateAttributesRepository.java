@@ -4,6 +4,8 @@ import by.mifort.automation.hr.dev.entity.CandidateAttributes;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Repository for working with candidate's Attributes in database
  *
@@ -14,4 +16,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CandidateAttributesRepository extends JpaRepository<CandidateAttributes, Integer> {
+
+    List<CandidateAttributes> findCandidateAttributesByCandidateId(String id);
+
 }
