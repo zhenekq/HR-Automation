@@ -7,7 +7,7 @@ import by.mifort.automation.hr.dev.entity.CommunicationHistory;
 import by.mifort.automation.hr.dev.util.MappingDtoComponentConverter;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -21,12 +21,12 @@ public class MappingDtoComponentConverterImpl implements MappingDtoComponentConv
         if (candidate.getKeywords() != null) {
             candidateDto.setKeywords(candidate.getKeywords());
         } else {
-            candidateDto.setKeywords(new ArrayList<>());
+            candidateDto.setKeywords(Collections.emptyList());
         }
         if (candidate.getCommunicationHistory() != null) {
             candidateDto.setCommunicationHistory(candidate.getCommunicationHistory());
         } else {
-            candidateDto.setCommunicationHistory(new ArrayList<>());
+            candidateDto.setCommunicationHistory(Collections.emptyList());
         }
         return candidateDto;
     }

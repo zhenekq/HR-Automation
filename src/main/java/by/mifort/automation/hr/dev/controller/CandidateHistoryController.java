@@ -56,7 +56,7 @@ public class CandidateHistoryController {
     /**
      * PATCH request to update history with candidate
      *
-     * @param id      - candidate identifier
+     * @param id      candidate identifier
      * @param history body of history
      * @return Candidate's id
      */

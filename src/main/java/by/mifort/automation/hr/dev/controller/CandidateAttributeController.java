@@ -1,8 +1,10 @@
 package by.mifort.automation.hr.dev.controller;
 
 import by.mifort.automation.hr.dev.entity.CandidateAttributes;
+import by.mifort.automation.hr.dev.service.CandidateAttributesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,10 +21,17 @@ import java.util.List;
 @Api("Controller for manipulate with attributes of candidate")
 public class CandidateAttributeController {
 
+    private final CandidateAttributesService service;
+
+    @Autowired
+    public CandidateAttributeController(CandidateAttributesService service) {
+        this.service = service;
+    }
+
     /**
      * GET request to get candidate's attributes
      *
-     * @param id - candidate identifier
+     * @param id candidate identifier
      * @return CandidateAttributes of candidate
      */
     @ApiOperation("Get attributes of candidate by his id")
@@ -34,7 +43,7 @@ public class CandidateAttributeController {
     /**
      * POST request to create attributes with candidate
      *
-     * @param id         - candidate identifier
+     * @param id         candidate identifier
      * @param attributes body of attributes
      * @return Candidate's id
      */
@@ -48,7 +57,7 @@ public class CandidateAttributeController {
     /**
      * PATCH request to update attributes with candidate
      *
-     * @param id         - candidate identifier
+     * @param id candidate identifier
      * @param attributes body of attribute
      * @return Candidate's id
      */
@@ -62,7 +71,7 @@ public class CandidateAttributeController {
     /**
      * DELETE request to archive candidate's attributes
      *
-     * @param id - candidate identifier
+     * @param id candidate identifier
      * @return Candidate's id
      */
     @ApiOperation("Archive history with candidate with his id")

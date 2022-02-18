@@ -41,14 +41,13 @@ public class CandidateController {
     @ApiOperation("Get paginated candidates, with amount of them on one page")
     @GetMapping
     public List<CandidateDto> getAll(FilterDto filterDto) {
-        System.out.println(filterDto);
         return candidateService.getAll(filterDto);
     }
 
     /**
      * GET request to receive info about candidate by id
      *
-     * @param id - unique identifier for searching
+     * @param id unique identifier for searching
      * @return Candidate info by id
      */
     @ApiOperation("Get full information about user by id")
@@ -60,7 +59,7 @@ public class CandidateController {
     /**
      * POST request to create candidate
      *
-     * @param candidate - candidate entity body
+     * @param candidate candidate entity body
      * @return Conversation of successful created candidate with id
      */
     @ApiOperation("Create new candidate")

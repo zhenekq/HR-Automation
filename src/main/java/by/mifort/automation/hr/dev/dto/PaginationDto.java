@@ -5,6 +5,9 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
 /**
  * Dto for pagination our entities
  *
@@ -15,7 +18,12 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @JsonIgnoreProperties({"page", "amount"})
 public class PaginationDto {
 
+    @Positive
+    @NotNull
     private Integer pageNumber;
+
+    @Positive
+    @NotNull
     private Integer pageSize;
 
     public PaginationDto() {
