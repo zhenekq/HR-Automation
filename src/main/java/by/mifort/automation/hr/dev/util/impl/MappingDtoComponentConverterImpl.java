@@ -1,10 +1,9 @@
 package by.mifort.automation.hr.dev.util.impl;
 
-import by.mifort.automation.hr.dev.dto.CommunicationHistoryDto;
 import by.mifort.automation.hr.dev.dto.CandidateDto;
-import by.mifort.automation.hr.dev.entity.CommunicationHistory;
-import by.mifort.automation.hr.dev.entity.Keyword;
+import by.mifort.automation.hr.dev.dto.CommunicationHistoryDto;
 import by.mifort.automation.hr.dev.entity.Candidate;
+import by.mifort.automation.hr.dev.entity.CommunicationHistory;
 import by.mifort.automation.hr.dev.util.MappingDtoComponentConverter;
 import org.springframework.stereotype.Component;
 
@@ -19,14 +18,16 @@ public class MappingDtoComponentConverterImpl implements MappingDtoComponentConv
         candidateDto.setId(candidate.getId());
         candidateDto.setStatus(candidate.getStatus());
         candidateDto.setLastContact(candidate.getLastContact());
-        if(candidate.getCandidateKeywords() != null)
-            candidateDto.setKeywords(candidate.getCandidateKeywords());
-        else
+        if (candidate.getKeywords() != null) {
+            candidateDto.setKeywords(candidate.getKeywords());
+        } else {
             candidateDto.setKeywords(new ArrayList<>());
-        if(candidate.getCandidateCommunicationHistory() != null)
-            candidateDto.setCommunicationHistory(candidate.getCandidateCommunicationHistory());
-        else
+        }
+        if (candidate.getCommunicationHistory() != null) {
+            candidateDto.setCommunicationHistory(candidate.getCommunicationHistory());
+        } else {
             candidateDto.setCommunicationHistory(new ArrayList<>());
+        }
         return candidateDto;
     }
 
@@ -44,7 +45,6 @@ public class MappingDtoComponentConverterImpl implements MappingDtoComponentConv
         dto.setComment(communicationHistory.getComment());
         dto.setCreateDate(communicationHistory.getCreateDate());
         dto.setUpdateDate(communicationHistory.getUpdateDate());
-        dto.setHuman(convertToPeopleDto(communicationHistory.getCandidate()));
 
         return dto;
     }

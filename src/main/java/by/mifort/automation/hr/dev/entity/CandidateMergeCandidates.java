@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 /**
  * People merge candidates entity
+ *
  * @author yauheni_vozny
  * @version 1.0
  */
@@ -31,7 +32,7 @@ public class CandidateMergeCandidates implements Serializable {
 
     /**
      * @see Candidate Join 2 primary keys like a foreign key for 1 primary key
-     * */
+     */
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
@@ -52,7 +53,8 @@ public class CandidateMergeCandidates implements Serializable {
     })
     private Candidate candidate;
 
-    public CandidateMergeCandidates() {}
+    public CandidateMergeCandidates() {
+    }
 
     public CandidateMergeCandidates(MergeCandidates mergeCandidates, String status, String reason, String reasonComment) {
         this.mergeCandidates = mergeCandidates;

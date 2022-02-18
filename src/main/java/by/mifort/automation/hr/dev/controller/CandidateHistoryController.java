@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller that handles requests about candidate's history communication
+ *
+ * @author yauheni_vozny
+ * @version 1.0
+ */
 @RestController
 @RequestMapping("/candidates/{id}/history")
 @Api("Controller for manipulate with history of candidate")
@@ -22,6 +28,7 @@ public class CandidateHistoryController {
 
     /**
      * GET request to get candidate's history
+     *
      * @param id - candidate identifier
      * @return CommunicationHistory of candidate
      */
@@ -33,43 +40,44 @@ public class CandidateHistoryController {
 
     /**
      * POST request to create history with candidate
-     * @param id - candidate identifier
+     *
+     * @param id      - candidate identifier
      * @param history body of history
-     * @return Conversation of successfully created history with candidate
+     * @return Candidate's id
      */
     @ApiOperation("Create new history with candidate by his id")
     @PostMapping
     public String createByCandidateId(@PathVariable String id,
-                                             @RequestBody CommunicationHistory history) {
-        CommunicationHistoryDto dto = service.createByCandidateId(id, history);
-        return dto.getHuman().getId();
+                                      @RequestBody CommunicationHistory history) {
+        service.createByCandidateId(id, history);
+        return id;
     }
 
     /**
      * PATCH request to update history with candidate
-     * @param id - candidate identifier
+     *
+     * @param id      - candidate identifier
      * @param history body of history
-     * @return Conversation of successfully updated history with candidate
+     * @return Candidate's id
      */
     @ApiOperation("Update history with candidate by his id")
     @PatchMapping
     public String updateByCandidateId(@PathVariable String id,
-                                             @RequestBody CommunicationHistory history) {
-        CommunicationHistoryDto dto = service.updateByCandidateId(id, history);
-        return dto.getHuman().getId();
+                                      @RequestBody CommunicationHistory history) {
+        service.updateByCandidateId(id, history);
+        return id;
     }
 
     /**
      * DELETE request to archive history with candidate
+     *
      * @param id - candidate identifier
-     * @return Conversation of successfully archived history with candidate
+     * @return Candidate's id
      */
     @ApiOperation("Archive history with candidate with his id")
     @DeleteMapping
-    public String archiveHistoryWithCandidate(@PathVariable String id,
-                                              @RequestBody CommunicationHistory history) {
-        CommunicationHistoryDto dto = service.archiveByCandidateId(id, history);
-        return dto.getHuman().getId();
+    public String archiveHistoryWithCandidate(@PathVariable String id) {
+        service.archiveByCandidateId(id);
+        return id;
     }
-
 }

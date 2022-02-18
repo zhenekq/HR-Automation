@@ -10,9 +10,10 @@ import java.io.Serializable;
 
 /**
  * People merge primary keys
- * @see CandidateMergeCandidates connected attributes with id
+ *
  * @author yauheni_vozny
  * @version 1.0
+ * @see CandidateMergeCandidates connected attributes with id
  */
 @Embeddable
 public class MergeCandidates implements Serializable {

@@ -1,18 +1,18 @@
 package by.mifort.automation.hr.dev.util;
 
-import by.mifort.automation.hr.dev.dto.CommunicationHistoryDto;
 import by.mifort.automation.hr.dev.dto.CandidateDto;
-import by.mifort.automation.hr.dev.entity.CommunicationHistory;
-import by.mifort.automation.hr.dev.entity.Keyword;
+import by.mifort.automation.hr.dev.dto.CommunicationHistoryDto;
 import by.mifort.automation.hr.dev.entity.Candidate;
+import by.mifort.automation.hr.dev.entity.CommunicationHistory;
 
 import java.util.List;
 
 /**
  * Dto converter to entities
+ *
  * @author yauheni_vozny
  * @version 1.0
- * */
+ */
 
 public interface MappingDtoComponentConverter {
 
@@ -23,7 +23,6 @@ public interface MappingDtoComponentConverter {
     CommunicationHistoryDto convertToCommunicationHistoryDto(CommunicationHistory communicationHistory);
 
     List<CommunicationHistoryDto> convertToListCommunicationHistoryDto(List<CommunicationHistory> communicationHistoryList);
-
 
 
 }

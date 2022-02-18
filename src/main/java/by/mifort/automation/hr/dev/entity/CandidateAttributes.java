@@ -8,11 +8,11 @@ import javax.persistence.*;
 
 /**
  * People attributes that connected with candidate
- * @see AttributeTypes connected attributes with types
+ *
  * @author yauheni_vozny
  * @version 1.0
+ * @see AttributeTypes connected attributes with types
  */
-
 @Entity
 @Table(name = "peopleattributes")
 public class CandidateAttributes {

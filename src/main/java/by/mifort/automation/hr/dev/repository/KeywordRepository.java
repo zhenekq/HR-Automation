@@ -9,17 +9,18 @@ import org.springframework.stereotype.Repository;
 
 /**
  * Repository for working with candidate's Keywords in database
- * @see Keyword
+ *
  * @author yauheni_vozny
  * @version 1.0
+ * @see Keyword
  */
 
 @Repository
 public interface KeywordRepository extends JpaRepository<Keyword, String> {
 
     /**
-     * @return Paginated information about keywords
      * @param pageable settings to pagination
+     * @return Paginated information about keywords
      */
     @Query("select k from Keyword k")
     Page<Keyword> findAllKeywords(Pageable pageable);

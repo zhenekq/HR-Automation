@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 
 /**
  * Communication history with candidate
+ *
  * @author yauheni_vozny
  * @version 1.0
  */

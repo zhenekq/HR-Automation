@@ -10,10 +10,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Head entity "people" that has all information
+ *
  * @author yauheni_vozny
  * @version 1.0
  */
@@ -34,39 +34,44 @@ public class Candidate implements Serializable {
 
     /**
      * Information about candidate updates
+     *
      * @see CandidateUpdate
      */
     @OneToMany(mappedBy = "candidate")
-    private List<CandidateUpdate> candidateUpdates;
+    private List<CandidateUpdate> updates;
 
     /**
      * Keyboards that connection with candidate
+     *
      * @see Keyword
      */
     @OneToMany(mappedBy = "candidate")
-    private List<Keyword> candidateKeywords;
+    private List<Keyword> keywords;
 
     /**
      * Communication history with candidate
+     *
      * @see CommunicationHistory
      */
     @OneToMany(mappedBy = "candidate")
-    private List<CommunicationHistory> candidateCommunicationHistory;
+    private List<CommunicationHistory> communicationHistory;
 
     /**
      * Attributes that connected with candidate
+     *
      * @see CandidateAttributes
      */
     @OneToMany(mappedBy = "candidate")
-    private List<CandidateAttributes> candidateAttributes;
+    private List<CandidateAttributes> attributes;
 
 
     /**
      * Merged candidates
+     *
      * @see CandidateMergeCandidates
      */
     @OneToMany(mappedBy = "candidate")
-    private List<CandidateMergeCandidates> candidates;
+    private List<CandidateMergeCandidates> mergeCandidates;
 
     public Candidate() {
     }
@@ -103,48 +108,48 @@ public class Candidate implements Serializable {
     }
 
     @JsonIgnore
-    public List<CandidateUpdate> getCandidateUpdates() {
-        return candidateUpdates;
+    public List<CandidateUpdate> getUpdates() {
+        return updates;
     }
 
-    public void setCandidateUpdates(List<CandidateUpdate> candidateUpdates) {
-        this.candidateUpdates = candidateUpdates;
-    }
-
-    @JsonIgnore
-    public List<Keyword> getCandidateKeywords() {
-        return candidateKeywords;
-    }
-
-    public void setCandidateKeywords(List<Keyword> candidateKeywords) {
-        this.candidateKeywords = candidateKeywords;
+    public void setUpdates(List<CandidateUpdate> updates) {
+        this.updates = updates;
     }
 
     @JsonIgnore
-    public List<CommunicationHistory> getCandidateCommunicationHistory() {
-        return candidateCommunicationHistory;
+    public List<Keyword> getKeywords() {
+        return keywords;
     }
 
-    public void setCandidateCommunicationHistory(List<CommunicationHistory> candidateCommunicationHistory) {
-        this.candidateCommunicationHistory = candidateCommunicationHistory;
-    }
-
-    @JsonIgnore
-    public List<CandidateAttributes> getCandidateAttributes() {
-        return candidateAttributes;
-    }
-
-    public void setCandidateAttributes(List<CandidateAttributes> candidateAttributes) {
-        this.candidateAttributes = candidateAttributes;
+    public void setKeywords(List<Keyword> keywords) {
+        this.keywords = keywords;
     }
 
     @JsonIgnore
-    public List<CandidateMergeCandidates> getCandidates() {
-        return candidates;
+    public List<CommunicationHistory> getCommunicationHistory() {
+        return communicationHistory;
     }
 
-    public void setCandidates(List<CandidateMergeCandidates> candidates) {
-        this.candidates = candidates;
+    public void setCommunicationHistory(List<CommunicationHistory> communicationHistory) {
+        this.communicationHistory = communicationHistory;
+    }
+
+    @JsonIgnore
+    public List<CandidateAttributes> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(List<CandidateAttributes> attributes) {
+        this.attributes = attributes;
+    }
+
+    @JsonIgnore
+    public List<CandidateMergeCandidates> getMergeCandidates() {
+        return mergeCandidates;
+    }
+
+    public void setMergeCandidates(List<CandidateMergeCandidates> mergeCandidates) {
+        this.mergeCandidates = mergeCandidates;
     }
 
     @Override

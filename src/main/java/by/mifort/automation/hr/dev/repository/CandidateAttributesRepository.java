@@ -6,9 +6,10 @@ import org.springframework.stereotype.Repository;
 
 /**
  * Repository for working with candidate's Attributes in database
- * @see CandidateAttributes
+ *
  * @author yauheni_vozny
  * @version 1.0
+ * @see CandidateAttributes
  */
 
 @Repository

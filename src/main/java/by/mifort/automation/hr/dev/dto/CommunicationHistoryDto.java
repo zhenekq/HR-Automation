@@ -1,6 +1,5 @@
 package by.mifort.automation.hr.dev.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -21,7 +20,6 @@ public class CommunicationHistoryDto {
     private Timestamp createDate;
     private Timestamp updateDate;
     private String comment;
-    private CandidateDto human;
 
     public CommunicationHistoryDto() {
     }
@@ -56,15 +54,6 @@ public class CommunicationHistoryDto {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    @JsonIgnore
-    public CandidateDto getHuman() {
-        return human;
-    }
-
-    public void setHuman(CandidateDto human) {
-        this.human = human;
     }
 
     @Override

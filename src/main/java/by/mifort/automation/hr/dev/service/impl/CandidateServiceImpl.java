@@ -34,19 +34,20 @@ public class CandidateServiceImpl implements CandidateService {
     }
 
     @Override
-    public List<CandidateDto> getAll(FilterDto filterDto, String keyword) {
+    public List<CandidateDto> getAll(FilterDto filterDto) {
         List<Candidate> candidateList;
         Integer page = filterDto.getPageNumber();
         Integer amount = filterDto.getPageSize();
+        String query = filterDto.getKeyword().get(0);
         if (page == null || amount == null || page <= 0 || amount <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parameters cannot be nullable");
         }
         Pageable pageable = PageRequest.of(page - 1, amount);
-        if (keyword == null || keyword.isEmpty()) {
-            candidateList = candidateRepository.findAllPeople(pageable).toList();
+        if (query == null || query.isEmpty()) {
+            candidateList = candidateRepository.findAllCandidates(pageable).toList();
             return converter.convertToListPeopleDto(candidateList);
         }
-        candidateList = candidateRepository.findAllByHumanKeywords(keyword, pageable);
+        candidateList = candidateRepository.findAllByKeywords(query, pageable);
         return converter.convertToListPeopleDto(candidateList);
     }
 

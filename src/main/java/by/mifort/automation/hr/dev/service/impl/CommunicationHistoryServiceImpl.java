@@ -23,28 +23,28 @@ public class CommunicationHistoryServiceImpl implements CommunicationHistoryServ
     }
 
     @Override
-    public List<CommunicationHistoryDto> getByCandidateId(String id) {
-        List<CommunicationHistory> communicationHistory = repository.findCommunicationHistoriesByCandidateId(id);
+    public List<CommunicationHistoryDto> getByCandidateId(String candidateId) {
+        List<CommunicationHistory> communicationHistory = repository.findCommunicationHistoriesByCandidateId(candidateId);
         return converter.convertToListCommunicationHistoryDto(communicationHistory);
     }
 
     @Override
     @Transactional
-    public CommunicationHistoryDto createByCandidateId(String id, CommunicationHistory history) {
+    public CommunicationHistoryDto createByCandidateId(String candidateId, CommunicationHistory history) {
         Candidate candidate = new Candidate();
-        candidate.setId(id);
+        candidate.setId(candidateId);
         history.setCandidate(candidate);
         repository.save(history);
         return converter.convertToCommunicationHistoryDto(history);
     }
 
     @Override
-    public CommunicationHistoryDto updateByCandidateId(String id, CommunicationHistory history) {
+    public CommunicationHistoryDto updateByCandidateId(String candidateId, CommunicationHistory history) {
         return null;
     }
 
     @Override
-    public CommunicationHistoryDto archiveByCandidateId(String id, CommunicationHistory history) {
+    public CommunicationHistoryDto archiveByCandidateId(String candidateId) {
         return null;
     }
 }

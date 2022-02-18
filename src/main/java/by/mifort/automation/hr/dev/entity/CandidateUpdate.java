@@ -1,18 +1,19 @@
 package by.mifort.automation.hr.dev.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
  * Updates about candidate
+ *
  * @author yauheni_vozny
  * @version 1.0
- * */
+ */
 
 @Entity
 @Table(name = "peopleupdates")

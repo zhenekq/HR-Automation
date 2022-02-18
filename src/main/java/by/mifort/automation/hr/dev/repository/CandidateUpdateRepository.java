@@ -6,9 +6,10 @@ import org.springframework.stereotype.Repository;
 
 /**
  * Repository for working with candidate's CandidateUpdate in database
- * @see CandidateUpdate
+ *
  * @author yauheni_vozny
  * @version 1.0
+ * @see CandidateUpdate
  */
 
 @Repository

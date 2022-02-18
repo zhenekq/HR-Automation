@@ -33,20 +33,21 @@ public class CandidateController {
     /**
      * GET request to receive all info about candidates
      * Also with filters such as keywords and attributes
+     *
      * @param filterDto entity with pageSize, pageNum, and other filter configuration
-     * @see FilterDto
-     * @param keyword candidates with this keyword
      * @return Full list of candidates or by keyboards or not
+     * @see FilterDto
      */
     @ApiOperation("Get paginated candidates, with amount of them on one page")
     @GetMapping
-    public List<CandidateDto> getAll(FilterDto filterDto,
-                                     @RequestParam(required = false) String keyword) {
-        return candidateService.getAll(filterDto, keyword);
+    public List<CandidateDto> getAll(FilterDto filterDto) {
+        System.out.println(filterDto);
+        return candidateService.getAll(filterDto);
     }
 
     /**
      * GET request to receive info about candidate by id
+     *
      * @param id - unique identifier for searching
      * @return Candidate info by id
      */
@@ -58,6 +59,7 @@ public class CandidateController {
 
     /**
      * POST request to create candidate
+     *
      * @param candidate - candidate entity body
      * @return Conversation of successful created candidate with id
      */

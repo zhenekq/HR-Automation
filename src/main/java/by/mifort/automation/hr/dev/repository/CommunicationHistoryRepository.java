@@ -11,9 +11,10 @@ import java.util.List;
 
 /**
  * Repository for working with candidate's CommunicationHistory in database
- * @see CommunicationHistory
+ *
  * @author yauheni_vozny
  * @version 1.0
+ * @see CommunicationHistory
  */
 
 @Repository
@@ -22,16 +23,14 @@ public interface CommunicationHistoryRepository extends JpaRepository<Communicat
     /**
      * @param pageable value for pagination
      * @return page of communication history with all candidates
-     * */
-
+     */
+    @Query("select h from CommunicationHistory h")
     Page<CommunicationHistory> findAllHistory(Pageable pageable);
 
     /**
      * @param id human id for find his communication history
      * @return page of communication history with candidate
-     * */
+     */
     List<CommunicationHistory> findCommunicationHistoriesByCandidateId(String id);
-
-    Boolean existsCommunicationHistoryByCandidateId(String id);
 
 }

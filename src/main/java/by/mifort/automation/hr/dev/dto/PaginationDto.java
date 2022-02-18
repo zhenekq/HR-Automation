@@ -7,9 +7,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Dto for pagination our entities
+ *
  * @author yauheni_vozny
  * @version 1.0
- * */
+ */
 
 @JsonIgnoreProperties({"page", "amount"})
 public class PaginationDto {

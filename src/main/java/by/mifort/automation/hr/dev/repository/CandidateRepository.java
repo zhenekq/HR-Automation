@@ -11,21 +11,26 @@ import java.util.List;
 
 /**
  * Repository for working with Candidate in database
- * @see Candidate
+ *
  * @author yauheni_vozny
  * @version 1.0
+ * @see Candidate
  */
 
 @Repository
 public interface CandidateRepository extends JpaRepository<Candidate, String> {
 
     /**
-     * @return Paginated information about people
      * @param pageable settings to pagination
+     * @return Paginated information about people
      */
     @Query("select p from Candidate p")
-    Page<Candidate> findAllPeople(Pageable pageable);
+    Page<Candidate> findAllCandidates(Pageable pageable);
 
-    @Query("select p from Candidate p inner join p.candidateKeywords kb where kb.id =:keyword")
-    List<Candidate> findAllByHumanKeywords(String keyword, Pageable pageable);
+    /**
+     * @param pageable settings to pagination
+     * @return Paginated information about people by keywords
+     */
+    @Query("select p from Candidate p inner join p.keywords kb where kb.id =:keyword")
+    List<Candidate> findAllByKeywords(String keyword, Pageable pageable);
 }
