@@ -26,6 +26,8 @@ public interface MappingDtoComponentConverter {
 
     List<CommunicationHistoryDto> convertToListCommunicationHistoryDto(List<CommunicationHistory> communicationHistoryList);
 
+    CommunicationHistory convertToCommunicationHistory(CommunicationHistoryDto dto);
+
     CandidateAttributesDto convertToCandidateAttributesDto(CandidateAttributes attributes);
 
     List<CandidateAttributesDto> convertToListCandidateAttributesDto(List<CandidateAttributes> attributes);

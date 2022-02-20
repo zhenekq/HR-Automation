@@ -5,9 +5,13 @@ import by.mifort.automation.hr.dev.entity.Candidate;
 import by.mifort.automation.hr.dev.entity.CommunicationHistory;
 import by.mifort.automation.hr.dev.repository.CommunicationHistoryRepository;
 import by.mifort.automation.hr.dev.service.CommunicationHistoryService;
+import by.mifort.automation.hr.dev.util.AssertDifferencesUpdates;
 import by.mifort.automation.hr.dev.util.MappingDtoComponentConverter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -16,10 +20,13 @@ public class CommunicationHistoryServiceImpl implements CommunicationHistoryServ
 
     private final CommunicationHistoryRepository repository;
     private final MappingDtoComponentConverter converter;
+    private final AssertDifferencesUpdates assertDifferencesUpdates;
 
-    public CommunicationHistoryServiceImpl(CommunicationHistoryRepository repository, MappingDtoComponentConverter converter) {
+    @Autowired
+    public CommunicationHistoryServiceImpl(CommunicationHistoryRepository repository, MappingDtoComponentConverter converter, AssertDifferencesUpdates assertDifferencesUpdates) {
         this.repository = repository;
         this.converter = converter;
+        this.assertDifferencesUpdates = assertDifferencesUpdates;
     }
 
     @Override
@@ -39,8 +46,19 @@ public class CommunicationHistoryServiceImpl implements CommunicationHistoryServ
     }
 
     @Override
-    public CommunicationHistoryDto updateByCandidateId(String candidateId, CommunicationHistory history) {
-        return null;
+    @Transactional
+    public CommunicationHistoryDto updateByCandidateId(String candidateId, CommunicationHistoryDto history) {
+        if (history.getId() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        CommunicationHistory communicationHistory = repository.findCommunicationHistoryByCandidateIdAndId(candidateId, history.getId());
+        if (communicationHistory == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        } else {
+            communicationHistory = assertDifferencesUpdates.assertCommunicationHistoryAndDto(communicationHistory, history);
+        }
+        repository.save(communicationHistory);
+        return converter.convertToCommunicationHistoryDto(communicationHistory);
     }
 
     @Override

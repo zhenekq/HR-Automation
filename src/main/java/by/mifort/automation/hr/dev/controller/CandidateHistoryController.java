@@ -32,7 +32,7 @@ public class CandidateHistoryController {
      * @param id - candidate identifier
      * @return CommunicationHistory of candidate
      */
-    @ApiOperation("Get history with candidate by his id")
+    @ApiOperation("Get all histories with candidate by his id")
     @GetMapping
     public List<CommunicationHistoryDto> getByCandidateId(@PathVariable String id) {
         return service.getByCandidateId(id);
@@ -41,7 +41,7 @@ public class CandidateHistoryController {
     /**
      * POST request to create history with candidate
      *
-     * @param id      - candidate identifier
+     * @param id      candidate identifier
      * @param history body of history
      * @return Candidate's id
      */
@@ -63,7 +63,7 @@ public class CandidateHistoryController {
     @ApiOperation("Update history with candidate by his id")
     @PatchMapping
     public String updateByCandidateId(@PathVariable String id,
-                                      @RequestBody CommunicationHistory history) {
+                                      @RequestBody CommunicationHistoryDto history) {
         service.updateByCandidateId(id, history);
         return id;
     }
@@ -71,7 +71,7 @@ public class CandidateHistoryController {
     /**
      * DELETE request to archive history with candidate
      *
-     * @param id - candidate identifier
+     * @param id candidate identifier
      * @return Candidate's id
      */
     @ApiOperation("Archive history with candidate with his id")

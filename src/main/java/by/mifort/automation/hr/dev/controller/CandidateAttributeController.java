@@ -52,6 +52,7 @@ public class CandidateAttributeController {
     @PostMapping
     public String createByCandidateId(@PathVariable String id,
                                       @RequestBody CandidateAttributes attributes) {
+        service.createByCandidateId(id, attributes);
         return id;
     }
 
@@ -66,6 +67,7 @@ public class CandidateAttributeController {
     @PatchMapping
     public String updateByCandidateId(@PathVariable String id,
                                       @RequestBody CandidateAttributes attributes) {
+        service.updateByCandidateId(id, attributes);
         return id;
     }
 
@@ -78,6 +80,7 @@ public class CandidateAttributeController {
     @ApiOperation("Archive history with candidate with his id")
     @DeleteMapping
     public String deleteByCandidateId(@PathVariable String id) {
+        service.archiveByCandidateId(id);
         return id;
     }
 }

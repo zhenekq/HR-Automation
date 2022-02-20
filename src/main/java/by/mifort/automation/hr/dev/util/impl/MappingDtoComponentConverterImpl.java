@@ -30,6 +30,11 @@ public class MappingDtoComponentConverterImpl implements MappingDtoComponentConv
         } else {
             candidateDto.setCommunicationHistory(Collections.emptyList());
         }
+        if (candidate.getAttributes() != null) {
+            candidateDto.setCandidateAttributes(candidate.getAttributes());
+        } else {
+            candidateDto.setCandidateAttributes(Collections.emptyList());
+        }
         return candidateDto;
     }
 
@@ -56,6 +61,17 @@ public class MappingDtoComponentConverterImpl implements MappingDtoComponentConv
         return communicationHistoryList.stream()
                 .map(this::convertToCommunicationHistoryDto)
                 .toList();
+    }
+
+    @Override
+    public CommunicationHistory convertToCommunicationHistory(CommunicationHistoryDto dto) {
+        CommunicationHistory history = new CommunicationHistory();
+        history.setId(dto.getId());
+        history.setComment(dto.getComment());
+        history.setCreateDate(dto.getCreateDate());
+        history.setUpdateDate(dto.getUpdateDate());
+
+        return history;
     }
 
     @Override

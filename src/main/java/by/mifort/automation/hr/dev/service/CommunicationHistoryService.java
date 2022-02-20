@@ -37,7 +37,7 @@ public interface CommunicationHistoryService {
      * @param candidateId candidate's identifier
      * @param history     body of history
      */
-    CommunicationHistoryDto updateByCandidateId(String candidateId, CommunicationHistory history);
+    CommunicationHistoryDto updateByCandidateId(String candidateId, CommunicationHistoryDto history);
 
     /**
      * Archive exists communication history with candidate
