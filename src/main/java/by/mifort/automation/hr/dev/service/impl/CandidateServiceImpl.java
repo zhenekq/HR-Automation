@@ -46,7 +46,7 @@ public class CandidateServiceImpl implements CandidateService {
             candidateList = candidateRepository.findAll(pageable).toList();
             return converter.convertToListEntityDto(candidateList);
         }
-        candidateList = candidateRepository.findAllByKeywords(filterDto.getKeyword().get(0), pageable);
+        candidateList = candidateRepository.findCandidatesByKeywordsContaining(filterDto.getKeyword().get(0), pageable);
         return converter.convertToListEntityDto(candidateList);
     }
 

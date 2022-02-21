@@ -23,6 +23,6 @@ public interface CandidateRepository extends JpaRepository<Candidate, String> {
      * @param pageable settings to pagination
      * @return Paginated information about people by keywords
      */
-    @Query("select p from Candidate p inner join p.keywords kb where kb.id =:keyword")
-    List<Candidate> findAllByKeywords(String keyword, Pageable pageable);
+    @Query("select p from Candidate p inner join p.keywords kb where kb.id like %:keyword%")
+    List<Candidate> findCandidatesByKeywordsContaining(String keyword, Pageable pageable);
 }
