@@ -1,6 +1,7 @@
 package by.mifort.automation.hr.dev.service;
 
 import by.mifort.automation.hr.dev.dto.CommunicationHistoryDto;
+import by.mifort.automation.hr.dev.dto.FilterDto;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface CommunicationHistoryService {
      *
      * @param candidateId candidate's identifier
      */
-    List<CommunicationHistoryDto> getByCandidateId(String candidateId);
+    List<CommunicationHistoryDto> getByCandidateId(String candidateId, FilterDto filterDto);
 
     /**
      * Create new communication history with candidate
@@ -42,6 +43,7 @@ public interface CommunicationHistoryService {
      * Archive exists communication history with candidate
      *
      * @param candidateId candidate's identifier
+     * @param historyId   history's identifier
      */
-    CommunicationHistoryDto archiveByCandidateId(String candidateId);
+    CommunicationHistoryDto archiveByCandidateId(String candidateId, Integer historyId);
 }

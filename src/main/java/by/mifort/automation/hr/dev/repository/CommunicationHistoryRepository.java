@@ -24,6 +24,12 @@ public interface CommunicationHistoryRepository extends JpaRepository<Communicat
     List<CommunicationHistory> findCommunicationHistoriesByCandidateIdAndIsArchivedFalse(String id);
 
     /**
+     * @param id human id for find his communication history
+     * @return page of archived communication history with candidate
+     */
+    List<CommunicationHistory> findCommunicationHistoriesByCandidateIdAndIsArchivedTrue(String id);
+
+    /**
      * @param candidateId candidate id for find his communication history
      * @param id          history id for find it history
      * @return history that connected with candidate by both identifiers

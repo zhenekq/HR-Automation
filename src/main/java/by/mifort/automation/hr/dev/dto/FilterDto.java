@@ -9,6 +9,7 @@ import java.util.List;
 public class FilterDto extends PaginationDto {
 
     private List<String> keyword;
+    private Boolean isArchived;
 
     public FilterDto() {
     }
@@ -19,6 +20,14 @@ public class FilterDto extends PaginationDto {
 
     public void setKeyword(List<String> keyword) {
         this.keyword = keyword;
+    }
+
+    public Boolean getIsArchived() {
+        return isArchived;
+    }
+
+    public void setIsArchived(Boolean archived) {
+        isArchived = archived;
     }
 
     @Override

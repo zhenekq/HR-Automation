@@ -1,6 +1,7 @@
 package by.mifort.automation.hr.dev.controller;
 
 import by.mifort.automation.hr.dev.dto.CommunicationHistoryDto;
+import by.mifort.automation.hr.dev.dto.FilterDto;
 import by.mifort.automation.hr.dev.service.CommunicationHistoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,8 +34,10 @@ public class CandidateHistoryController {
      */
     @ApiOperation("Get all histories with candidate by his id")
     @GetMapping
-    public List<CommunicationHistoryDto> getByCandidateId(@PathVariable String id) {
-        return service.getByCandidateId(id);
+    public List<CommunicationHistoryDto> getByCandidateId(@PathVariable String id,
+                                                          FilterDto filterDto) {
+        System.out.println(filterDto.getIsArchived());
+        return service.getByCandidateId(id, filterDto);
     }
 
     /**

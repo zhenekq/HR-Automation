@@ -1,6 +1,7 @@
 package by.mifort.automation.hr.dev.service.impl;
 
 import by.mifort.automation.hr.dev.dto.CommunicationHistoryDto;
+import by.mifort.automation.hr.dev.dto.FilterDto;
 import by.mifort.automation.hr.dev.entity.Candidate;
 import by.mifort.automation.hr.dev.entity.CommunicationHistory;
 import by.mifort.automation.hr.dev.repository.CommunicationHistoryRepository;
@@ -31,8 +32,15 @@ public class CommunicationHistoryServiceImpl implements CommunicationHistoryServ
     }
 
     @Override
-    public List<CommunicationHistoryDto> getByCandidateId(String candidateId) {
-        List<CommunicationHistory> communicationHistory = repository.findCommunicationHistoriesByCandidateIdAndIsArchivedFalse(candidateId);
+    public List<CommunicationHistoryDto> getByCandidateId(String candidateId, FilterDto filterDto) {
+        List<CommunicationHistory> communicationHistory;
+        if (filterDto.getIsArchived() == null || !filterDto.getIsArchived()) {
+            communicationHistory = repository
+                    .findCommunicationHistoriesByCandidateIdAndIsArchivedFalse(candidateId);
+            return converter.convertToListEntityDto(communicationHistory);
+        }
+        communicationHistory = repository
+                .findCommunicationHistoriesByCandidateIdAndIsArchivedTrue(candidateId);
         return converter.convertToListEntityDto(communicationHistory);
     }
 
