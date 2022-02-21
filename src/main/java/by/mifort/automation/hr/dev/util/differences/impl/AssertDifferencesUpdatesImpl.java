@@ -1,8 +1,8 @@
-package by.mifort.automation.hr.dev.util.impl;
+package by.mifort.automation.hr.dev.util.differences.impl;
 
 import by.mifort.automation.hr.dev.dto.CommunicationHistoryDto;
 import by.mifort.automation.hr.dev.entity.CommunicationHistory;
-import by.mifort.automation.hr.dev.util.AssertDifferencesUpdates;
+import by.mifort.automation.hr.dev.util.differences.AssertDifferencesUpdates;
 import org.springframework.stereotype.Component;
 
 @Component

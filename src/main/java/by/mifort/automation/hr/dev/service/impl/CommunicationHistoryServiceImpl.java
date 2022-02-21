@@ -5,8 +5,8 @@ import by.mifort.automation.hr.dev.entity.Candidate;
 import by.mifort.automation.hr.dev.entity.CommunicationHistory;
 import by.mifort.automation.hr.dev.repository.CommunicationHistoryRepository;
 import by.mifort.automation.hr.dev.service.CommunicationHistoryService;
-import by.mifort.automation.hr.dev.util.AssertDifferencesUpdates;
-import by.mifort.automation.hr.dev.util.MappingDtoComponentConverter;
+import by.mifort.automation.hr.dev.util.converter.EntityConverter;
+import by.mifort.automation.hr.dev.util.differences.AssertDifferencesUpdates;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -19,11 +19,11 @@ import java.util.List;
 public class CommunicationHistoryServiceImpl implements CommunicationHistoryService {
 
     private final CommunicationHistoryRepository repository;
-    private final MappingDtoComponentConverter converter;
+    private final EntityConverter<CommunicationHistory, CommunicationHistoryDto> converter;
     private final AssertDifferencesUpdates assertDifferencesUpdates;
 
     @Autowired
-    public CommunicationHistoryServiceImpl(CommunicationHistoryRepository repository, MappingDtoComponentConverter converter, AssertDifferencesUpdates assertDifferencesUpdates) {
+    public CommunicationHistoryServiceImpl(CommunicationHistoryRepository repository, EntityConverter<CommunicationHistory, CommunicationHistoryDto> converter, AssertDifferencesUpdates assertDifferencesUpdates) {
         this.repository = repository;
         this.converter = converter;
         this.assertDifferencesUpdates = assertDifferencesUpdates;
@@ -32,7 +32,7 @@ public class CommunicationHistoryServiceImpl implements CommunicationHistoryServ
     @Override
     public List<CommunicationHistoryDto> getByCandidateId(String candidateId) {
         List<CommunicationHistory> communicationHistory = repository.findCommunicationHistoriesByCandidateId(candidateId);
-        return converter.convertToListCommunicationHistoryDto(communicationHistory);
+        return converter.convertToListEntityDto(communicationHistory);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class CommunicationHistoryServiceImpl implements CommunicationHistoryServ
         candidate.setId(candidateId);
         history.setCandidate(candidate);
         repository.save(history);
-        return converter.convertToCommunicationHistoryDto(history);
+        return converter.convertToEntityDto(history);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class CommunicationHistoryServiceImpl implements CommunicationHistoryServ
             communicationHistory = assertDifferencesUpdates.assertCommunicationHistoryAndDto(communicationHistory, history);
         }
         repository.save(communicationHistory);
-        return converter.convertToCommunicationHistoryDto(communicationHistory);
+        return converter.convertToEntityDto(communicationHistory);
     }
 
     @Override

@@ -78,7 +78,6 @@ public class CandidateAttributes {
         this.candidate = candidate;
     }
 
-    @JsonIgnore
     public AttributeTypes getAttributeTypes() {
         return attributeTypes;
     }

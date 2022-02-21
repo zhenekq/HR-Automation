@@ -7,7 +7,7 @@ import by.mifort.automation.hr.dev.entity.CandidateAttributes;
 import by.mifort.automation.hr.dev.entity.Keyword;
 import by.mifort.automation.hr.dev.repository.CandidateRepository;
 import by.mifort.automation.hr.dev.service.CandidateService;
-import by.mifort.automation.hr.dev.util.MappingDtoComponentConverter;
+import by.mifort.automation.hr.dev.util.converter.EntityConverter;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -25,10 +25,10 @@ import java.util.Set;
 public class CandidateServiceImpl implements CandidateService {
 
     private final CandidateRepository candidateRepository;
-    private final MappingDtoComponentConverter converter;
+    private final EntityConverter<Candidate, CandidateDto> converter;
 
     @Autowired
-    public CandidateServiceImpl(CandidateRepository candidateRepository, MappingDtoComponentConverter converter) {
+    public CandidateServiceImpl(CandidateRepository candidateRepository, EntityConverter<Candidate, CandidateDto> converter) {
         this.candidateRepository = candidateRepository;
         this.converter = converter;
     }
@@ -44,16 +44,16 @@ public class CandidateServiceImpl implements CandidateService {
         Pageable pageable = PageRequest.of(page - 1, amount);
         if (filterDto.getKeyword() == null) {
             candidateList = candidateRepository.findAll(pageable).toList();
-            return converter.convertToListPeopleDto(candidateList);
+            return converter.convertToListEntityDto(candidateList);
         }
         candidateList = candidateRepository.findAllByKeywords(filterDto.getKeyword().get(0), pageable);
-        return converter.convertToListPeopleDto(candidateList);
+        return converter.convertToListEntityDto(candidateList);
     }
 
     @Override
     public CandidateDto getById(@NotNull String id) {
         Candidate candidate = candidateRepository.getById(id);
-        return converter.convertToPeopleDto(candidate);
+        return converter.convertToEntityDto(candidate);
     }
 
     @Override

@@ -28,21 +28,5 @@ public interface CandidateAttributesService {
      * @param candidateId candidate's identifier
      * @param attributes  body of attributes
      */
-    CandidateAttributesDto createByCandidateId(String candidateId, CandidateAttributes attributes);
-
-    /**
-     * Update exists attributes with candidate
-     *
-     * @param candidateId candidate's identifier
-     * @param attributes  body of attributes
-     */
-    CandidateAttributesDto updateByCandidateId(String candidateId, CandidateAttributes attributes);
-
-    /**
-     * Archive exists attributes with candidate
-     *
-     * @param candidateId candidate's identifier
-     */
-    CandidateAttributesDto archiveByCandidateId(String candidateId);
-
+    CandidateAttributesDto createByCandidateIdAndAttributeTypeId(String candidateId, Integer attributeTypeId, CandidateAttributes attributes);
 }

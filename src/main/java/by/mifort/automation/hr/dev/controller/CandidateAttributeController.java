@@ -46,41 +46,15 @@ public class CandidateAttributeController {
      *
      * @param id         candidate identifier
      * @param attributes body of attributes
+     * @param type       attribute type
      * @return Candidate's id
      */
     @ApiOperation("Create new attributes with candidate by his id")
     @PostMapping
     public String createByCandidateId(@PathVariable String id,
-                                      @RequestBody CandidateAttributes attributes) {
-        service.createByCandidateId(id, attributes);
-        return id;
-    }
-
-    /**
-     * PATCH request to update attributes with candidate
-     *
-     * @param id candidate identifier
-     * @param attributes body of attribute
-     * @return Candidate's id
-     */
-    @ApiOperation("Update history with candidate by his id")
-    @PatchMapping
-    public String updateByCandidateId(@PathVariable String id,
-                                      @RequestBody CandidateAttributes attributes) {
-        service.updateByCandidateId(id, attributes);
-        return id;
-    }
-
-    /**
-     * DELETE request to archive candidate's attributes
-     *
-     * @param id candidate identifier
-     * @return Candidate's id
-     */
-    @ApiOperation("Archive history with candidate with his id")
-    @DeleteMapping
-    public String deleteByCandidateId(@PathVariable String id) {
-        service.archiveByCandidateId(id);
+                                      @RequestBody CandidateAttributes attributes,
+                                      @RequestParam Integer type) {
+        service.createByCandidateIdAndAttributeTypeId(id, type, attributes);
         return id;
     }
 }

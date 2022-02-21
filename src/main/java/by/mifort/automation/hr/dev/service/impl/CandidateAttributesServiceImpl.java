@@ -1,12 +1,15 @@
 package by.mifort.automation.hr.dev.service.impl;
 
 import by.mifort.automation.hr.dev.dto.CandidateAttributesDto;
+import by.mifort.automation.hr.dev.entity.AttributeTypes;
+import by.mifort.automation.hr.dev.entity.Candidate;
 import by.mifort.automation.hr.dev.entity.CandidateAttributes;
 import by.mifort.automation.hr.dev.repository.CandidateAttributesRepository;
 import by.mifort.automation.hr.dev.service.CandidateAttributesService;
-import by.mifort.automation.hr.dev.util.MappingDtoComponentConverter;
+import by.mifort.automation.hr.dev.util.converter.EntityConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,10 +17,10 @@ import java.util.List;
 public class CandidateAttributesServiceImpl implements CandidateAttributesService {
 
     private final CandidateAttributesRepository repository;
-    private final MappingDtoComponentConverter converter;
+    private final EntityConverter<CandidateAttributes, CandidateAttributesDto> converter;
 
     @Autowired
-    public CandidateAttributesServiceImpl(CandidateAttributesRepository repository, MappingDtoComponentConverter converter) {
+    public CandidateAttributesServiceImpl(CandidateAttributesRepository repository, EntityConverter<CandidateAttributes, CandidateAttributesDto> converter) {
         this.repository = repository;
         this.converter = converter;
     }
@@ -25,21 +28,19 @@ public class CandidateAttributesServiceImpl implements CandidateAttributesServic
     @Override
     public List<CandidateAttributesDto> getByCandidateId(String candidateId) {
         List<CandidateAttributes> attributes = repository.findCandidateAttributesByCandidateId(candidateId);
-        return converter.convertToListCandidateAttributesDto(attributes);
+        return converter.convertToListEntityDto(attributes);
     }
 
     @Override
-    public CandidateAttributesDto createByCandidateId(String candidateId, CandidateAttributes attributes) {
-        return null;
-    }
-
-    @Override
-    public CandidateAttributesDto updateByCandidateId(String candidateId, CandidateAttributes attributes) {
-        return null;
-    }
-
-    @Override
-    public CandidateAttributesDto archiveByCandidateId(String candidateId) {
-        return null;
+    @Transactional
+    public CandidateAttributesDto createByCandidateIdAndAttributeTypeId(String candidateId, Integer attributeTypeId, CandidateAttributes attributes) {
+        Candidate candidate = new Candidate();
+        candidate.setId(candidateId);
+        attributes.setCandidate(candidate);
+        AttributeTypes types = new AttributeTypes();
+        types.setId(attributeTypeId);
+        attributes.setAttributeTypes(types);
+        repository.save(attributes);
+        return converter.convertToEntityDto(attributes);
     }
 }
