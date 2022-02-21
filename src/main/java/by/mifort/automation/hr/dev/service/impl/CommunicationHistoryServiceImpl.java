@@ -36,11 +36,11 @@ public class CommunicationHistoryServiceImpl implements CommunicationHistoryServ
         List<CommunicationHistory> communicationHistory;
         if (filterDto.getIsArchived() == null || !filterDto.getIsArchived()) {
             communicationHistory = repository
-                    .findCommunicationHistoriesByCandidateIdAndIsArchivedFalse(candidateId);
+                    .findCommunicationHistoriesByCandidateIdAndIsArchivedEquals(candidateId, Boolean.FALSE);
             return converter.convertToListEntityDto(communicationHistory);
         }
         communicationHistory = repository
-                .findCommunicationHistoriesByCandidateIdAndIsArchivedTrue(candidateId);
+                .findCommunicationHistoriesByCandidateIdAndIsArchivedEquals(candidateId, Boolean.TRUE);
         return converter.convertToListEntityDto(communicationHistory);
     }
 

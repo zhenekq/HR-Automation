@@ -19,15 +19,9 @@ import java.util.Optional;
 public interface CommunicationHistoryRepository extends JpaRepository<CommunicationHistory, Integer> {
     /**
      * @param id human id for find his communication history
-     * @return page of not archived communication history with candidate
+     * @return page of archived or not communication history with candidate
      */
-    List<CommunicationHistory> findCommunicationHistoriesByCandidateIdAndIsArchivedFalse(String id);
-
-    /**
-     * @param id human id for find his communication history
-     * @return page of archived communication history with candidate
-     */
-    List<CommunicationHistory> findCommunicationHistoriesByCandidateIdAndIsArchivedTrue(String id);
+    List<CommunicationHistory> findCommunicationHistoriesByCandidateIdAndIsArchivedEquals(String id, Boolean isArchived);
 
     /**
      * @param candidateId candidate id for find his communication history

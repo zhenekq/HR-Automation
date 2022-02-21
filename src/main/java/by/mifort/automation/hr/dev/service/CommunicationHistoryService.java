@@ -20,6 +20,7 @@ public interface CommunicationHistoryService {
      * Get history of candidate by id
      *
      * @param candidateId candidate's identifier
+     * @return List of archived or not histories by candidate's identifier
      */
     List<CommunicationHistoryDto> getByCandidateId(String candidateId, FilterDto filterDto);
 
