@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -32,11 +33,17 @@ public class AttributeTypesServiceImpl implements AttributeTypesService {
 
     @Override
     public List<AttributeTypesDto> getAll(FilterDto filterDto) {
+        List<AttributeTypes> types;
         Integer page = filterDto.getPageNumber();
         Integer amount = filterDto.getPageSize();
         Pageable pageable = PageRequest.of(page - 1, amount);
-        List<AttributeTypes> attributeTypes = repository.findAll(pageable).toList();
-        return converter.convertToListEntityDto(attributeTypes);
+        if (filterDto.getIsArchived() == null || !filterDto.getIsArchived()) {
+            types = repository
+                    .findAllByIsArchivedEquals(pageable, Boolean.FALSE);
+            return converter.convertToListEntityDto(types);
+        }
+        types = repository.findAllByIsArchivedEquals(pageable, Boolean.TRUE);
+        return converter.convertToListEntityDto(types);
     }
 
     @Override
@@ -59,6 +66,11 @@ public class AttributeTypesServiceImpl implements AttributeTypesService {
 
     @Override
     public AttributeTypesDto archiveById(Integer id) {
-        return null;
+        AttributeTypes attributeTypes = repository
+                .findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Attribute type do not exists"));
+        attributeTypes.setArchived(Boolean.TRUE);
+        repository.save(attributeTypes);
+        return converter.convertToEntityDto(attributeTypes);
     }
 }

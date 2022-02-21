@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Attribute types of candidate attributes
@@ -33,8 +33,11 @@ public class AttributeTypes {
     @Column(name = "isidentifier")
     private Boolean isIdentifier;
 
+    @Column(name = "isarchived")
+    private Boolean isArchived;
+
     @OneToMany(mappedBy = "attributeTypes")
-    private Set<CandidateAttributes> candidateAttributes;
+    private List<CandidateAttributes> candidateAttributes;
 
     public AttributeTypes() {
     }
@@ -85,6 +88,22 @@ public class AttributeTypes {
 
     public void setIdentifier(Boolean identifier) {
         isIdentifier = identifier;
+    }
+
+    public Boolean getArchived() {
+        return isArchived;
+    }
+
+    public void setArchived(Boolean archived) {
+        isArchived = archived;
+    }
+
+    public List<CandidateAttributes> getCandidateAttributes() {
+        return candidateAttributes;
+    }
+
+    public void setCandidateAttributes(List<CandidateAttributes> candidateAttributes) {
+        this.candidateAttributes = candidateAttributes;
     }
 
     @Override

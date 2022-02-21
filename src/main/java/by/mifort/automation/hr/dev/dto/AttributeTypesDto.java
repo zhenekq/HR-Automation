@@ -18,16 +18,18 @@ public class AttributeTypesDto {
     private String basicType;
     private String validation;
     private Boolean isIdentifier;
+    private Boolean isArchived;
 
     public AttributeTypesDto() {
     }
 
-    public AttributeTypesDto(Integer id, String name, String basicType, String validation, Boolean isIdentifier) {
+    public AttributeTypesDto(Integer id, String name, String basicType, String validation, Boolean isIdentifier, Boolean isArchived) {
         this.id = id;
         this.name = name;
         this.basicType = basicType;
         this.validation = validation;
         this.isIdentifier = isIdentifier;
+        this.isArchived = isArchived;
     }
 
     public Integer getId() {
@@ -68,6 +70,14 @@ public class AttributeTypesDto {
 
     public void setIdentifier(Boolean identifier) {
         isIdentifier = identifier;
+    }
+
+    public Boolean getArchived() {
+        return isArchived;
+    }
+
+    public void setArchived(Boolean archived) {
+        isArchived = archived;
     }
 
     @Override
