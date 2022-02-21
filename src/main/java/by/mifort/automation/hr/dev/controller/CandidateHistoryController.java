@@ -74,9 +74,10 @@ public class CandidateHistoryController {
      * @return Candidate's id
      */
     @ApiOperation("Archive history with candidate with his id")
-    @DeleteMapping
-    public String archiveHistoryWithCandidate(@PathVariable String id) {
-        service.archiveByCandidateId(id);
+    @DeleteMapping("/{historyId}")
+    public String archiveHistoryWithCandidate(@PathVariable String id,
+                                              @PathVariable Integer historyId) {
+        service.archiveByCandidateId(id, historyId);
         return id;
     }
 }

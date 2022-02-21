@@ -31,6 +31,9 @@ public class CommunicationHistory {
     @Column(name = "comment")
     private String comment;
 
+    @Column(name = "isarchived")
+    private Boolean isArchived;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private Candidate candidate;
@@ -38,11 +41,12 @@ public class CommunicationHistory {
     public CommunicationHistory() {
     }
 
-    public CommunicationHistory(Integer id, Timestamp createDate, Timestamp updateDate, String comment, Candidate candidate) {
+    public CommunicationHistory(Integer id, Timestamp createDate, Timestamp updateDate, String comment, Boolean isArchived, Candidate candidate) {
         this.id = id;
         this.createDate = createDate;
         this.updateDate = updateDate;
         this.comment = comment;
+        this.isArchived = isArchived;
         this.candidate = candidate;
     }
 
@@ -85,6 +89,14 @@ public class CommunicationHistory {
 
     public void setCandidate(Candidate candidate) {
         this.candidate = candidate;
+    }
+
+    public Boolean getArchived() {
+        return isArchived;
+    }
+
+    public void setArchived(Boolean archived) {
+        isArchived = archived;
     }
 
     @Override

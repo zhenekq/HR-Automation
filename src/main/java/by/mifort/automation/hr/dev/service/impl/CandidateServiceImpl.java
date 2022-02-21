@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -47,7 +48,9 @@ public class CandidateServiceImpl implements CandidateService {
 
     @Override
     public CandidateDto getById(@NotNull String id) {
-        Candidate candidate = candidateRepository.getById(id);
+        Candidate candidate = candidateRepository
+                .findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Candidate with id: " + id + " do not exists!"));
         return converter.convertToEntityDto(candidate);
     }
 

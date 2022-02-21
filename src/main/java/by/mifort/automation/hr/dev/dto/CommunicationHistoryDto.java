@@ -20,6 +20,7 @@ public class CommunicationHistoryDto {
     private Timestamp createDate;
     private Timestamp updateDate;
     private String comment;
+    private Boolean isArchived;
 
     public CommunicationHistoryDto() {
     }
@@ -54,6 +55,14 @@ public class CommunicationHistoryDto {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public Boolean getArchived() {
+        return isArchived;
+    }
+
+    public void setArchived(Boolean archived) {
+        isArchived = archived;
     }
 
     @Override

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -31,7 +32,7 @@ public class CommunicationHistoryServiceImpl implements CommunicationHistoryServ
 
     @Override
     public List<CommunicationHistoryDto> getByCandidateId(String candidateId) {
-        List<CommunicationHistory> communicationHistory = repository.findCommunicationHistoriesByCandidateId(candidateId);
+        List<CommunicationHistory> communicationHistory = repository.findCommunicationHistoriesByCandidateIdAndIsArchivedFalse(candidateId);
         return converter.convertToListEntityDto(communicationHistory);
     }
 
@@ -53,14 +54,19 @@ public class CommunicationHistoryServiceImpl implements CommunicationHistoryServ
         }
         CommunicationHistory communicationHistory = repository
                 .findCommunicationHistoryByCandidateIdAndId(candidateId, historyDto.getId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new EntityNotFoundException("Communication history do not exists"));
         communicationHistory = assertDifferencesUpdates.assertCommunicationHistoryAndDto(communicationHistory, historyDto);
         repository.save(communicationHistory);
         return converter.convertToEntityDto(communicationHistory);
     }
 
     @Override
-    public CommunicationHistoryDto archiveByCandidateId(String candidateId) {
-        return null;
+    public CommunicationHistoryDto archiveByCandidateId(String candidateId, Integer historyId) {
+        CommunicationHistory communicationHistory = repository
+                .findCommunicationHistoryByCandidateIdAndId(candidateId, historyId)
+                .orElseThrow(() -> new EntityNotFoundException("Communication history do not exists"));
+        communicationHistory.setArchived(Boolean.TRUE);
+        repository.save(communicationHistory);
+        return converter.convertToEntityDto(communicationHistory);
     }
 }
