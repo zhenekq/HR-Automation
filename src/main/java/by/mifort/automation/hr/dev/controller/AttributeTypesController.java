@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/candidates/attributes")
+@RequestMapping("/attributestypes")
 @Api("Controller for manipulate with attribute types")
 public class AttributeTypesController {
 

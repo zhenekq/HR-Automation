@@ -1,56 +1,28 @@
-package by.mifort.automation.hr.dev.entity;
+package by.mifort.automation.hr.dev.dto;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.vladmihalcea.hibernate.type.json.JsonStringType;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Map;
 
 /**
- * Updates about candidate
+ * Data transfer object for entity CandidateUpdates
  *
  * @author yauheni_vozny
  * @version 1.0
+ * @see by.mifort.automation.hr.dev.entity.CandidateUpdate
  */
-
-@Entity
-@Table(name = "peopleupdates")
-@TypeDef(name = "json", typeClass = JsonStringType.class)
-public class CandidateUpdate {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CandidateUpdateDto {
     private Integer id;
-
-    @Column(name = "source", nullable = false)
     private String source;
-
-    @Column(name = "updatedate")
     private Timestamp updateDate;
-
-    @Column(name = "changeset", columnDefinition = "json")
-    @Type(type = "json")
     private Map<String, String> changeSet;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private Candidate candidate;
-
-    public CandidateUpdate() {
-    }
-
-    public CandidateUpdate(Integer id, String source, Timestamp updateDate, Map<String, String> changeSet, Candidate candidate) {
-        this.id = id;
-        this.source = source;
-        this.updateDate = updateDate;
-        this.changeSet = changeSet;
-        this.candidate = candidate;
+    public CandidateUpdateDto() {
     }
 
     public Integer getId() {
@@ -82,17 +54,9 @@ public class CandidateUpdate {
         return changeSet;
     }
 
+    @JsonAnySetter
     public void setChangeSet(Map<String, String> changeSet) {
         this.changeSet = changeSet;
-    }
-
-    @JsonIgnore
-    public Candidate getCandidate() {
-        return candidate;
-    }
-
-    public void setCandidate(Candidate candidate) {
-        this.candidate = candidate;
     }
 
     @Override

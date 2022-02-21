@@ -6,7 +6,9 @@ import by.mifort.automation.hr.dev.service.CandidateService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -40,6 +42,11 @@ public class CandidateController {
     @ApiOperation("Get paginated candidates, with amount of them on one page")
     @GetMapping
     public List<CandidateDto> getAll(FilterDto filterDto) {
+        Integer pageNumber = filterDto.getPageNumber();
+        Integer pageSize = filterDto.getPageSize();
+        if (pageNumber == null || pageSize == null || pageNumber <= 0 || pageSize <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parameters cannot be nullable");
+        }
         return candidateService.getAll(filterDto);
     }
 

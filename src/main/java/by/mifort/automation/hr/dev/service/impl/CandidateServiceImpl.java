@@ -12,10 +12,8 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +36,6 @@ public class CandidateServiceImpl implements CandidateService {
         List<Candidate> candidateList;
         Integer page = filterDto.getPageNumber();
         Integer amount = filterDto.getPageSize();
-        if (page == null || amount == null || page <= 0 || amount <= 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parameters cannot be nullable");
-        }
         Pageable pageable = PageRequest.of(page - 1, amount);
         if (filterDto.getKeyword() == null) {
             candidateList = candidateRepository.findAll(pageable).toList();
