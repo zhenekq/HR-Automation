@@ -2,7 +2,6 @@ package by.mifort.automation.hr.dev.controller;
 
 import by.mifort.automation.hr.dev.dto.CandidateDto;
 import by.mifort.automation.hr.dev.dto.FilterDto;
-import by.mifort.automation.hr.dev.entity.Candidate;
 import by.mifort.automation.hr.dev.service.CandidateService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -64,7 +63,7 @@ public class CandidateController {
      */
     @ApiOperation("Create new candidate")
     @PostMapping
-    public String create(@RequestBody Candidate candidate) {
+    public String create(@RequestBody CandidateDto candidate) {
         candidateService.create(candidate);
         return candidate.getId();
     }

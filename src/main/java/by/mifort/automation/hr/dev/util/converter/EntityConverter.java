@@ -18,18 +18,4 @@ public interface EntityConverter<Entity, EntityDto> {
     Entity convertToEntity(EntityDto entityDto);
 
     List<Entity> convertToListEntity(List<EntityDto> entityDtoList);
-
-    /*CommunicationHistoryDto convertToCommunicationHistoryDto(CommunicationHistory communicationHistory);
-
-    List<CommunicationHistoryDto> convertToListCommunicationHistoryDto(List<CommunicationHistory> communicationHistoryList);
-
-    CommunicationHistory convertToCommunicationHistory(CommunicationHistoryDto dto);
-
-    CandidateAttributesDto convertToCandidateAttributesDto(CandidateAttributes attributes);
-
-    List<CandidateAttributesDto> convertToListCandidateAttributesDto(List<CandidateAttributes> attributes);
-
-    AttributeTypesDto convertToAttributeTypeDto(AttributeTypes attributeTypes);
-
-    List<AttributeTypesDto> convertToListAttributeTypesDto(List<AttributeTypes> attributeTypes);*/
 }

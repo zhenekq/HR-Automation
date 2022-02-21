@@ -1,7 +1,6 @@
 package by.mifort.automation.hr.dev.controller;
 
 import by.mifort.automation.hr.dev.dto.CommunicationHistoryDto;
-import by.mifort.automation.hr.dev.entity.CommunicationHistory;
 import by.mifort.automation.hr.dev.service.CommunicationHistoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -48,7 +47,7 @@ public class CandidateHistoryController {
     @ApiOperation("Create new history with candidate by his id")
     @PostMapping
     public String createByCandidateId(@PathVariable String id,
-                                      @RequestBody CommunicationHistory history) {
+                                      @RequestBody CommunicationHistoryDto history) {
         service.createByCandidateId(id, history);
         return id;
     }

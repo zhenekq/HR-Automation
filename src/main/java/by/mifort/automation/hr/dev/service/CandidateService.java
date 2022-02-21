@@ -36,9 +36,9 @@ public interface CandidateService {
     /**
      * Create new candidate in database
      *
-     * @param candidate body of our candidate
+     * @param candidateDto body of our candidate
      */
-    void create(Candidate candidate);
+    void create(CandidateDto candidateDto);
 
     /**
      * @param keywords keywords that connected with candidate

@@ -37,25 +37,25 @@ public class CommunicationHistoryServiceImpl implements CommunicationHistoryServ
 
     @Override
     @Transactional
-    public CommunicationHistoryDto createByCandidateId(String candidateId, CommunicationHistory history) {
-        Candidate candidate = new Candidate();
-        candidate.setId(candidateId);
-        history.setCandidate(candidate);
+    public CommunicationHistoryDto createByCandidateId(String candidateId, CommunicationHistoryDto historyDto) {
+        CommunicationHistory history = converter.convertToEntity(historyDto);
+        history.setCandidate(new Candidate());
+        history.getCandidate().setId(candidateId);
         repository.save(history);
         return converter.convertToEntityDto(history);
     }
 
     @Override
     @Transactional
-    public CommunicationHistoryDto updateByCandidateId(String candidateId, CommunicationHistoryDto history) {
-        if (history.getId() == null) {
+    public CommunicationHistoryDto updateByCandidateId(String candidateId, CommunicationHistoryDto historyDto) {
+        if (historyDto.getId() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-        CommunicationHistory communicationHistory = repository.findCommunicationHistoryByCandidateIdAndId(candidateId, history.getId());
+        CommunicationHistory communicationHistory = repository.findCommunicationHistoryByCandidateIdAndId(candidateId, historyDto.getId());
         if (communicationHistory == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         } else {
-            communicationHistory = assertDifferencesUpdates.assertCommunicationHistoryAndDto(communicationHistory, history);
+            communicationHistory = assertDifferencesUpdates.assertCommunicationHistoryAndDto(communicationHistory, historyDto);
         }
         repository.save(communicationHistory);
         return converter.convertToEntityDto(communicationHistory);

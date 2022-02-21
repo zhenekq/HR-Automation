@@ -78,9 +78,9 @@ public class AttributeTypesController {
      * @param id attribute type identifier
      * @return attribute type
      */
-    @ApiOperation("Archive history with candidate with his id")
+    @ApiOperation("Archive attribute type")
     @DeleteMapping("{id}")
-    public AttributeTypesDto deleteByCandidateId(@PathVariable String id) {
+    public AttributeTypesDto deleteByAttributeId(@PathVariable String id) {
         return null;
     }
 }

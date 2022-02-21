@@ -55,14 +55,6 @@ public class CandidateDto {
         this.status = status;
     }
 
-    public List<CandidateUpdate> getPeopleUpdates() {
-        return candidateUpdates;
-    }
-
-    public void setPeopleUpdates(List<CandidateUpdate> candidateUpdates) {
-        this.candidateUpdates = candidateUpdates;
-    }
-
     public List<Keyword> getKeywords() {
         return keywords;
     }

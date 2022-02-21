@@ -58,7 +58,8 @@ public class CandidateServiceImpl implements CandidateService {
 
     @Override
     @Transactional
-    public void create(@NotNull Candidate candidate) {
+    public void create(@NotNull CandidateDto candidateDto) {
+        Candidate candidate = converter.convertToEntity(candidateDto);
         candidateRepository.save(candidate);
     }
 
