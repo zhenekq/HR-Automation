@@ -29,11 +29,20 @@ public class AttributeTypesConverter implements EntityConverter<AttributeTypes, 
 
     @Override
     public AttributeTypes convertToEntity(AttributeTypesDto dto) {
-        return null;
+        AttributeTypes types = new AttributeTypes();
+        types.setId(dto.getId());
+        types.setBasicType(dto.getBasicType());
+        types.setIdentifier(dto.getIdentifier());
+        types.setName(dto.getName());
+        types.setValidation(dto.getValidation());
+
+        return types;
     }
 
     @Override
     public List<AttributeTypes> convertToListEntity(List<AttributeTypesDto> attributeTypesDtos) {
-        return null;
+        return attributeTypesDtos.stream()
+                .map(this::convertToEntity)
+                .toList();
     }
 }

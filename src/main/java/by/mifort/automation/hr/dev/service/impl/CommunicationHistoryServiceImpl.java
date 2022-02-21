@@ -51,12 +51,10 @@ public class CommunicationHistoryServiceImpl implements CommunicationHistoryServ
         if (historyDto.getId() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-        CommunicationHistory communicationHistory = repository.findCommunicationHistoryByCandidateIdAndId(candidateId, historyDto.getId());
-        if (communicationHistory == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        } else {
-            communicationHistory = assertDifferencesUpdates.assertCommunicationHistoryAndDto(communicationHistory, historyDto);
-        }
+        CommunicationHistory communicationHistory = repository
+                .findCommunicationHistoryByCandidateIdAndId(candidateId, historyDto.getId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+        communicationHistory = assertDifferencesUpdates.assertCommunicationHistoryAndDto(communicationHistory, historyDto);
         repository.save(communicationHistory);
         return converter.convertToEntityDto(communicationHistory);
     }

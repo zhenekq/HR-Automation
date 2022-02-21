@@ -6,10 +6,13 @@ import by.mifort.automation.hr.dev.entity.AttributeTypes;
 import by.mifort.automation.hr.dev.repository.AttributeTypesRepository;
 import by.mifort.automation.hr.dev.service.AttributeTypesService;
 import by.mifort.automation.hr.dev.util.converter.EntityConverter;
+import by.mifort.automation.hr.dev.util.differences.AssertDifferencesUpdates;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -18,11 +21,13 @@ public class AttributeTypesServiceImpl implements AttributeTypesService {
 
     private final AttributeTypesRepository repository;
     private final EntityConverter<AttributeTypes, AttributeTypesDto> converter;
+    private final AssertDifferencesUpdates assertDifferencesUpdates;
 
     @Autowired
-    public AttributeTypesServiceImpl(AttributeTypesRepository repository, EntityConverter<AttributeTypes, AttributeTypesDto> converter) {
+    public AttributeTypesServiceImpl(AttributeTypesRepository repository, EntityConverter<AttributeTypes, AttributeTypesDto> converter, AssertDifferencesUpdates assertDifferencesUpdates) {
         this.repository = repository;
         this.converter = converter;
+        this.assertDifferencesUpdates = assertDifferencesUpdates;
     }
 
     @Override
@@ -36,12 +41,20 @@ public class AttributeTypesServiceImpl implements AttributeTypesService {
 
     @Override
     public AttributeTypesDto create(AttributeTypesDto dto) {
-        return null;
+        AttributeTypes types = converter.convertToEntity(dto);
+        repository.save(types);
+        return dto;
     }
 
     @Override
     public AttributeTypesDto updateById(Integer id, AttributeTypesDto dto) {
-        return null;
+        AttributeTypes attributeTypes = repository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        attributeTypes = assertDifferencesUpdates.assertAttributeTypesAndDto(attributeTypes, dto);
+        repository.save(attributeTypes);
+        return converter.convertToEntityDto(attributeTypes);
+
     }
 
     @Override

@@ -56,7 +56,7 @@ public class AttributeTypesController {
     @ApiOperation("Create new attribute type")
     @PostMapping
     public AttributeTypesDto create(@RequestBody AttributeTypesDto type) {
-        return type;
+        return service.create(type);
     }
 
     /**
@@ -67,9 +67,9 @@ public class AttributeTypesController {
      */
     @ApiOperation("Update attribute type")
     @PatchMapping("{id}")
-    public AttributeTypesDto updateByAttributeId(@PathVariable String id,
+    public AttributeTypesDto updateByAttributeId(@PathVariable Integer id,
                                                  @RequestBody AttributeTypesDto type) {
-        return type;
+        return service.updateById(id, type);
     }
 
     /**
@@ -80,7 +80,7 @@ public class AttributeTypesController {
      */
     @ApiOperation("Archive attribute type")
     @DeleteMapping("{id}")
-    public AttributeTypesDto deleteByAttributeId(@PathVariable String id) {
-        return null;
+    public AttributeTypesDto deleteByAttributeId(@PathVariable Integer id) {
+        return service.archiveById(id);
     }
 }

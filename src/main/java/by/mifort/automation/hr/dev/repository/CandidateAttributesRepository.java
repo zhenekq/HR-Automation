@@ -16,7 +16,10 @@ import java.util.List;
 
 @Repository
 public interface CandidateAttributesRepository extends JpaRepository<CandidateAttributes, Integer> {
-
+    /**
+     * @param id candidate id
+     * @return List of candidate attributes by candidate's identifier
+     */
     List<CandidateAttributes> findCandidateAttributesByCandidateId(String id);
 
 }

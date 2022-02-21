@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Repository for working with candidate's CommunicationHistory in database
@@ -38,6 +39,6 @@ public interface CommunicationHistoryRepository extends JpaRepository<Communicat
      * @param id          history id for find it history
      * @return history that connected with candidate by both identifiers
      */
-    CommunicationHistory findCommunicationHistoryByCandidateIdAndId(String candidateId, Integer id);
+    Optional<CommunicationHistory> findCommunicationHistoryByCandidateIdAndId(String candidateId, Integer id);
 
 }
