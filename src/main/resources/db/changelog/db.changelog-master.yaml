@@ -43,3 +43,5 @@ databaseChangeLog:
       file: db/changelog/changeset/fill-people-attributes-table-logic-values.yaml
   - include:
       file: db/changelog/changeset/add-columns-to-history-and-candidate-history-and-insert-values.yaml
+  - include:
+      file: db/changelog/changeset/change-column-is-archived-to-snake-case.yaml
