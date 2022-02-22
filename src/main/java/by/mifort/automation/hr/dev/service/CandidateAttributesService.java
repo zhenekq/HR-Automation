@@ -1,6 +1,5 @@
 package by.mifort.automation.hr.dev.service;
 
-import by.mifort.automation.hr.dev.dto.CandidateAttributesDto;
 import by.mifort.automation.hr.dev.entity.CandidateAttributes;
 
 import java.util.List;
@@ -20,13 +19,14 @@ public interface CandidateAttributesService {
      *
      * @param candidateId candidate's identifier
      */
-    List<CandidateAttributesDto> getByCandidateId(String candidateId);
+    List<CandidateAttributes> getByCandidateId(String candidateId);
 
     /**
      * Create new attributes with candidate
      *
-     * @param candidateId candidate's identifier
-     * @param attributes  body of attributes
+     * @param candidateId     candidate's identifier
+     * @param attributes      body of attributes
+     * @param attributeTypeId attribute type identifier
      */
-    CandidateAttributesDto createByCandidateIdAndAttributeTypeId(String candidateId, Integer attributeTypeId, CandidateAttributes attributes);
+    CandidateAttributes createByCandidateIdAndAttributeTypeId(String candidateId, Integer attributeTypeId, CandidateAttributes attributes);
 }
