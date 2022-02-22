@@ -2,9 +2,11 @@ package by.mifort.automation.hr.dev.controller;
 
 import by.mifort.automation.hr.dev.dto.CandidateDto;
 import by.mifort.automation.hr.dev.dto.FilterDto;
+import by.mifort.automation.hr.dev.entity.Candidate;
 import by.mifort.automation.hr.dev.entity.Keyword;
 import by.mifort.automation.hr.dev.service.CandidateService;
 import by.mifort.automation.hr.dev.service.KeywordService;
+import by.mifort.automation.hr.dev.util.converter.EntityConverter;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +30,13 @@ public class CandidateController {
 
     private final CandidateService candidateService;
     private final KeywordService keywordService;
+    private final EntityConverter<Candidate, CandidateDto> converter;
 
     @Autowired
-    public CandidateController(CandidateService candidateService, KeywordService keywordService) {
+    public CandidateController(CandidateService candidateService, KeywordService keywordService, EntityConverter<Candidate, CandidateDto> converter) {
         this.candidateService = candidateService;
         this.keywordService = keywordService;
+        this.converter = converter;
     }
 
     /**
@@ -51,7 +55,8 @@ public class CandidateController {
         if (pageNumber == null || pageSize == null || pageNumber <= 0 || pageSize <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parameters cannot be nullable");
         }
-        return candidateService.getAll(filterDto);
+        List<Candidate> candidateList = candidateService.getAll(filterDto);
+        return converter.convertToListEntityDto(candidateList);
     }
 
     /**
@@ -63,7 +68,8 @@ public class CandidateController {
     @ApiOperation("Get full information about user by id")
     @GetMapping("/{id}")
     public CandidateDto getById(@PathVariable String id) {
-        return candidateService.getById(id);
+        Candidate candidate = candidateService.getById(id);
+        return converter.convertToEntityDto(candidate);
     }
 
     /**
@@ -74,7 +80,7 @@ public class CandidateController {
      */
     @ApiOperation("Create new candidate")
     @PostMapping
-    public String create(@RequestBody CandidateDto candidate) {
+    public String create(@RequestBody Candidate candidate) {
         candidateService.create(candidate);
         return candidate.getId();
     }
@@ -83,7 +89,7 @@ public class CandidateController {
     @PostMapping("/{id}")
     public List<Keyword> addKeywords(@PathVariable String id,
                                      FilterDto filterDto){
-        CandidateDto candidateDto = candidateService.getById(id);
+        Candidate candidateDto = candidateService.getById(id);
         System.out.println( keywordService.createByCandidateId(id, filterDto));
         return keywordService.createByCandidateId(id, filterDto);
     }
