@@ -30,13 +30,13 @@ public class CandidateHistoryController {
      * GET request to get candidate's history
      *
      * @param id - candidate identifier
+     * @param filterDto pagination by history (archived, or not)
      * @return CommunicationHistory of candidate
      */
-    @ApiOperation("Get all histories with candidate by his id")
+    @ApiOperation("Get all archived or not archived histories with candidate by his id")
     @GetMapping
     public List<CommunicationHistoryDto> getByCandidateId(@PathVariable String id,
                                                           FilterDto filterDto) {
-        System.out.println(filterDto.getIsArchived());
         return service.getByCandidateId(id, filterDto);
     }
 

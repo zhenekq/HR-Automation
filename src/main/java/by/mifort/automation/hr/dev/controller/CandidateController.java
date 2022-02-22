@@ -2,7 +2,9 @@ package by.mifort.automation.hr.dev.controller;
 
 import by.mifort.automation.hr.dev.dto.CandidateDto;
 import by.mifort.automation.hr.dev.dto.FilterDto;
+import by.mifort.automation.hr.dev.entity.Keyword;
 import by.mifort.automation.hr.dev.service.CandidateService;
+import by.mifort.automation.hr.dev.service.KeywordService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +27,12 @@ import java.util.List;
 public class CandidateController {
 
     private final CandidateService candidateService;
+    private final KeywordService keywordService;
 
     @Autowired
-    public CandidateController(CandidateService candidateService) {
+    public CandidateController(CandidateService candidateService, KeywordService keywordService) {
         this.candidateService = candidateService;
+        this.keywordService = keywordService;
     }
 
     /**
@@ -73,5 +77,14 @@ public class CandidateController {
     public String create(@RequestBody CandidateDto candidate) {
         candidateService.create(candidate);
         return candidate.getId();
+    }
+
+    @ApiOperation("Connect keywords to candidate")
+    @PostMapping("/{id}")
+    public List<Keyword> addKeywords(@PathVariable String id,
+                                     FilterDto filterDto){
+        CandidateDto candidateDto = candidateService.getById(id);
+        System.out.println( keywordService.createByCandidateId(id, filterDto));
+        return keywordService.createByCandidateId(id, filterDto);
     }
 }

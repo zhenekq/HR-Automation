@@ -47,10 +47,12 @@ public class CandidateServiceImpl implements CandidateService {
     }
 
     @Override
+    @Transactional
     public CandidateDto getById(@NotNull String id) {
         Candidate candidate = candidateRepository
-                .findById(id)
+                .findCandidateWithoutArchivedHistory(id)
                 .orElseThrow(() -> new EntityNotFoundException("Candidate with id: " + id + " do not exists!"));
+
         return converter.convertToEntityDto(candidate);
     }
 

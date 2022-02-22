@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /**
  * Repository for working with candidate's Keywords in database
  *
@@ -24,4 +26,6 @@ public interface KeywordRepository extends JpaRepository<Keyword, String> {
      */
     @Query("select k from Keyword k")
     Page<Keyword> findAllKeywords(Pageable pageable);
+
+    Optional<Keyword> findAllByCandidateId(String candidateId);
 }
