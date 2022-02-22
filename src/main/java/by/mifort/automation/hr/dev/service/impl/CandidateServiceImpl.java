@@ -43,7 +43,10 @@ public class CandidateServiceImpl implements CandidateService {
     public Candidate getById(@NotNull String id) {
         return candidateRepository
                 .findCandidateWithoutArchivedHistory(id)
-                .orElseThrow(() -> new EntityNotFoundException("Candidate with id: " + id + " do not exists!"));
+                .orElse(
+                        candidateRepository.findById(id)
+                                .orElseThrow(() -> new EntityNotFoundException("Candidate with id: " + id + " not found!"))
+                );
     }
 
     @Override
@@ -51,7 +54,7 @@ public class CandidateServiceImpl implements CandidateService {
     public void create(@NotNull Candidate candidate) {
         Candidate candidateDb = candidateRepository
                 .findById(candidate.getId())
-                .orElseThrow(() -> new EntityNotFoundException("Candidate with id: " + candidate.getId() + " do not exists!"));
+                .orElseThrow(() -> new EntityNotFoundException("Candidate with id: " + candidate.getId() + "exists!"));
         candidateRepository.save(candidate);
     }
 }
