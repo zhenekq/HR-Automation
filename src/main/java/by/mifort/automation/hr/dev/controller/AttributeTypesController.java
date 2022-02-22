@@ -2,7 +2,9 @@ package by.mifort.automation.hr.dev.controller;
 
 import by.mifort.automation.hr.dev.dto.AttributeTypesDto;
 import by.mifort.automation.hr.dev.dto.FilterDto;
+import by.mifort.automation.hr.dev.entity.AttributeTypes;
 import by.mifort.automation.hr.dev.service.AttributeTypesService;
+import by.mifort.automation.hr.dev.util.converter.EntityConverter;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +22,17 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/attributestypes/")
+@RequestMapping("/attributestypes")
 @Api("Controller for manipulate with attribute types")
 public class AttributeTypesController {
 
     private final AttributeTypesService service;
+    private final EntityConverter<AttributeTypes, AttributeTypesDto> converter;
 
     @Autowired
-    public AttributeTypesController(AttributeTypesService service) {
+    public AttributeTypesController(AttributeTypesService service, EntityConverter<AttributeTypes, AttributeTypesDto> converter) {
         this.service = service;
+        this.converter = converter;
     }
 
     /**
@@ -44,7 +48,8 @@ public class AttributeTypesController {
         if (pageNumber == null || pageSize == null || pageNumber <= 0 || pageSize <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parameters cannot be nullable");
         }
-        return service.getAll(filterDto);
+        List<AttributeTypes> attributeTypes = service.getAll(filterDto);
+        return converter.convertToListEntityDto(attributeTypes);
     }
 
     /**
@@ -55,8 +60,9 @@ public class AttributeTypesController {
      */
     @ApiOperation("Create new attribute type")
     @PostMapping
-    public AttributeTypesDto create(@RequestBody AttributeTypesDto type) {
-        return service.create(type);
+    public AttributeTypesDto create(@RequestBody AttributeTypes type) {
+        AttributeTypes types = service.create(type);
+        return converter.convertToEntityDto(types);
     }
 
     /**
@@ -69,7 +75,8 @@ public class AttributeTypesController {
     @PatchMapping("{id}")
     public AttributeTypesDto updateByAttributeId(@PathVariable Integer id,
                                                  @RequestBody AttributeTypesDto type) {
-        return service.updateById(id, type);
+        AttributeTypes types = service.updateById(id, type);
+        return converter.convertToEntityDto(types);
     }
 
     /**
@@ -81,6 +88,7 @@ public class AttributeTypesController {
     @ApiOperation("Archive attribute type")
     @DeleteMapping("{id}")
     public AttributeTypesDto deleteByAttributeId(@PathVariable Integer id) {
-        return service.archiveById(id);
+        AttributeTypes types = service.archiveById(id);
+        return converter.convertToEntityDto(types);
     }
 }
