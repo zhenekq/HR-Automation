@@ -46,6 +46,7 @@ public class CommunicationHistoryServiceImpl implements CommunicationHistoryServ
     public CommunicationHistory createByCandidateId(String candidateId, CommunicationHistory history) {
         history.setCandidate(new Candidate());
         history.getCandidate().setId(candidateId);
+        history.setArchived(Boolean.FALSE);
         repository.save(history);
         return history;
     }
