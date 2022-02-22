@@ -51,10 +51,11 @@ public class CandidateServiceImpl implements CandidateService {
 
     @Override
     @Transactional
-    public void create(@NotNull Candidate candidate) {
+    public Candidate create(@NotNull Candidate candidate) {
         Candidate candidateDb = candidateRepository
                 .findById(candidate.getId())
                 .orElseThrow(() -> new EntityNotFoundException("Candidate with id: " + candidate.getId() + "exists!"));
         candidateRepository.save(candidate);
+        return candidate;
     }
 }

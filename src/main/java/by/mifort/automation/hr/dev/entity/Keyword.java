@@ -27,6 +27,10 @@ public class Keyword {
     public Keyword() {
     }
 
+    public Keyword(String id) {
+        this.id = id;
+    }
+
     public Keyword(String id, Candidate candidate) {
         this.id = id;
         this.candidate = candidate;

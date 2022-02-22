@@ -8,6 +8,7 @@ import by.mifort.automation.hr.dev.service.KeywordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,10 +23,21 @@ public class KeywordServiceImpl implements KeywordService {
 
     @Override
     public List<Keyword> createByCandidateId(String id, FilterDto dto) {
-        Candidate candidate = new Candidate();
-        candidate.setId(id);
-        List<Keyword> keywords = repository.findAllByCandidateId(id).stream().toList();
-
-        return keywords;
+        List<Keyword> requestKeywords = dto.getKeyword()
+                .stream()
+                .map(Keyword::new)
+                .toList();
+        List<Keyword> distinctKeywords = new ArrayList<>();
+        for (Keyword keyword : requestKeywords) {
+            Keyword dbKeyword = repository.findById(keyword.getId()).orElse(null);
+            if (dbKeyword == null) {
+                distinctKeywords.add(keyword);
+            }
+        }
+        distinctKeywords.forEach((el) -> el.setCandidate(new Candidate(id)));
+        repository.saveAll(distinctKeywords);
+        return distinctKeywords;
     }
+
+
 }

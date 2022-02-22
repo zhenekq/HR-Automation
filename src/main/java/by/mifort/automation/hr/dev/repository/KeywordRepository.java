@@ -1,10 +1,7 @@
 package by.mifort.automation.hr.dev.repository;
 
 import by.mifort.automation.hr.dev.entity.Keyword;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -19,13 +16,6 @@ import java.util.Optional;
 
 @Repository
 public interface KeywordRepository extends JpaRepository<Keyword, String> {
-
-    /**
-     * @param pageable settings to pagination
-     * @return Paginated information about keywords
-     */
-    @Query("select k from Keyword k")
-    Page<Keyword> findAllKeywords(Pageable pageable);
 
     Optional<Keyword> findAllByCandidateId(String candidateId);
 }

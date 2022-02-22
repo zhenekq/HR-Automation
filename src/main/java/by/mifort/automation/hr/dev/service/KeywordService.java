@@ -15,6 +15,11 @@ import java.util.List;
 
 public interface KeywordService {
 
+    /**
+     * @param id  identifier of candidate
+     * @param dto using for query with keywords
+     * @return list of added unique keywords to candidate
+     */
     List<Keyword> createByCandidateId(String id, FilterDto dto);
 
 }

@@ -32,8 +32,8 @@ public interface CandidateService {
     /**
      * Create new candidate in database
      *
-     * @param candidateDto body of our candidate
+     * @param candidate body of our candidate
      */
-    void create(Candidate candidate);
+    Candidate create(Candidate candidate);
 
 }

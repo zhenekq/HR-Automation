@@ -80,9 +80,9 @@ public class CandidateController {
      */
     @ApiOperation("Create new candidate")
     @PostMapping
-    public String create(@RequestBody Candidate candidate) {
-        candidateService.create(candidate);
-        return candidate.getId();
+    public CandidateDto create(@RequestBody Candidate candidate) {
+        Candidate createdCandidate = candidateService.create(candidate);
+        return converter.convertToEntityDto(createdCandidate);
     }
 
     @ApiOperation("Connect keywords to candidate")
@@ -90,7 +90,6 @@ public class CandidateController {
     public List<Keyword> addKeywords(@PathVariable String id,
                                      FilterDto filterDto){
         Candidate candidateDto = candidateService.getById(id);
-        System.out.println( keywordService.createByCandidateId(id, filterDto));
         return keywordService.createByCandidateId(id, filterDto);
     }
 }
