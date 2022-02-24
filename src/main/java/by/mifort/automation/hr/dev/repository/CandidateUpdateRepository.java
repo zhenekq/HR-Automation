@@ -4,6 +4,8 @@ import by.mifort.automation.hr.dev.entity.CandidateUpdate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /**
  * Repository for working with candidate's CandidateUpdate in database
  *
@@ -14,4 +16,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CandidateUpdateRepository extends JpaRepository<CandidateUpdate, Integer> {
+
+    Optional<CandidateUpdate> findAllByCandidateId(String candidateId);
+
 }
