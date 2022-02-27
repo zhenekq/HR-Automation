@@ -5,7 +5,6 @@ import by.mifort.automation.hr.dev.entity.Candidate;
 import by.mifort.automation.hr.dev.util.converter.EntityConverter;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -18,18 +17,12 @@ public class CandidateConverter implements EntityConverter<Candidate, CandidateD
         candidateDto.setLastContact(candidate.getLastContact());
         if (candidate.getKeywords() != null) {
             candidateDto.setKeywords(candidate.getKeywords());
-        } else {
-            candidateDto.setKeywords(Collections.emptyList());
         }
         if (candidate.getCommunicationHistory() != null) {
             candidateDto.setCommunicationHistory(candidate.getCommunicationHistory());
-        } else {
-            candidateDto.setCommunicationHistory(Collections.emptyList());
         }
         if (candidate.getAttributes() != null) {
             candidateDto.setCandidateAttributes(candidate.getAttributes());
-        } else {
-            candidateDto.setCandidateAttributes(Collections.emptyList());
         }
         return candidateDto;
     }

@@ -28,8 +28,6 @@ databaseChangeLog:
   - include:
       file: db/changelog/changeset/fill-people-table-logic-values.yaml
   - include:
-      file: db/changelog/changeset/create-fourth-entity-in-people-table.yaml
-  - include:
       file: db/changelog/changeset/fill-people-keywords-table-logic-values.yaml
   - include:
       file: db/changelog/changeset/change-column-names-to-snake-case.yaml

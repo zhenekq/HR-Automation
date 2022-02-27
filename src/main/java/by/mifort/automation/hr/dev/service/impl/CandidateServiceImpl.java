@@ -42,20 +42,15 @@ public class CandidateServiceImpl implements CandidateService {
     @Transactional
     public Candidate getById(@NotNull String id) {
         return candidateRepository
-                .findCandidateWithoutArchivedHistory(id)
-                .orElse(
-                        candidateRepository.findById(id)
-                                .orElseThrow(() -> new EntityNotFoundException("Candidate with id: " + id + " not found!"))
-                );
+                .findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Candidate with id: " + id + " not found!"));
     }
 
     @Override
     @Transactional
     public Candidate create(@NotNull Candidate candidate) {
-        Candidate candidateDb = candidateRepository
+        return candidateRepository
                 .findById(candidate.getId())
-                .orElseThrow(() -> new EntityNotFoundException("Candidate with id: " + candidate.getId() + "exists!"));
-        candidateRepository.save(candidate);
-        return candidate;
+                .orElse(candidateRepository.save(candidate));
     }
 }

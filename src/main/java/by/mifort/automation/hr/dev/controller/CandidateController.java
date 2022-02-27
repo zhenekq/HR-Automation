@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -26,6 +27,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/candidates")
 @Api("Candidate controller for searching and creating new")
+@Transactional
 public class CandidateController {
 
     private final CandidateService candidateService;
