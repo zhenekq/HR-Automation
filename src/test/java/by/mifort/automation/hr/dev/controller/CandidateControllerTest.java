@@ -29,7 +29,7 @@ public class CandidateControllerTest {
 
     private final CandidateController controller;
     private final EntityConverter<Candidate, CandidateDto> converter;
-    private List<Candidate> candidates;
+    private List<Candidate> candidates; //testcommit
 
     @Autowired
     public CandidateControllerTest(CandidateController controller, EntityConverter<Candidate, CandidateDto> converter) {
