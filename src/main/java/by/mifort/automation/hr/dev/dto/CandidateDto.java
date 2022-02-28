@@ -31,6 +31,12 @@ public class CandidateDto {
     public CandidateDto() {
     }
 
+    public CandidateDto(String id, Timestamp lastContact, String status) {
+        this.id = id;
+        this.lastContact = lastContact;
+        this.status = status;
+    }
+
     public String getId() {
         return id;
     }
@@ -109,4 +115,5 @@ public class CandidateDto {
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
+
 }

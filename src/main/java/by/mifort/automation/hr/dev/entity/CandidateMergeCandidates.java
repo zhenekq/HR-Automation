@@ -5,7 +5,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * People merge candidates entity
@@ -16,10 +15,11 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "people_merge_candidates")
-public class CandidateMergeCandidates implements Serializable {
+public class CandidateMergeCandidates {
 
-    @EmbeddedId
-    private MergeCandidates mergeCandidates;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
     @Column(name = "status")
     private String status;
@@ -34,7 +34,7 @@ public class CandidateMergeCandidates implements Serializable {
      * @see Candidate Join 2 primary keys like a foreign key for 1 primary key
      */
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    /*@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
             @JoinColumn(
                     name = "user1Id",
@@ -51,24 +51,22 @@ public class CandidateMergeCandidates implements Serializable {
                     updatable = false
             )
     })
-    private Candidate candidate;
-
+    private Candidate candidate;*/
     public CandidateMergeCandidates() {
     }
 
-    public CandidateMergeCandidates(MergeCandidates mergeCandidates, String status, String reason, String reasonComment) {
-        this.mergeCandidates = mergeCandidates;
+    public CandidateMergeCandidates(String status, String reason, String reasonComment) {
         this.status = status;
         this.reason = reason;
         this.reasonComment = reasonComment;
     }
 
-    public MergeCandidates getMergeCandidates() {
-        return mergeCandidates;
+    public Integer getId() {
+        return id;
     }
 
-    public void setMergeCandidates(MergeCandidates mergeCandidates) {
-        this.mergeCandidates = mergeCandidates;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getStatus() {
@@ -93,14 +91,6 @@ public class CandidateMergeCandidates implements Serializable {
 
     public void setReasonComment(String reasonComment) {
         this.reasonComment = reasonComment;
-    }
-
-    public Candidate getCandidate() {
-        return candidate;
-    }
-
-    public void setCandidate(Candidate candidate) {
-        this.candidate = candidate;
     }
 
     @Override

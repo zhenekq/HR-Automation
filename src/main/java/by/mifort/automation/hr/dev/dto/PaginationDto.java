@@ -29,6 +29,11 @@ public class PaginationDto {
     public PaginationDto() {
     }
 
+    public PaginationDto(Integer pageNumber, Integer pageSize) {
+        this.pageNumber = pageNumber;
+        this.pageSize = pageSize;
+    }
+
     public Integer getPageNumber() {
         return pageNumber;
     }

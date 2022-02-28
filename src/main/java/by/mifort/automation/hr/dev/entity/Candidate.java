@@ -7,7 +7,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -21,7 +20,7 @@ import java.util.List;
 @Entity
 @Table(name = "people", schema = "public")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Candidate implements Serializable {
+public class Candidate {
 
     @Id
     private String id;
@@ -37,7 +36,7 @@ public class Candidate implements Serializable {
      *
      * @see CandidateUpdate
      */
-    @OneToMany(mappedBy = "candidate")
+    @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY)
     private List<CandidateUpdate> updates;
 
     /**
@@ -45,7 +44,7 @@ public class Candidate implements Serializable {
      *
      * @see Keyword
      */
-    @OneToMany(mappedBy = "candidate")
+    @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY)
     private List<Keyword> keywords;
 
     /**
@@ -53,7 +52,7 @@ public class Candidate implements Serializable {
      *
      * @see CommunicationHistory
      */
-    @OneToMany(mappedBy = "candidate")
+    @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY)
     private List<CommunicationHistory> communicationHistory;
 
     /**
@@ -61,7 +60,7 @@ public class Candidate implements Serializable {
      *
      * @see CandidateAttributes
      */
-    @OneToMany(mappedBy = "candidate")
+    @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY)
     private List<CandidateAttributes> attributes;
 
 
@@ -70,9 +69,8 @@ public class Candidate implements Serializable {
      *
      * @see CandidateMergeCandidates
      */
-    @OneToMany(mappedBy = "candidate")
-    private List<CandidateMergeCandidates> mergeCandidates;
-
+    /*@OneToMany(mappedBy = "candidate")
+    private List<CandidateMergeCandidates> mergeCandidates;*/
     public Candidate() {
     }
 
@@ -145,15 +143,6 @@ public class Candidate implements Serializable {
 
     public void setAttributes(List<CandidateAttributes> attributes) {
         this.attributes = attributes;
-    }
-
-    @JsonIgnore
-    public List<CandidateMergeCandidates> getMergeCandidates() {
-        return mergeCandidates;
-    }
-
-    public void setMergeCandidates(List<CandidateMergeCandidates> mergeCandidates) {
-        this.mergeCandidates = mergeCandidates;
     }
 
     @Override

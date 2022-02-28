@@ -14,6 +14,10 @@ public class FilterDto extends PaginationDto {
     public FilterDto() {
     }
 
+    public FilterDto(Integer pageNumber, Integer pageSize) {
+        super(pageNumber, pageSize);
+    }
+
     public List<String> getKeyword() {
         return keyword;
     }
