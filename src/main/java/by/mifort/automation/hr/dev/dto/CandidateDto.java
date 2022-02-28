@@ -113,7 +113,10 @@ public class CandidateDto {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+        return "CandidateDto{" +
+                "id='" + id + '\'' +
+                ", lastContact=" + lastContact +
+                ", status='" + status + '\'' +
+                '}';
     }
-
 }

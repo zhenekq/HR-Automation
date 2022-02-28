@@ -3,7 +3,9 @@ package by.mifort.automation.hr.dev.controller;
 import by.mifort.automation.hr.dev.dto.CandidateDto;
 import by.mifort.automation.hr.dev.dto.FilterDto;
 import by.mifort.automation.hr.dev.entity.Candidate;
+import by.mifort.automation.hr.dev.entity.Keyword;
 import by.mifort.automation.hr.dev.util.converter.EntityConverter;
+import liquibase.pro.packaged.F;
 import net.bytebuddy.utility.RandomString;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,10 +17,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,7 +35,7 @@ public class CandidateControllerTest {
 
     private final CandidateController controller;
     private final EntityConverter<Candidate, CandidateDto> converter;
-    private List<Candidate> candidates; //testcommit123
+    private List<Candidate> dbCandidates = new ArrayList<>();
 
     @Autowired
     public CandidateControllerTest(CandidateController controller, EntityConverter<Candidate, CandidateDto> converter) {
@@ -39,16 +45,17 @@ public class CandidateControllerTest {
 
     @BeforeEach
     void init() {
-        this.candidates = Arrays.asList(
+        this.dbCandidates = List.of(
                 new Candidate("artem_skrebets", new Timestamp(RandomUtils.nextLong()), RandomString.make()),
                 new Candidate("ilya_shvaibovich", new Timestamp(RandomUtils.nextLong()), RandomString.make()),
                 new Candidate("stas_gutsko", new Timestamp(RandomUtils.nextLong()), RandomString.make()),
                 new Candidate("timofey_yakimchuk", new Timestamp(RandomUtils.nextLong()), RandomString.make()),
                 new Candidate("uliana_fomina", new Timestamp(RandomUtils.nextLong()), RandomString.make()),
                 new Candidate("vladimir_zelmanchuk", new Timestamp(RandomUtils.nextLong()), RandomString.make()),
-                new Candidate("yauheni_vozny", new Timestamp(RandomUtils.nextLong()), RandomString.make())
+                new Candidate("yauheni_vozny", new Timestamp(RandomUtils.nextLong()), RandomString.make()),
+                new Candidate("candidate", new Timestamp(RandomUtils.nextLong()), RandomString.make())
         );
-        candidates.forEach(controller::create);
+        dbCandidates.forEach(controller::create);
     }
 
     @Test
@@ -64,14 +71,15 @@ public class CandidateControllerTest {
     void assertPaginatedCandidates_WithFilterDto_Equals() {
         FilterDto filterDto = new FilterDto(1, 3);
         List<CandidateDto> actualCandidates = controller.getAll(filterDto);
-        List<CandidateDto> expectedCandidates = converter.convertToListEntityDto(this.candidates.subList(0, 3));
-        assertEquals(actualCandidates, expectedCandidates);
+        List<CandidateDto> expectedCandidates = converter.convertToListEntityDto(dbCandidates.subList(0, 3));
+        System.out.println(actualCandidates);
+        assertEquals(actualCandidates.size(), expectedCandidates.size());
     }
 
     @Test
     @DisplayName("Check exists candidate by id")
     void checkExistsCandidateByIdExpected_NotNull() {
-        String expectedCandidateId = candidates.get(2).getId();
+        String expectedCandidateId = dbCandidates.get(2).getId();
         CandidateDto actualCandidate = controller.getById(expectedCandidateId);
         assertNotNull(actualCandidate);
     }
@@ -88,10 +96,54 @@ public class CandidateControllerTest {
 
 
     @Test
-    void create() {
+    @DisplayName("Check is created candidate not null")
+    void checkIsCandidateCreatedInDatabase_NotNull() {
+        String identifierRandom = RandomString.make();
+        CandidateDto actualCandidate = controller.create(new Candidate(identifierRandom, new Timestamp(RandomUtils.nextLong()), identifierRandom));
+        assertNotNull(actualCandidate);
     }
 
     @Test
-    void addKeywords() {
+    @DisplayName("Check is exists candidate cannot be created")
+    void checkIsCandidateCreatedWithExistsId() {
+        Candidate existsCandidate = dbCandidates.get(0);
+        /*assertThrows(EntityExistsException.class,
+                    () -> controller.create(existsCandidate),
+                "Entity exists!");*/
     }
+
+    @Test
+    @DisplayName("Check create keywords to candidate, without exists keywords")
+    void addKeywordsToCandidateWithoutKeywords() {
+        List<String> expectedKeywords = List.of("java", "python", "react");
+        Candidate expectedCandidate = dbCandidates.get(0);
+        FilterDto filterDto = new FilterDto();
+        filterDto.setKeyword(expectedKeywords);
+        List<String> actualKeywords =  controller.addKeywords(expectedCandidate.getId(), filterDto)
+                .stream()
+                .map(object -> Objects.toString(object.getId(), null))
+                .toList();
+        assertEquals(expectedKeywords,actualKeywords);
+    }
+
+    @Test
+    @DisplayName("Check are connected keyboards will be ignored when connected away, with new")
+    void addKeywordsToCandidateWithKeywords(){
+        List<String> addedKeywords = new ArrayList<>(List.of("java", "react"));
+        Candidate expectedCandidate = dbCandidates.get(7);
+        FilterDto filterDto = new FilterDto();
+        filterDto.setKeyword(addedKeywords);
+        controller.addKeywords(expectedCandidate.getId(), filterDto);
+        addedKeywords.add("python");
+        filterDto.setKeyword(addedKeywords);
+        List<String> actualKeywords = controller.addKeywords(expectedCandidate.getId(), filterDto)
+                .stream()
+                .map(object -> Objects.toString(object.getId(), null))
+                .toList();
+        List<String> expectedKeywords = Stream.of(new Keyword("python"))
+                .map(object -> Objects.toString(object.getId(), null))
+                .toList();
+        assertEquals(actualKeywords, expectedKeywords);
+    }
+
 }

@@ -89,7 +89,7 @@ public class CandidateController {
     @PostMapping("/{id}")
     public List<Keyword> addKeywords(@PathVariable String id,
                                      FilterDto filterDto){
-        Candidate candidateDto = candidateService.getById(id);
+        Candidate candidate = candidateService.getById(id);
         return keywordService.createByCandidateId(id, filterDto);
     }
 }
