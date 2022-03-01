@@ -50,6 +50,14 @@ public class CommunicationHistory {
         this.candidate = candidate;
     }
 
+    public CommunicationHistory(Timestamp createDate, Timestamp updateDate, String comment, Boolean isArchived, Candidate candidate) {
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.comment = comment;
+        this.isArchived = isArchived;
+        this.candidate = candidate;
+    }
+
     public Integer getId() {
         return id;
     }

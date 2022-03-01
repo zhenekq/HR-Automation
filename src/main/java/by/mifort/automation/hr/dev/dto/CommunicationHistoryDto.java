@@ -77,6 +77,12 @@ public class CommunicationHistoryDto {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+        return "CommunicationHistoryDto{" +
+                "id=" + id +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", comment='" + comment + '\'' +
+                ", isArchived=" + isArchived +
+                '}';
     }
 }

@@ -4,6 +4,7 @@ import by.mifort.automation.hr.dev.dto.CommunicationHistoryDto;
 import by.mifort.automation.hr.dev.dto.FilterDto;
 import by.mifort.automation.hr.dev.entity.Candidate;
 import by.mifort.automation.hr.dev.entity.CommunicationHistory;
+import by.mifort.automation.hr.dev.repository.CandidateRepository;
 import by.mifort.automation.hr.dev.repository.CommunicationHistoryRepository;
 import by.mifort.automation.hr.dev.service.CommunicationHistoryService;
 import by.mifort.automation.hr.dev.util.differences.AssertDifferencesUpdates;
@@ -20,16 +21,21 @@ import java.util.List;
 public class CommunicationHistoryServiceImpl implements CommunicationHistoryService {
 
     private final CommunicationHistoryRepository repository;
+    private final CandidateRepository candidateRepository;
     private final AssertDifferencesUpdates assertDifferencesUpdates;
 
     @Autowired
-    public CommunicationHistoryServiceImpl(CommunicationHistoryRepository repository, AssertDifferencesUpdates assertDifferencesUpdates) {
+    public CommunicationHistoryServiceImpl(CommunicationHistoryRepository repository, CandidateRepository candidateRepository, AssertDifferencesUpdates assertDifferencesUpdates) {
         this.repository = repository;
+        this.candidateRepository = candidateRepository;
         this.assertDifferencesUpdates = assertDifferencesUpdates;
     }
 
     @Override
     public List<CommunicationHistory> getByCandidateId(String candidateId, FilterDto filterDto) {
+        candidateRepository
+                .findById(candidateId)
+                .orElseThrow(() ->  new EntityNotFoundException("Candidate with id: " + candidateId + " not found!"));
         List<CommunicationHistory> communicationHistory;
         if (filterDto.getIsArchived() == null || !filterDto.getIsArchived()) {
             communicationHistory = repository
@@ -44,9 +50,9 @@ public class CommunicationHistoryServiceImpl implements CommunicationHistoryServ
     @Override
     @Transactional
     public CommunicationHistory createByCandidateId(String candidateId, CommunicationHistory history) {
-        history.setCandidate(new Candidate());
-        history.getCandidate().setId(candidateId);
-        history.setArchived(Boolean.FALSE);
+        Candidate candidate = candidateRepository.findById(candidateId)
+                        .orElseThrow(() -> new EntityNotFoundException("Candidate not found!"));
+        history.setCandidate(candidate);
         repository.save(history);
         return history;
     }

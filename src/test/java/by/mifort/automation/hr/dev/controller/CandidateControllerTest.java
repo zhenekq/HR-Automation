@@ -1,5 +1,6 @@
 package by.mifort.automation.hr.dev.controller;
 
+import by.mifort.automation.hr.dev.db.H2Database;
 import by.mifort.automation.hr.dev.dto.CandidateDto;
 import by.mifort.automation.hr.dev.dto.FilterDto;
 import by.mifort.automation.hr.dev.entity.Candidate;
@@ -8,6 +9,8 @@ import by.mifort.automation.hr.dev.util.converter.EntityConverter;
 import liquibase.pro.packaged.F;
 import net.bytebuddy.utility.RandomString;
 import org.apache.commons.lang3.RandomUtils;
+import org.junit.Before;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,6 +38,7 @@ public class CandidateControllerTest {
 
     private final CandidateController controller;
     private final EntityConverter<Candidate, CandidateDto> converter;
+    private H2Database h2Database = H2Database.getInstance();
     private List<Candidate> dbCandidates = new ArrayList<>();
 
     @Autowired
@@ -45,16 +49,7 @@ public class CandidateControllerTest {
 
     @BeforeEach
     void init() {
-        this.dbCandidates = List.of(
-                new Candidate("artem_skrebets", new Timestamp(RandomUtils.nextLong()), RandomString.make()),
-                new Candidate("ilya_shvaibovich", new Timestamp(RandomUtils.nextLong()), RandomString.make()),
-                new Candidate("stas_gutsko", new Timestamp(RandomUtils.nextLong()), RandomString.make()),
-                new Candidate("timofey_yakimchuk", new Timestamp(RandomUtils.nextLong()), RandomString.make()),
-                new Candidate("uliana_fomina", new Timestamp(RandomUtils.nextLong()), RandomString.make()),
-                new Candidate("vladimir_zelmanchuk", new Timestamp(RandomUtils.nextLong()), RandomString.make()),
-                new Candidate("yauheni_vozny", new Timestamp(RandomUtils.nextLong()), RandomString.make()),
-                new Candidate("candidate", new Timestamp(RandomUtils.nextLong()), RandomString.make())
-        );
+        this.dbCandidates = h2Database.initializeCandidates();
         dbCandidates.forEach(controller::create);
     }
 
@@ -72,7 +67,6 @@ public class CandidateControllerTest {
         FilterDto filterDto = new FilterDto(1, 3);
         List<CandidateDto> actualCandidates = controller.getAll(filterDto);
         List<CandidateDto> expectedCandidates = converter.convertToListEntityDto(dbCandidates.subList(0, 3));
-        System.out.println(actualCandidates);
         assertEquals(actualCandidates.size(), expectedCandidates.size());
     }
 
@@ -107,15 +101,15 @@ public class CandidateControllerTest {
     @DisplayName("Check is exists candidate cannot be created")
     void checkIsCandidateCreatedWithExistsId() {
         Candidate existsCandidate = dbCandidates.get(0);
-        /*assertThrows(EntityExistsException.class,
+        assertThrows(EntityExistsException.class,
                     () -> controller.create(existsCandidate),
-                "Entity exists!");*/
+                "Entity exists!");
     }
 
     @Test
     @DisplayName("Check create keywords to candidate, without exists keywords")
     void addKeywordsToCandidateWithoutKeywords() {
-        List<String> expectedKeywords = List.of("java", "python", "react");
+        List<String> expectedKeywords = List.of("javaBackend", "pythonBackend", "react");
         Candidate expectedCandidate = dbCandidates.get(0);
         FilterDto filterDto = new FilterDto();
         filterDto.setKeyword(expectedKeywords);
@@ -130,7 +124,7 @@ public class CandidateControllerTest {
     @DisplayName("Check are connected keyboards will be ignored when connected away, with new")
     void addKeywordsToCandidateWithKeywords(){
         List<String> addedKeywords = new ArrayList<>(List.of("java", "react"));
-        Candidate expectedCandidate = dbCandidates.get(7);
+        Candidate expectedCandidate = dbCandidates.get(2);
         FilterDto filterDto = new FilterDto();
         filterDto.setKeyword(addedKeywords);
         controller.addKeywords(expectedCandidate.getId(), filterDto);
@@ -140,9 +134,7 @@ public class CandidateControllerTest {
                 .stream()
                 .map(object -> Objects.toString(object.getId(), null))
                 .toList();
-        List<String> expectedKeywords = Stream.of(new Keyword("python"))
-                .map(object -> Objects.toString(object.getId(), null))
-                .toList();
+        List<String> expectedKeywords = List.of("python");
         assertEquals(actualKeywords, expectedKeywords);
     }
 
