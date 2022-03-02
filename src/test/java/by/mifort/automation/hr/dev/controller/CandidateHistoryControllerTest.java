@@ -192,7 +192,4 @@ class CandidateHistoryControllerTest {
                 () -> historyController.archiveHistoryWithCandidate(candidateId, expectedHistory.getId()),
                 "Communication history not found!");
     }
-
-
-
 }

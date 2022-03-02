@@ -1,5 +1,6 @@
 package by.mifort.automation.hr.dev.db;
 
+import by.mifort.automation.hr.dev.entity.AttributeTypes;
 import by.mifort.automation.hr.dev.entity.Candidate;
 import by.mifort.automation.hr.dev.entity.CommunicationHistory;
 import net.bytebuddy.utility.RandomString;
@@ -38,5 +39,26 @@ public class H2Database {
                 new CommunicationHistory(6, new Timestamp(RandomUtils.nextLong()),new Timestamp(RandomUtils.nextLong()), "comment6", Boolean.TRUE, new Candidate("yauheni_vozny")),
                 new CommunicationHistory(7, new Timestamp(RandomUtils.nextLong()),new Timestamp(RandomUtils.nextLong()), "comment7", Boolean.TRUE, new Candidate("yauheni_vozny"))
         );
+    }
+
+    public List<AttributeTypes> initializeAttributeTypes(){
+        return List.of(
+                new AttributeTypes(1, RandomString.make(),RandomString.make(), RandomString.make(), true, Boolean.FALSE),
+                new AttributeTypes(2, RandomString.make(),RandomString.make(), RandomString.make(), true, Boolean.FALSE),
+                new AttributeTypes(3, RandomString.make(),RandomString.make(), RandomString.make(), true, Boolean.FALSE),
+                new AttributeTypes(4, RandomString.make(),RandomString.make(), RandomString.make(), true, Boolean.FALSE),
+                new AttributeTypes(5, RandomString.make(),RandomString.make(), RandomString.make(), true, Boolean.FALSE),
+                new AttributeTypes(6, RandomString.make(),RandomString.make(), RandomString.make(), true, Boolean.FALSE),
+                new AttributeTypes(7, RandomString.make(),RandomString.make(), RandomString.make(), true, Boolean.TRUE),
+                new AttributeTypes(8, RandomString.make(),RandomString.make(), RandomString.make(), true, Boolean.TRUE)
+        );
+    }
+
+    public AttributeTypes getAttributeTypeWithRandomValues(){
+         return new AttributeTypes(RandomString.make(),
+                                   RandomString.make(),
+                                   RandomString.make(),
+                                   RandomUtils.nextBoolean(),
+                                   RandomUtils.nextBoolean());
     }
 }

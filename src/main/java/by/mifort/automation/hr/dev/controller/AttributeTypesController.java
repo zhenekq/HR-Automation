@@ -22,7 +22,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/attributestypes")
+    @RequestMapping("/attributetypes")
 @Api("Controller for manipulate with attribute types")
 public class AttributeTypesController {
 
@@ -63,6 +63,13 @@ public class AttributeTypesController {
     public AttributeTypesDto create(@RequestBody AttributeTypes type) {
         AttributeTypes types = service.create(type);
         return converter.convertToEntityDto(types);
+    }
+
+    @ApiOperation("Get attribute type by id")
+    @GetMapping("{id}")
+    public AttributeTypesDto getById(@PathVariable Integer id){
+        AttributeTypes attributeTypes = service.getById(id);
+        return converter.convertToEntityDto(attributeTypes);
     }
 
     /**

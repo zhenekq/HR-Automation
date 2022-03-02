@@ -7,6 +7,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -45,12 +46,21 @@ public class AttributeTypes {
     public AttributeTypes() {
     }
 
-    public AttributeTypes(Integer id, String name, String basicType, String validation, Boolean isIdentifier) {
+    public AttributeTypes(Integer id, String name, String basicType, String validation, Boolean isIdentifier, Boolean isArchived) {
         this.id = id;
         this.name = name;
         this.basicType = basicType;
         this.validation = validation;
         this.isIdentifier = isIdentifier;
+        this.isArchived = isArchived;
+    }
+
+    public AttributeTypes(String name, String basicType, String validation, Boolean isIdentifier, Boolean isArchived) {
+        this.name = name;
+        this.basicType = basicType;
+        this.validation = validation;
+        this.isIdentifier = isIdentifier;
+        this.isArchived = isArchived;
     }
 
     public Integer getId() {

@@ -23,6 +23,14 @@ public interface AttributeTypesService {
      */
     List<AttributeTypes> getAll(FilterDto filterDto);
 
+
+    /**
+     * Get attribute type by id
+     *
+     * @param id identifier of attribute type
+     * */
+    AttributeTypes getById(Integer id);
+
     /**
      * Create new attribute type in database
      *
