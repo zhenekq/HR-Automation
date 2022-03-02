@@ -100,7 +100,7 @@ class AttributeTypesControllerTest {
         AttributeTypes createAttribute = h2Database.getAttributeTypeWithRandomValues();
         createAttribute.setName(null);
         assertThrows(IllegalArgumentException.class,
-                ()->controller.create(createAttribute),
+                () -> controller.create(createAttribute),
                 "Parameters cannot be nullable!");
     }
 
@@ -176,11 +176,5 @@ class AttributeTypesControllerTest {
         assertThrows(EntityNotFoundException.class,
                 () -> controller.deleteByAttributeId(notExistsAttributeType),
                 "Attribute type not exists!");
-    }
-
-
-
-    @Test
-    void deleteByAttributeId() {
     }
 }

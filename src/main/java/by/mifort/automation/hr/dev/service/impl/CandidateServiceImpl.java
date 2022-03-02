@@ -4,6 +4,7 @@ import by.mifort.automation.hr.dev.dto.FilterDto;
 import by.mifort.automation.hr.dev.entity.Candidate;
 import by.mifort.automation.hr.dev.repository.CandidateRepository;
 import by.mifort.automation.hr.dev.service.CandidateService;
+import by.mifort.automation.hr.dev.util.validator.EntityValidator;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
@@ -18,10 +20,12 @@ import java.util.List;
 public class CandidateServiceImpl implements CandidateService {
 
     private final CandidateRepository candidateRepository;
+    private final EntityValidator<Candidate> validator;
 
     @Autowired
-    public CandidateServiceImpl(CandidateRepository candidateRepository) {
+    public CandidateServiceImpl(CandidateRepository candidateRepository, EntityValidator<Candidate> validator) {
         this.candidateRepository = candidateRepository;
+        this.validator = validator;
     }
 
     @Override
@@ -47,9 +51,12 @@ public class CandidateServiceImpl implements CandidateService {
 
     @Override
     @Transactional
-    public Candidate create(@NotNull Candidate candidate) {
-        return candidateRepository
-                .findById(candidate.getId())
-                .orElse(candidateRepository.save(candidate));
+    public Candidate create(Candidate candidate) {
+        if(validator.isValidParams(candidate)){
+            return candidateRepository
+                    .findById(candidate.getId())
+                    .orElse(candidateRepository.save(candidate));
+        }
+        throw new IllegalArgumentException("Fields cannot be nullable");
     }
 }

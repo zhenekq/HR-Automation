@@ -2,9 +2,11 @@ package by.mifort.automation.hr.dev.db;
 
 import by.mifort.automation.hr.dev.entity.AttributeTypes;
 import by.mifort.automation.hr.dev.entity.Candidate;
+import by.mifort.automation.hr.dev.entity.CandidateAttributes;
 import by.mifort.automation.hr.dev.entity.CommunicationHistory;
 import net.bytebuddy.utility.RandomString;
 import org.apache.commons.lang3.RandomUtils;
+import org.checkerframework.checker.units.qual.C;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -54,11 +56,36 @@ public class H2Database {
         );
     }
 
+    public List<CandidateAttributes> initializeCandidateAttributes(){
+        return List.of(
+                new CandidateAttributes(1,  RandomString.make(), RandomUtils.nextInt(), new Candidate("yauheni_vozny"), new AttributeTypes(1)),
+                new CandidateAttributes(2,  RandomString.make(), RandomUtils.nextInt(), new Candidate("artem_skrebets"), new AttributeTypes(2)),
+                new CandidateAttributes(3,  RandomString.make(), RandomUtils.nextInt(), new Candidate("stas_gutsko"), new AttributeTypes(3)),
+                new CandidateAttributes(4,  RandomString.make(), RandomUtils.nextInt(), new Candidate("uliana_fomina"), new AttributeTypes(4)),
+                new CandidateAttributes(5,  RandomString.make(), RandomUtils.nextInt(), new Candidate("vladimir_zelmanchuk"), new AttributeTypes(5)),
+                new CandidateAttributes(6,  RandomString.make(), RandomUtils.nextInt(), new Candidate("yauheni_vozny"), new AttributeTypes(6))
+        );
+    }
+
     public AttributeTypes getAttributeTypeWithRandomValues(){
          return new AttributeTypes(RandomString.make(),
                                    RandomString.make(),
                                    RandomString.make(),
                                    RandomUtils.nextBoolean(),
                                    RandomUtils.nextBoolean());
+    }
+
+    public CandidateAttributes getCandidateAttributesWithRandomValues(String candidateId, Integer type){
+        CandidateAttributes attributes = new CandidateAttributes(RandomString.make(), RandomUtils.nextInt());
+        attributes.setCandidate(new Candidate(candidateId));
+        attributes.setAttributeTypes(new AttributeTypes(type));
+
+        return attributes;
+    }
+
+    public Candidate getCandidateWithRandomValues(){
+        return new Candidate(RandomString.make(),
+                              new Timestamp(RandomUtils.nextLong()),
+                              RandomString.make());
     }
 }

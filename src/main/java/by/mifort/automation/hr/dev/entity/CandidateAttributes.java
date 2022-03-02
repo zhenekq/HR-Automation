@@ -38,11 +38,17 @@ public class CandidateAttributes {
     public CandidateAttributes() {
     }
 
-    public CandidateAttributes(Integer id, Integer type, String value, Integer valueSource, Candidate candidate) {
+    public CandidateAttributes(Integer id, String value, Integer valueSource, Candidate candidate, AttributeTypes attributeTypes) {
         this.id = id;
         this.value = value;
         this.valueSource = valueSource;
         this.candidate = candidate;
+        this.attributeTypes = attributeTypes;
+    }
+
+    public CandidateAttributes(String value, Integer valueSource) {
+        this.value = value;
+        this.valueSource = valueSource;
     }
 
     public Integer getId() {

@@ -46,6 +46,10 @@ public class AttributeTypes {
     public AttributeTypes() {
     }
 
+    public AttributeTypes(Integer id) {
+        this.id = id;
+    }
+
     public AttributeTypes(Integer id, String name, String basicType, String validation, Boolean isIdentifier, Boolean isArchived) {
         this.id = id;
         this.name = name;

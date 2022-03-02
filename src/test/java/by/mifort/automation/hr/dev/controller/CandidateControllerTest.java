@@ -100,10 +100,11 @@ public class CandidateControllerTest {
     @Test
     @DisplayName("Check is exists candidate cannot be created")
     void checkIsCandidateCreatedWithExistsId() {
-        Candidate existsCandidate = dbCandidates.get(0);
-        assertThrows(EntityExistsException.class,
+        Candidate existsCandidate = h2Database.getCandidateWithRandomValues();
+        existsCandidate.setStatus(null);
+        assertThrows(IllegalArgumentException.class,
                     () -> controller.create(existsCandidate),
-                "Entity exists!");
+                "Fields cannot be nullable");
     }
 
     @Test
