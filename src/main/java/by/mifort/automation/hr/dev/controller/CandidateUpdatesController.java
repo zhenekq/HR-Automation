@@ -5,11 +5,9 @@ import by.mifort.automation.hr.dev.entity.CandidateUpdate;
 import by.mifort.automation.hr.dev.service.CandidateUpdatesService;
 import by.mifort.automation.hr.dev.util.converter.EntityConverter;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,9 +39,23 @@ public class CandidateUpdatesController {
      */
 
     @GetMapping
+    @ApiOperation("Get all updates by candidate identifier")
     public List<CandidateUpdateDto> getByCandidateId(@PathVariable String id) {
         List<CandidateUpdate> updates = service.getByCandidateId(id);
         return converter.convertToListEntityDto(updates);
+    }
+
+    /**
+     * POST request to create new candidate update
+     *
+     * @param update body of update
+     * @return New candidate update
+     */
+    @PostMapping
+    @ApiOperation("Create new update for candidate")
+    public CandidateUpdateDto create(@PathVariable String id, @RequestBody CandidateUpdate update){
+        CandidateUpdate newUpdate = service.createByCandidateId(id, update);
+        return converter.convertToEntityDto(newUpdate);
     }
 
 }

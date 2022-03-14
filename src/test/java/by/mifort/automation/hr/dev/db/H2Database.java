@@ -1,15 +1,14 @@
 package by.mifort.automation.hr.dev.db;
 
-import by.mifort.automation.hr.dev.entity.AttributeTypes;
-import by.mifort.automation.hr.dev.entity.Candidate;
-import by.mifort.automation.hr.dev.entity.CandidateAttributes;
-import by.mifort.automation.hr.dev.entity.CommunicationHistory;
+import by.mifort.automation.hr.dev.entity.*;
 import net.bytebuddy.utility.RandomString;
 import org.apache.commons.lang3.RandomUtils;
 import org.checkerframework.checker.units.qual.C;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class H2Database {
     private static final H2Database instance = new H2Database();
@@ -65,6 +64,34 @@ public class H2Database {
                 new CandidateAttributes(5,  RandomString.make(), RandomUtils.nextInt(), new Candidate("vladimir_zelmanchuk"), new AttributeTypes(5)),
                 new CandidateAttributes(6,  RandomString.make(), RandomUtils.nextInt(), new Candidate("yauheni_vozny"), new AttributeTypes(6))
         );
+    }
+
+    public List<CandidateUpdate> initializeCandidateUpdates(){
+        return List.of(
+                new CandidateUpdate(1, RandomString.make(), new Timestamp(RandomUtils.nextLong()), getChangeSet(), new Candidate("yauheni_vozny")),
+                new CandidateUpdate(2, RandomString.make(), new Timestamp(RandomUtils.nextLong()), getChangeSet(), new Candidate("artem_skrebets")),
+                new CandidateUpdate(3, RandomString.make(), new Timestamp(RandomUtils.nextLong()), getChangeSet(), new Candidate("stas_gutsko")),
+                new CandidateUpdate(4, RandomString.make(), new Timestamp(RandomUtils.nextLong()), getChangeSet(), new Candidate("uliana_fomina")),
+                new CandidateUpdate(5, RandomString.make(), new Timestamp(RandomUtils.nextLong()), getChangeSet(), new Candidate("vladimir_zelmanchuk")),
+                new CandidateUpdate(6, RandomString.make(), new Timestamp(RandomUtils.nextLong()), getChangeSet(), new Candidate("yauheni_vozny"))
+        );
+    }
+
+    private Map<String, String> getChangeSet(){
+        Map<String, String> changeSet = new HashMap<>();
+        changeSet.put("key1", "value1");
+        changeSet.put("key2", "value2");
+        changeSet.put("key3", "value3");
+
+        return changeSet;
+    }
+
+    public CandidateUpdate getRandomCandidateUpdate(){
+        return new CandidateUpdate(RandomUtils.nextInt(),
+                                   RandomString.make(),
+                                   new Timestamp(RandomUtils.nextLong()),
+                                   getChangeSet(),
+                                   new Candidate(RandomString.make()));
     }
 
     public AttributeTypes getAttributeTypeWithRandomValues(){

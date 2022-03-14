@@ -92,6 +92,13 @@ public class AttributeTypesDto {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("name", name)
+                .append("basicType", basicType)
+                .append("validation", validation)
+                .append("isIdentifier", isIdentifier)
+                .append("isArchived", isArchived)
+                .toString();
     }
 }

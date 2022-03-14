@@ -49,3 +49,7 @@ databaseChangeLog:
       file: db/changelog/changeset/change-column-is-archived-to-snake-case.yaml
   - include:
       file: db/changelog/changeset/add-default-value-to-is-archived.yaml
+  - include:
+      file: db/changelog/changeset/drop-merge-candidates-table.yaml
+  - include:
+      file: db/changelog/changeset/create-merge-candidates-table-new-version.yaml

@@ -26,7 +26,7 @@ public class CandidateDto {
     private List<Keyword> keywords = new ArrayList<>();
     private List<CommunicationHistory> communicationHistory = new ArrayList<>();
     private List<CandidateAttributes> candidateAttributes = new ArrayList<>();
-    private List<CandidateMergeCandidates> mergeCandidates = new ArrayList<>();
+    private List<CandidateMerge> mergeCandidates = new ArrayList<>();
 
     public CandidateDto() {
     }
@@ -93,11 +93,11 @@ public class CandidateDto {
         this.candidateAttributes = candidateAttributes;
     }
 
-    public List<CandidateMergeCandidates> getMergeCandidates() {
+    public List<CandidateMerge> getMergeCandidates() {
         return mergeCandidates;
     }
 
-    public void setMergeCandidates(List<CandidateMergeCandidates> mergeCandidates) {
+    public void setMergeCandidates(List<CandidateMerge> mergeCandidates) {
         this.mergeCandidates = mergeCandidates;
     }
 
@@ -113,10 +113,10 @@ public class CandidateDto {
 
     @Override
     public String toString() {
-        return "CandidateDto{" +
-                "id='" + id + '\'' +
-                ", lastContact=" + lastContact +
-                ", status='" + status + '\'' +
-                '}';
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("lastContact", lastContact)
+                .append("status", status)
+                .toString();
     }
 }

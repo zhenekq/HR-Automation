@@ -71,6 +71,11 @@ public class CandidateUpdateDto {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("source", source)
+                .append("updateDate", updateDate)
+                .append("changeSet", changeSet)
+                .toString();
     }
 }

@@ -56,6 +56,10 @@ public class CandidateAttributesDto {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("value", value)
+                .append("valueSource", valueSource)
+                .toString();
     }
 }

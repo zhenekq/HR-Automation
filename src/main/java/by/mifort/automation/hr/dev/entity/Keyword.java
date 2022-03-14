@@ -65,8 +65,8 @@ public class Keyword {
 
     @Override
     public String toString() {
-        return "Keyword{" +
-                "id='" + id + '\'' +
-                '}';
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .toString();
     }
 }

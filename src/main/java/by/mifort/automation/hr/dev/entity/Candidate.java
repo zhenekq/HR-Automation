@@ -36,7 +36,7 @@ public class Candidate {
      *
      * @see CandidateUpdate
      */
-    @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "candidate")
     private List<CandidateUpdate> updates;
 
     /**
@@ -44,7 +44,7 @@ public class Candidate {
      *
      * @see Keyword
      */
-    @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "candidate")
     private List<Keyword> keywords;
 
     /**
@@ -52,7 +52,7 @@ public class Candidate {
      *
      * @see CommunicationHistory
      */
-    @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "candidate")
     private List<CommunicationHistory> communicationHistory;
 
     /**
@@ -60,17 +60,21 @@ public class Candidate {
      *
      * @see CandidateAttributes
      */
-    @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "candidate")
     private List<CandidateAttributes> attributes;
 
 
     /**
      * Merged candidates
      *
-     * @see CandidateMergeCandidates
+     * @see CandidateMerge
      */
-    /*@OneToMany(mappedBy = "candidate")
-    private List<CandidateMergeCandidates> mergeCandidates;*/
+    @OneToMany(mappedBy = "candidate1")
+    private List<CandidateMerge> mergeCandidate1;
+
+    @OneToMany(mappedBy = "candidate2")
+    private List<CandidateMerge> mergeCandidate2;
+
     public Candidate() {
     }
 
@@ -143,6 +147,14 @@ public class Candidate {
 
     public void setAttributes(List<CandidateAttributes> attributes) {
         this.attributes = attributes;
+    }
+
+    public List<CandidateMerge> getMergeCandidate1() {
+        return mergeCandidate1;
+    }
+
+    public List<CandidateMerge> getMergeCandidate2() {
+        return mergeCandidate2;
     }
 
     @Override

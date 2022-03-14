@@ -172,7 +172,7 @@ class AttributeTypesControllerTest {
     @Test
     @DisplayName("Check archive exists attribute type by id")
     void checkAttributeTypeArchive_NotExists(){
-        Integer notExistsAttributeType = this.attributeTypes.size() + 1;
+        Integer notExistsAttributeType = this.attributeTypes.size() + RandomUtils.nextInt();
         assertThrows(EntityNotFoundException.class,
                 () -> controller.deleteByAttributeId(notExistsAttributeType),
                 "Attribute type not exists!");

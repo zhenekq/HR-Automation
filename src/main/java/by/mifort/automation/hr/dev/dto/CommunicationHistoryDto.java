@@ -77,12 +77,12 @@ public class CommunicationHistoryDto {
 
     @Override
     public String toString() {
-        return "CommunicationHistoryDto{" +
-                "id=" + id +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", comment='" + comment + '\'' +
-                ", isArchived=" + isArchived +
-                '}';
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("createDate", createDate)
+                .append("updateDate", updateDate)
+                .append("comment", comment)
+                .append("isArchived", isArchived)
+                .toString();
     }
 }
