@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Repository for working with candidate's Attributes in database
@@ -21,5 +22,4 @@ public interface CandidateAttributesRepository extends JpaRepository<CandidateAt
      * @return List of candidate attributes by candidate's identifier
      */
     List<CandidateAttributes> findCandidateAttributesByCandidateId(String id);
-
 }

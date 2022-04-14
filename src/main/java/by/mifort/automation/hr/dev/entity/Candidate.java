@@ -36,7 +36,7 @@ public class Candidate {
      *
      * @see CandidateUpdate
      */
-    @OneToMany(mappedBy = "candidate")
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
     private List<CandidateUpdate> updates;
 
     /**
@@ -44,7 +44,7 @@ public class Candidate {
      *
      * @see Keyword
      */
-    @OneToMany(mappedBy = "candidate")
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
     private List<Keyword> keywords;
 
     /**
@@ -52,7 +52,7 @@ public class Candidate {
      *
      * @see CommunicationHistory
      */
-    @OneToMany(mappedBy = "candidate")
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
     private List<CommunicationHistory> communicationHistory;
 
     /**
@@ -60,7 +60,7 @@ public class Candidate {
      *
      * @see CandidateAttributes
      */
-    @OneToMany(mappedBy = "candidate")
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
     private List<CandidateAttributes> attributes;
 
 
@@ -169,6 +169,16 @@ public class Candidate {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("lastContact", lastContact)
+                .append("status", status)
+                .append("updates", updates)
+                .append("keywords", keywords)
+                .append("communicationHistory", communicationHistory)
+                .append("attributes", attributes)
+                .append("mergeCandidate1", mergeCandidate1)
+                .append("mergeCandidate2", mergeCandidate2)
+                .toString();
     }
 }

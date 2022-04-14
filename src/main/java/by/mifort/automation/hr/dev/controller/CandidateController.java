@@ -72,6 +72,11 @@ public class CandidateController {
         return converter.convertToEntityDto(candidate);
     }
 
+    @GetMapping("/duplicates")
+    public List<CandidateDto> getDuplicates(){
+        return converter.convertToListEntityDto(candidateService.getDuplicates());
+    }
+
     /**
      * POST request to create candidate
      *

@@ -2,10 +2,12 @@ package by.mifort.automation.hr.dev.util.differences.impl;
 
 import by.mifort.automation.hr.dev.dto.AttributeTypesDto;
 import by.mifort.automation.hr.dev.dto.CommunicationHistoryDto;
-import by.mifort.automation.hr.dev.entity.AttributeTypes;
-import by.mifort.automation.hr.dev.entity.CommunicationHistory;
+import by.mifort.automation.hr.dev.entity.*;
 import by.mifort.automation.hr.dev.util.differences.AssertDifferencesUpdates;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class AssertDifferencesUpdatesImpl implements AssertDifferencesUpdates {
@@ -38,5 +40,33 @@ public class AssertDifferencesUpdatesImpl implements AssertDifferencesUpdates {
             types.setValidation(dto.getValidation());
         }
         return types;
+    }
+
+    @Override
+    public Candidate assertCommonCandidate(Candidate firstCandidate, Candidate secondCandidate) {
+        Candidate commonCandidate = new Candidate();
+
+        List<CandidateUpdate> commonUpdates = firstCandidate.getUpdates();
+        commonUpdates.addAll(secondCandidate.getUpdates());
+
+        List<Keyword> commonKeywords = firstCandidate.getKeywords();
+        commonKeywords.addAll(secondCandidate.getKeywords());
+
+        List<CommunicationHistory> commonHistory = firstCandidate.getCommunicationHistory();
+        commonHistory.addAll(secondCandidate.getCommunicationHistory());
+
+        List<CandidateAttributes> commonAttributes = firstCandidate.getAttributes();
+        commonAttributes.addAll(secondCandidate.getAttributes());
+
+        commonCandidate.setId(firstCandidate.getId());
+        commonCandidate.setStatus(firstCandidate.getStatus());
+        commonCandidate.setLastContact(firstCandidate.getLastContact());
+
+        commonCandidate.setUpdates(commonUpdates);
+        commonCandidate.setKeywords(commonKeywords);
+        commonCandidate.setCommunicationHistory(commonHistory);
+        commonCandidate.setAttributes(commonAttributes);
+
+        return commonCandidate;
     }
 }

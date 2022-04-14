@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -59,4 +60,10 @@ public class CandidateServiceImpl implements CandidateService {
         }
         throw new IllegalArgumentException("Fields cannot be nullable");
     }
+
+    @Override
+    public List<Candidate> getDuplicates() {
+        return candidateRepository.findCandidatesByAttributesEqualsAndAttributes();
+    }
+
 }

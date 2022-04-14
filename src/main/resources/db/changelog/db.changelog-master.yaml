@@ -53,3 +53,5 @@ databaseChangeLog:
       file: db/changelog/changeset/drop-merge-candidates-table.yaml
   - include:
       file: db/changelog/changeset/create-merge-candidates-table-new-version.yaml
+  - include:
+      file: db/changelog/changeset/fill-merge-fake-candidates.yaml

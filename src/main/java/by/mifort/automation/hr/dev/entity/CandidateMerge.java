@@ -15,7 +15,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "people_merge_candidates")
-public class CandidateMergeCandidates {
+public class CandidateMerge {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,28 +34,18 @@ public class CandidateMergeCandidates {
      * @see Candidate Join 2 primary keys like a foreign key for 1 primary key
      */
 
-    /*@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumns({
-            @JoinColumn(
-                    name = "user1Id",
-                    referencedColumnName = "id",
-                    nullable = false,
-                    insertable = false,
-                    updatable = false
-            ),
-            @JoinColumn(
-                    name = "user2Id",
-                    referencedColumnName = "id",
-                    nullable = false,
-                    insertable = false,
-                    updatable = false
-            )
-    })
-    private Candidate candidate;*/
-    public CandidateMergeCandidates() {
+    @ManyToOne
+    @JoinColumn(name = "user1_id", nullable = false)
+    private Candidate candidate1;
+
+    @ManyToOne
+    @JoinColumn(name = "user2_id", nullable = false)
+    private Candidate candidate2;
+
+    public CandidateMerge() {
     }
 
-    public CandidateMergeCandidates(String status, String reason, String reasonComment) {
+    public CandidateMerge(String status, String reason, String reasonComment) {
         this.status = status;
         this.reason = reason;
         this.reasonComment = reasonComment;
@@ -91,6 +81,22 @@ public class CandidateMergeCandidates {
 
     public void setReasonComment(String reasonComment) {
         this.reasonComment = reasonComment;
+    }
+
+    public Candidate getCandidate1() {
+        return candidate1;
+    }
+
+    public void setCandidate1(Candidate candidate1) {
+        this.candidate1 = candidate1;
+    }
+
+    public Candidate getCandidate2() {
+        return candidate2;
+    }
+
+    public void setCandidate2(Candidate candidate2) {
+        this.candidate2 = candidate2;
     }
 
     @Override

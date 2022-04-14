@@ -36,4 +36,5 @@ public interface CandidateService {
      */
     Candidate create(Candidate candidate);
 
+    List<Candidate> getDuplicates();
 }
