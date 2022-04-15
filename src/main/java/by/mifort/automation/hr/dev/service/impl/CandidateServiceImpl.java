@@ -60,10 +60,4 @@ public class CandidateServiceImpl implements CandidateService {
         }
         throw new IllegalArgumentException("Fields cannot be nullable");
     }
-
-    @Override
-    public List<Candidate> getDuplicates() {
-        return candidateRepository.findCandidatesByAttributesEqualsAndAttributes();
-    }
-
 }

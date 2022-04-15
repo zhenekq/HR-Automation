@@ -27,9 +27,4 @@ public interface CandidateRepository extends JpaRepository<Candidate, String> {
     @Query("select p from Candidate p inner join p.keywords kb where kb.id like %:keyword%")
     List<Candidate> findCandidatesByKeywordsContaining(String keyword, Pageable pageable);
 
-    @Query("select p from Candidate p inner join  p.communicationHistory cm where p.id =:id and cm.isArchived=false")
-    Optional<Candidate> findCandidateWithoutArchivedHistory(String id);
-
-    @Query("select p from Candidate p inner join  p.attributes cm where p.id = p.id and cm.value = cm.value")
-    List<Candidate> findCandidatesByAttributesEqualsAndAttributes();
 }

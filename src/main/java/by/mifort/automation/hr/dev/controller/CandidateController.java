@@ -3,9 +3,13 @@ package by.mifort.automation.hr.dev.controller;
 import by.mifort.automation.hr.dev.dto.CandidateDto;
 import by.mifort.automation.hr.dev.dto.FilterDto;
 import by.mifort.automation.hr.dev.entity.Candidate;
+import by.mifort.automation.hr.dev.entity.CandidateAttributes;
 import by.mifort.automation.hr.dev.entity.Keyword;
 import by.mifort.automation.hr.dev.service.CandidateService;
 import by.mifort.automation.hr.dev.service.KeywordService;
+import by.mifort.automation.hr.dev.service.duplicates.DuplicatesStrategy;
+import by.mifort.automation.hr.dev.service.duplicates.DuplicatesStrategyFactory;
+import by.mifort.automation.hr.dev.service.duplicates.DuplicatesStrategyName;
 import by.mifort.automation.hr.dev.util.converter.EntityConverter;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,7 +18,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Controller that handles requests about candidates
@@ -31,13 +37,17 @@ public class CandidateController {
     private final CandidateService candidateService;
     private final KeywordService keywordService;
     private final EntityConverter<Candidate, CandidateDto> converter;
+    private final DuplicatesStrategyFactory factory;
 
     @Autowired
-    public CandidateController(CandidateService candidateService, KeywordService keywordService, EntityConverter<Candidate, CandidateDto> converter) {
+    public CandidateController(CandidateService candidateService, KeywordService keywordService, EntityConverter<Candidate, CandidateDto> converter, DuplicatesStrategyFactory factory) {
         this.candidateService = candidateService;
         this.keywordService = keywordService;
         this.converter = converter;
+        this.factory = factory;
     }
+
+    //STATEGY PATTERN
 
     /**
      * GET request to receive all info about candidates
@@ -73,8 +83,10 @@ public class CandidateController {
     }
 
     @GetMapping("/duplicates")
-    public List<CandidateDto> getDuplicates(){
-        return converter.convertToListEntityDto(candidateService.getDuplicates());
+    public List<List<CandidateAttributes>> getDuplicates(@RequestParam String find){
+        DuplicatesStrategy strategy = factory.findStrategy(DuplicatesStrategyName.valueOf(find.toUpperCase(Locale.ROOT)));
+        List<List<CandidateAttributes>> res = strategy.getDuplicates();
+        return res;
     }
 
     /**

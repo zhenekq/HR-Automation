@@ -104,7 +104,12 @@ public class CandidateAttributes {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+        return "CandidateAttributes{" +
+                "id=" + id +
+                ", value='" + value + '\'' +
+                ", valueSource=" + valueSource +
+                ", candidate=" + candidate +
+                ", attributeTypes=" + attributeTypes +
+                '}' + "\n";
     }
-
 }
