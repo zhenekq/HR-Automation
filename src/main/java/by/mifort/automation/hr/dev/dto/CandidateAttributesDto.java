@@ -16,6 +16,7 @@ public class CandidateAttributesDto {
     private Integer id;
     private String value;
     private Integer valueSource;
+    private String name;
 
     public CandidateAttributesDto() {
     }
@@ -44,6 +45,14 @@ public class CandidateAttributesDto {
         this.valueSource = valueSource;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         return EqualsBuilder.reflectionEquals(this, o);
@@ -56,10 +65,12 @@ public class CandidateAttributesDto {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("value", value)
-                .append("valueSource", valueSource)
-                .toString();
+        final StringBuilder sb = new StringBuilder("CandidateAttributesDto{");
+        sb.append("id=").append(id);
+        sb.append(", value='").append(value).append('\'');
+        sb.append(", valueSource=").append(valueSource);
+        sb.append(", name='").append(name).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

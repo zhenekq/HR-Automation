@@ -50,6 +50,10 @@ public class AttributeTypes {
         this.id = id;
     }
 
+    public AttributeTypes(String name) {
+        this.name = name;
+    }
+
     public AttributeTypes(Integer id, String name, String basicType, String validation, Boolean isIdentifier, Boolean isArchived) {
         this.id = id;
         this.name = name;
@@ -136,6 +140,15 @@ public class AttributeTypes {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+        final StringBuilder sb = new StringBuilder("AttributeTypes{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", basicType='").append(basicType).append('\'');
+        sb.append(", validation='").append(validation).append('\'');
+        sb.append(", isIdentifier=").append(isIdentifier);
+        sb.append(", isArchived=").append(isArchived);
+        sb.append(", candidateAttributes=").append(candidateAttributes);
+        sb.append('}');
+        return sb.toString();
     }
 }

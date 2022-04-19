@@ -23,4 +23,10 @@ public interface AttributeTypesRepository extends JpaRepository<AttributeTypes, 
      * @return Paginated information about attribute types
      */
     List<AttributeTypes> findAllByIsArchivedEquals(Pageable pageable, Boolean archived);
+
+    /**
+     * @param name of attribute
+     * @return Paginated information about attribute types
+     */
+    List<AttributeTypes> findByName(String name);
 }

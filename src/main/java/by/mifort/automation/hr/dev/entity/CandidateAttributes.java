@@ -94,12 +94,17 @@ public class CandidateAttributes {
 
     @Override
     public boolean equals(Object o) {
-        return EqualsBuilder.reflectionEquals(this, o);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CandidateAttributes that = (CandidateAttributes) o;
+
+        return attributeTypes.equals(that.attributeTypes);
     }
 
     @Override
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
+        return attributeTypes.getId().hashCode();
     }
 
     @Override

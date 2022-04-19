@@ -23,7 +23,7 @@ public interface CandidateAttributesRepository extends JpaRepository<CandidateAt
      * @param id candidate id
      * @return List of candidate attributes by candidate's identifier
      */
-    List<CandidateAttributes> findCandidateAttributesByCandidateId(String id);
+    List<CandidateAttributes> findAllByCandidateId(String id);
 
     /**
      * @param type identifier for searching
