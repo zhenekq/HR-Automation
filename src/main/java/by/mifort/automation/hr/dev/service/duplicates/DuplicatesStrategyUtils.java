@@ -1,7 +1,12 @@
 package by.mifort.automation.hr.dev.service.duplicates;
 
+import by.mifort.automation.hr.dev.entity.Candidate;
 import by.mifort.automation.hr.dev.entity.CandidateAttributes;
+import by.mifort.automation.hr.dev.repository.CandidateRepository;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -13,21 +18,20 @@ import java.util.List;
  */
 public class DuplicatesStrategyUtils {
 
-    private DuplicatesStrategyUtils(){}
-
     /**
      * @author yauheni_vozny
      * @return Arrays of arrays duplicates by one similar attribute
      */
-    public static List<List<CandidateAttributes>> separate(List<CandidateAttributes> attributes){
-        List<List<CandidateAttributes>> result = new ArrayList<>();
+    public static List<List<Candidate>> separate(List<CandidateAttributes> attributes){
+        List<List<Candidate>> result = new ArrayList<>();
         for(int i=0;i<attributes.size();i++){
-            List<CandidateAttributes> logCandidates = new ArrayList<>();
-            logCandidates.add(attributes.get(i));
-            for(int j=i+1;j<attributes.size();j++){
+            List<Candidate> logCandidates = new ArrayList<>();
+            logCandidates.add(attributes.get(i).getCandidate());
+            for(int j=0;j<attributes.size();j++){
                 if(attributes.get(i).getValue().equals(attributes.get(j).getValue()) && i!=j){
-                    logCandidates.add(attributes.get(j));
-                    i++;
+                    logCandidates.add(attributes.get(j).getCandidate());
+                    attributes.remove(j);
+                    j--;
                 }
             }
             result.add(logCandidates);
@@ -35,11 +39,26 @@ public class DuplicatesStrategyUtils {
         return result;
     }
 
-    public static void isEnumContainsValue(String value){
-        for(DuplicatesStrategyName name: DuplicatesStrategyName.values()){
-            if(!name.name().equals(value)){
-                throw new IllegalArgumentException("Cannot find strategy like this");
+    public static List<List<Candidate>> separate2(List<CandidateAttributes> attributes){
+        List<List<Candidate>> res = new ArrayList<>();
+        String current = null;
+        int counter = 0;
+        List<Candidate> attributesList = new ArrayList<>();
+        for(int i=0;i<attributes.size();i++){
+            if(!attributes.get(i).getValue().equals(current)){
+                if(counter > 1){
+                    res.add(attributesList);
+                }
+                current = attributes.get(i).getValue();
+                counter = 1;
+            }else{
+                counter++;
+                attributesList.add(attributes.get(i).getCandidate());
             }
         }
+        if(counter > 1){
+            res.add(attributesList);
+        }
+        return res;
     }
 }

@@ -82,13 +82,6 @@ public class CandidateController {
         return converter.convertToEntityDto(candidate);
     }
 
-    @GetMapping("/duplicates")
-    public List<List<CandidateAttributes>> getDuplicates(@RequestParam String find){
-        DuplicatesStrategy strategy = factory.findStrategy(DuplicatesStrategyName.valueOf(find.toUpperCase(Locale.ROOT)));
-        List<List<CandidateAttributes>> res = strategy.getDuplicates();
-        return res;
-    }
-
     /**
      * POST request to create candidate
      *

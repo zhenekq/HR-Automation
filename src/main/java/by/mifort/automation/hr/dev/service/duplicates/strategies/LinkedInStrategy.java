@@ -1,6 +1,7 @@
 package by.mifort.automation.hr.dev.service.duplicates.strategies;
 
 import by.mifort.automation.hr.dev.dto.CandidateAttributesDto;
+import by.mifort.automation.hr.dev.entity.Candidate;
 import by.mifort.automation.hr.dev.entity.CandidateAttributes;
 import by.mifort.automation.hr.dev.repository.CandidateAttributesRepository;
 import by.mifort.automation.hr.dev.service.duplicates.DuplicatesStrategy;
@@ -30,7 +31,7 @@ public class LinkedInStrategy implements DuplicatesStrategy {
     }
 
     @Override
-    public List<List<CandidateAttributes>> getDuplicates() {
+    public List<List<Candidate>> getDuplicates() {
         List<CandidateAttributes> instagramCandidates = attributesRepository
                 .findCandidateAttributesByAttributeTypesName(getStrategyName().name());
         return DuplicatesStrategyUtils.separate(instagramCandidates);

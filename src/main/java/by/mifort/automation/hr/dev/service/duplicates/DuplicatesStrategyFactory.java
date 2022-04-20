@@ -3,6 +3,7 @@ package by.mifort.automation.hr.dev.service.duplicates;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,7 +24,6 @@ public class DuplicatesStrategyFactory {
     }
 
     public DuplicatesStrategy findStrategy(DuplicatesStrategyName strategyName){
-        DuplicatesStrategyUtils.isEnumContainsValue(strategyName.name());
         return duplicatesStrategies.get(strategyName);
     }
 
