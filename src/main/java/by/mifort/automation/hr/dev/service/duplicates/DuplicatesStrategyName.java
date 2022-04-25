@@ -17,5 +17,7 @@ public enum DuplicatesStrategyName {
     FIRSTNAME_LASTNAME_DOB_CITY,
     FIRSTNAME,
     LASTNAME,
-    KEY_STRATEGY
+    KEY_STRATEGY,
+    FLDC,
+    FIRSTNAME_LASTNAME_CITY_COMPANY
 }

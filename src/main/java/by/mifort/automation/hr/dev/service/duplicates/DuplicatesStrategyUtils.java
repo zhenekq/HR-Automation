@@ -16,24 +16,14 @@ import java.util.List;
  */
 public class DuplicatesStrategyUtils {
 
-    /**
-     * @author yauheni_vozny
-     * @return Arrays of arrays duplicates by one similar attribute
-     */
-    public static List<List<Candidate>> separate(List<CandidateAttributes> attributes, Comparator<CandidateAttributes> comparator){
-        List<List<Candidate>> result = new ArrayList<>();
+    public static String setValues(List<CandidateAttributes> attributes, String type){
+        String res = "";
         for(int i=0;i<attributes.size();i++){
-            List<Candidate> logCandidates = new ArrayList<>();
-            logCandidates.add(attributes.get(i).getCandidate());
-            for(int j=0;j<attributes.size();j++){
-                if(comparator.compare(attributes.get(i), attributes.get(j)) == 0 && i != j){
-                    logCandidates.add(attributes.get(j).getCandidate());
-                    attributes.remove(j);
-                    j--;
-                }
+            if(attributes.get(i).getAttributeTypes().getName().equals(type)){
+                res = attributes.get(i).getValue();
+                break;
             }
-            result.add(logCandidates);
         }
-        return result;
+        return res;
     }
 }
