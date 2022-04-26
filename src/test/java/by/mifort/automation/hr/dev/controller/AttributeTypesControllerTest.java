@@ -62,11 +62,10 @@ class AttributeTypesControllerTest {
     }
 
     @Test
-    @DisplayName("Get paginated attribute types with correct request params(not archived)")
+    @DisplayName("Get paginated attribute types with correct request params(archived)")
     void checkAttributeTypesGetPaginated_CorrectFilter_Archived(){
         List<AttributeTypes> attributes = new ArrayList<>(List.of(
-                this.attributeTypes.get(6),
-                this.attributeTypes.get(7)
+                this.attributeTypes.get(6)
         ));
         FilterDto filterDto = new FilterDto(1, 3);
         filterDto.setIsArchived(Boolean.TRUE);

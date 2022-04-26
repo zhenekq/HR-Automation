@@ -6,6 +6,7 @@ import org.apache.commons.lang3.RandomUtils;
 import org.checkerframework.checker.units.qual.C;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,8 @@ public class H2Database {
                 new Candidate("stas_gutsko", new Timestamp(RandomUtils.nextLong()), RandomString.make()),
                 new Candidate("uliana_fomina", new Timestamp(RandomUtils.nextLong()), RandomString.make()),
                 new Candidate("vladimir_zelmanchuk", new Timestamp(RandomUtils.nextLong()), RandomString.make()),
-                new Candidate("empty_candidate", new Timestamp(RandomUtils.nextLong()), RandomString.make())
+                new Candidate("empty_candidate", new Timestamp(RandomUtils.nextLong()), RandomString.make()),
+                new Candidate("yauheni_vozny_clone", new Timestamp(RandomUtils.nextLong()), RandomString.make())
         );
     }
 
@@ -44,26 +46,101 @@ public class H2Database {
 
     public List<AttributeTypes> initializeAttributeTypes(){
         return List.of(
-                new AttributeTypes(1, RandomString.make(),RandomString.make(), RandomString.make(), true, Boolean.FALSE),
-                new AttributeTypes(2, RandomString.make(),RandomString.make(), RandomString.make(), true, Boolean.FALSE),
-                new AttributeTypes(3, RandomString.make(),RandomString.make(), RandomString.make(), true, Boolean.FALSE),
-                new AttributeTypes(4, RandomString.make(),RandomString.make(), RandomString.make(), true, Boolean.FALSE),
-                new AttributeTypes(5, RandomString.make(),RandomString.make(), RandomString.make(), true, Boolean.FALSE),
-                new AttributeTypes(6, RandomString.make(),RandomString.make(), RandomString.make(), true, Boolean.FALSE),
-                new AttributeTypes(7, RandomString.make(),RandomString.make(), RandomString.make(), true, Boolean.TRUE),
-                new AttributeTypes(8, RandomString.make(),RandomString.make(), RandomString.make(), true, Boolean.TRUE)
+                new AttributeTypes(1, "phone","string", RandomString.make(), true, Boolean.FALSE),
+                new AttributeTypes(2, "twitter","string", RandomString.make(), true, Boolean.FALSE),
+                new AttributeTypes(3, "linkedin","string", RandomString.make(), true, Boolean.FALSE),
+                new AttributeTypes(4, "githubid","string", RandomString.make(), true, Boolean.FALSE),
+                new AttributeTypes(5, "company","string", RandomString.make(), false, Boolean.FALSE),
+                new AttributeTypes(6, "date_of_birth","date", RandomString.make(), false, Boolean.FALSE),
+                new AttributeTypes(7, "firstname","string", RandomString.make(), false, Boolean.TRUE),
+                new AttributeTypes(8, "lastname","string", RandomString.make(), false, Boolean.FALSE),
+                new AttributeTypes(9, "email","string", RandomString.make(), true, Boolean.FALSE),
+                new AttributeTypes(10, "facebookid","string", RandomString.make(), false, Boolean.FALSE),
+                new AttributeTypes(11, "passport_number","string", RandomString.make(), false, Boolean.FALSE),
+                new AttributeTypes(12, "city","string", RandomString.make(), false, Boolean.FALSE),
+                new AttributeTypes(13, "cityzenship","string", RandomString.make(), false, Boolean.FALSE),
+                new AttributeTypes(14, "gender","boolean", RandomString.make(), false, Boolean.FALSE),
+                new AttributeTypes(15, "telegram","string", RandomString.make(), true, Boolean.FALSE)
         );
     }
 
     public List<CandidateAttributes> initializeCandidateAttributes(){
-        return List.of(
-                new CandidateAttributes(1,  RandomString.make(), RandomUtils.nextInt(), new Candidate("yauheni_vozny"), new AttributeTypes(1)),
-                new CandidateAttributes(2,  RandomString.make(), RandomUtils.nextInt(), new Candidate("artem_skrebets"), new AttributeTypes(2)),
-                new CandidateAttributes(3,  RandomString.make(), RandomUtils.nextInt(), new Candidate("stas_gutsko"), new AttributeTypes(3)),
-                new CandidateAttributes(4,  RandomString.make(), RandomUtils.nextInt(), new Candidate("uliana_fomina"), new AttributeTypes(4)),
-                new CandidateAttributes(5,  RandomString.make(), RandomUtils.nextInt(), new Candidate("vladimir_zelmanchuk"), new AttributeTypes(5)),
-                new CandidateAttributes(6,  RandomString.make(), RandomUtils.nextInt(), new Candidate("yauheni_vozny"), new AttributeTypes(6))
-        );
+        List<CandidateAttributes> allAttributes = new ArrayList<>();
+        List<CandidateAttributes> yauheni_vozny = new ArrayList<>(List.of(
+                new CandidateAttributes(1,  "+375295141627", RandomUtils.nextInt(), new Candidate("yauheni_vozny"), new AttributeTypes(1)),
+                new CandidateAttributes(2,  "https://twitter.com/zhenekns", RandomUtils.nextInt(), new Candidate("yauheni_vozny"), new AttributeTypes(2)),
+                new CandidateAttributes(3,  "https://linkedin.com/zhenekns", RandomUtils.nextInt(), new Candidate("yauheni_vozny"), new AttributeTypes(3)),
+                new CandidateAttributes(4,  "https://github.com/zhenekq", RandomUtils.nextInt(), new Candidate("yauheni_vozny"), new AttributeTypes(4)),
+                new CandidateAttributes(5,  "Mifort", RandomUtils.nextInt(), new Candidate("yauheni_vozny"), new AttributeTypes(5)),
+                new CandidateAttributes(6,  "09.01.2002", RandomUtils.nextInt(), new Candidate("yauheni_vozny"), new AttributeTypes(6)),
+                new CandidateAttributes(7,  "Yauheni", RandomUtils.nextInt(), new Candidate("yauheni_vozny"), new AttributeTypes(7)),
+                new CandidateAttributes(8,  "Vozny", RandomUtils.nextInt(), new Candidate("yauheni_vozny"), new AttributeTypes(8)),
+                new CandidateAttributes(9,  "zhenek02ss@gmail.com", RandomUtils.nextInt(), new Candidate("yauheni_vozny"), new AttributeTypes(9)),
+                new CandidateAttributes(10,  "https://facebook.com/zhenekns", RandomUtils.nextInt(), new Candidate("yauheni_vozny"), new AttributeTypes(10)),
+                new CandidateAttributes(11,  "KH9083221", RandomUtils.nextInt(), new Candidate("yauheni_vozny"), new AttributeTypes(11)),
+                new CandidateAttributes(12,  "Minsk", RandomUtils.nextInt(), new Candidate("yauheni_vozny"), new AttributeTypes(12)),
+                new CandidateAttributes(13,  "Belarussian", RandomUtils.nextInt(), new Candidate("yauheni_vozny"), new AttributeTypes(13)),
+                new CandidateAttributes(14,  "1", RandomUtils.nextInt(), new Candidate("yauheni_vozny"), new AttributeTypes(14)),
+                new CandidateAttributes(15,  "https://t.me/zhenekns", RandomUtils.nextInt(), new Candidate("yauheni_vozny"), new AttributeTypes(15))
+        ));
+        List<CandidateAttributes> uliana_fomina = new ArrayList<>(List.of(
+                new CandidateAttributes(16,  "+375291243783", RandomUtils.nextInt(), new Candidate("uliana_fomina"), new AttributeTypes(1)),
+                new CandidateAttributes(17,  "https://twitter.com/fomina", RandomUtils.nextInt(), new Candidate("uliana_fomina"), new AttributeTypes(2)),
+                new CandidateAttributes(18,  "https://linkedin.com/fomina", RandomUtils.nextInt(), new Candidate("uliana_fomina"), new AttributeTypes(3)),
+                new CandidateAttributes(19,  "https://github.com/fomina", RandomUtils.nextInt(), new Candidate("uliana_fomina"), new AttributeTypes(4)),
+                new CandidateAttributes(20,  "Mifort", RandomUtils.nextInt(), new Candidate("uliana_fomina"), new AttributeTypes(5)),
+                new CandidateAttributes(21,  "17.02.2003", RandomUtils.nextInt(), new Candidate("uliana_fomina"), new AttributeTypes(6)),
+                new CandidateAttributes(22,  "Uliana", RandomUtils.nextInt(), new Candidate("uliana_fomina"), new AttributeTypes(7)),
+                new CandidateAttributes(23,  "Fomina", RandomUtils.nextInt(), new Candidate("uliana_fomina"), new AttributeTypes(8)),
+                new CandidateAttributes(24,  "fomina@gmail.com", RandomUtils.nextInt(), new Candidate("uliana_fomina"), new AttributeTypes(9)),
+                new CandidateAttributes(25,  "https://facebook.com/fomina", RandomUtils.nextInt(), new Candidate("uliana_fomina"), new AttributeTypes(10)),
+                new CandidateAttributes(26,  "KH8723637", RandomUtils.nextInt(), new Candidate("uliana_fomina"), new AttributeTypes(11)),
+                new CandidateAttributes(27,  "Minsk", RandomUtils.nextInt(), new Candidate("uliana_fomina"), new AttributeTypes(12)),
+                new CandidateAttributes(28,  "Belarussian", RandomUtils.nextInt(), new Candidate("uliana_fomina"), new AttributeTypes(13)),
+                new CandidateAttributes(29,  "0", RandomUtils.nextInt(), new Candidate("uliana_fomina"), new AttributeTypes(14)),
+                new CandidateAttributes(30,  "https://t.me/fomina", RandomUtils.nextInt(), new Candidate("uliana_fomina"), new AttributeTypes(15))
+        ));
+        List<CandidateAttributes> artem_skrebets = new ArrayList<>(List.of(
+                new CandidateAttributes(31,  "+375291243783", RandomUtils.nextInt(), new Candidate("artem_skrebets"), new AttributeTypes(1)),
+                new CandidateAttributes(32,  "https://twitter.com/artem_skrebets", RandomUtils.nextInt(), new Candidate("artem_skrebets"), new AttributeTypes(2)),
+                new CandidateAttributes(33,  "https://linkedin.com/artem_skrebets", RandomUtils.nextInt(), new Candidate("artem_skrebets"), new AttributeTypes(3)),
+                new CandidateAttributes(34,  "https://github.com/artem_skrebets", RandomUtils.nextInt(), new Candidate("artem_skrebets"), new AttributeTypes(4)),
+                new CandidateAttributes(35,  "Mifort", RandomUtils.nextInt(), new Candidate("artem_skrebets"), new AttributeTypes(5)),
+                new CandidateAttributes(36,  "17.02.2003", RandomUtils.nextInt(), new Candidate("artem_skrebets"), new AttributeTypes(6)),
+                new CandidateAttributes(37,  "Artem", RandomUtils.nextInt(), new Candidate("artem_skrebets"), new AttributeTypes(7)),
+                new CandidateAttributes(38,  "Skrebets", RandomUtils.nextInt(), new Candidate("artem_skrebets"), new AttributeTypes(8)),
+                new CandidateAttributes(39,  "artem_skrebets@gmail.com", RandomUtils.nextInt(), new Candidate("artem_skrebets"), new AttributeTypes(9)),
+                new CandidateAttributes(40,  "https://facebook.com/artem_skrebets", RandomUtils.nextInt(), new Candidate("artem_skrebets"), new AttributeTypes(10)),
+                new CandidateAttributes(41,  "KH1234123", RandomUtils.nextInt(), new Candidate("artem_skrebets"), new AttributeTypes(11)),
+                new CandidateAttributes(42,  "Minsk", RandomUtils.nextInt(), new Candidate("artem_skrebets"), new AttributeTypes(12)),
+                new CandidateAttributes(43,  "Belarussian", RandomUtils.nextInt(), new Candidate("artem_skrebets"), new AttributeTypes(13)),
+                new CandidateAttributes(44,  "1", RandomUtils.nextInt(), new Candidate("artem_skrebets"), new AttributeTypes(14)),
+                new CandidateAttributes(45,  "https://t.me/artem_skrebets", RandomUtils.nextInt(), new Candidate("artem_skrebets"), new AttributeTypes(15))
+        ));
+        List<CandidateAttributes> yauheni_vozny_clone = new ArrayList<>(List.of(
+                new CandidateAttributes(46,  "+375295141627", RandomUtils.nextInt(), new Candidate("yauheni_vozny_clone"), new AttributeTypes(1)),
+                new CandidateAttributes(47,  "https://twitter.com/zhenekns", RandomUtils.nextInt(), new Candidate("yauheni_vozny_clone"), new AttributeTypes(2)),
+                new CandidateAttributes(48,  "https://linkedin.com/zhenekns", RandomUtils.nextInt(), new Candidate("yauheni_vozny_clone"), new AttributeTypes(3)),
+                new CandidateAttributes(49,  "https://github.com/zhenekq", RandomUtils.nextInt(), new Candidate("yauheni_vozny_clone"), new AttributeTypes(4)),
+                new CandidateAttributes(50,  "Mifort", RandomUtils.nextInt(), new Candidate("yauheni_vozny_clone"), new AttributeTypes(5)),
+                new CandidateAttributes(51,  "09.01.2002", RandomUtils.nextInt(), new Candidate("yauheni_vozny_clone"), new AttributeTypes(6)),
+                new CandidateAttributes(52,  "Yauheni", RandomUtils.nextInt(), new Candidate("yauheni_vozny_clone"), new AttributeTypes(7)),
+                new CandidateAttributes(53,  "Vozny", RandomUtils.nextInt(), new Candidate("yauheni_vozny_clone"), new AttributeTypes(8)),
+                new CandidateAttributes(54,  "zhenek02ss@gmail.com", RandomUtils.nextInt(), new Candidate("yauheni_vozny_clone"), new AttributeTypes(9)),
+                new CandidateAttributes(55,  "https://facebook.com/zhenekns", RandomUtils.nextInt(), new Candidate("yauheni_vozny_clone"), new AttributeTypes(10)),
+                new CandidateAttributes(56,  "KH9083221", RandomUtils.nextInt(), new Candidate("yauheni_vozny_clone"), new AttributeTypes(11)),
+                new CandidateAttributes(57,  "Minsk", RandomUtils.nextInt(), new Candidate("yauheni_vozny_clone"), new AttributeTypes(12)),
+                new CandidateAttributes(58,  "Belarussian", RandomUtils.nextInt(), new Candidate("yauheni_vozny_clone"), new AttributeTypes(13)),
+                new CandidateAttributes(59,  "1", RandomUtils.nextInt(), new Candidate("yauheni_vozny_clone"), new AttributeTypes(14)),
+                new CandidateAttributes(59,  "https://t.me/zhenekns", RandomUtils.nextInt(), new Candidate("yauheni_vozny_clone"), new AttributeTypes(15))
+        ));
+
+        allAttributes.addAll(yauheni_vozny);
+        allAttributes.addAll(uliana_fomina);
+        allAttributes.addAll(artem_skrebets);
+        allAttributes.addAll(yauheni_vozny_clone);
+
+        return allAttributes;
     }
 
     public List<CandidateUpdate> initializeCandidateUpdates(){
