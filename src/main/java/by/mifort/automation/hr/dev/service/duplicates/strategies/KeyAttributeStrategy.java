@@ -1,12 +1,16 @@
 package by.mifort.automation.hr.dev.service.duplicates.strategies;
 
+import by.mifort.automation.hr.dev.dto.FilterDto;
 import by.mifort.automation.hr.dev.entity.Candidate;
 import by.mifort.automation.hr.dev.entity.CandidateAttributes;
 import by.mifort.automation.hr.dev.repository.CandidateAttributesRepository;
+import by.mifort.automation.hr.dev.service.CandidateService;
 import by.mifort.automation.hr.dev.service.duplicates.DuplicatesStrategy;
 import by.mifort.automation.hr.dev.service.duplicates.DuplicatesStrategyName;
+import by.mifort.automation.hr.dev.service.duplicates.comparator.KeyAttributeComparator;
 import by.mifort.automation.hr.dev.service.duplicates.comparator.SingleAttributeComparator;
 import by.mifort.automation.hr.dev.service.duplicates.separate.SeparateService;
+import liquibase.pro.packaged.F;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -15,25 +19,18 @@ import java.util.List;
 @Component
 public class KeyAttributeStrategy implements DuplicatesStrategy {
 
-    private final CandidateAttributesRepository repository;
+    private final CandidateService service;
     private final SeparateService separateService;
 
-    public KeyAttributeStrategy(CandidateAttributesRepository repository, SeparateService separateService) {
-        this.repository = repository;
+    public KeyAttributeStrategy(CandidateService service, SeparateService separateService) {
+        this.service = service;
         this.separateService = separateService;
     }
 
     @Override
     public List<List<Candidate>> getDuplicates() {
-        List<CandidateAttributes> email = repository.findCandidateAttributesByAttributeTypesName(DuplicatesStrategyName.EMAIL.name());
-        List<CandidateAttributes> facebook_id = repository.findCandidateAttributesByAttributeTypesName(DuplicatesStrategyName.FACEBOOKID.name());
-        List<CandidateAttributes> github_id = repository.findCandidateAttributesByAttributeTypesName(DuplicatesStrategyName.GITHUBID.name());
-        List<CandidateAttributes> instagram = repository.findCandidateAttributesByAttributeTypesName(DuplicatesStrategyName.INSTAGRAM.name());
-        List<CandidateAttributes> linkedin = repository.findCandidateAttributesByAttributeTypesName(DuplicatesStrategyName.LINKEDIN.name());
-        List<CandidateAttributes> phone = repository.findCandidateAttributesByAttributeTypesName(DuplicatesStrategyName.PHONE.name());
-        List<CandidateAttributes> telegram = repository.findCandidateAttributesByAttributeTypesName(DuplicatesStrategyName.TELEGRAM.name());
-
-        return push(email, linkedin, facebook_id, github_id, phone, telegram);
+        List<Candidate> candidates = new ArrayList<>(service.getAll(new FilterDto(1, Integer.MAX_VALUE)));
+        return separateService.separateBySeveralAttributes(candidates, new KeyAttributeComparator());
     }
 
     @Override
