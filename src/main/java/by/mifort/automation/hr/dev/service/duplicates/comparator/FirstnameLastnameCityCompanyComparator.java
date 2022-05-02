@@ -29,10 +29,17 @@ public class FirstnameLastnameCityCompanyComparator implements Comparator<Candid
         String secondCandidateCompany = DuplicatesStrategyUtils.setValues(o2Attr, COMPANY_IN_DB);
         String secondCandidateCity = DuplicatesStrategyUtils.setValues(o2Attr, CITY_IN_DB);
 
-        if(firstCandidateFirstname.equals(secondCandidateFirstname) &&
-                firstCandidateLastname.equals(secondCandidateLastname) &&
-                firstCandidateCompany.equals(secondCandidateCompany) &&
-                firstCandidateCity.equals(secondCandidateCity)){
+        boolean isFirstnameEquals = firstCandidateFirstname.equals(secondCandidateFirstname) &&
+                !firstCandidateFirstname.isEmpty();
+        boolean isLastnameEquals = firstCandidateLastname.equals(secondCandidateLastname) &&
+                !firstCandidateLastname.isEmpty();
+        boolean isCompanyEquals = firstCandidateCompany.equals(secondCandidateCompany) &&
+                !firstCandidateCompany.isEmpty();
+        boolean isCityEquals = firstCandidateCity.equals(secondCandidateCity) &&
+                !firstCandidateCity.isEmpty();
+        if(isFirstnameEquals && isLastnameEquals &&
+                isCompanyEquals && isCityEquals){
+            System.out.println("EQUALS");
             return 0;
         }
         return -1;

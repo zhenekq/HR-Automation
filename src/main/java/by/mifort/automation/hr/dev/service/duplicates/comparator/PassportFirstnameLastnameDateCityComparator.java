@@ -32,11 +32,19 @@ public class PassportFirstnameLastnameDateCityComparator implements Comparator<C
         String secondCandidateCity = DuplicatesStrategyUtils.setValues(o2Attr, CITY_IN_DB);
         String secondCandidatePassport = DuplicatesStrategyUtils.setValues(o2Attr, PASSPORT_IN_DB);
 
-        if(firstCandidateFirstname.equals(secondCandidateFirstname) &&
-                firstCandidateLastname.equals(secondCandidateLastname) &&
-                firstCandidateDate.equals(secondCandidateDate) &&
-                firstCandidateCity.equals(secondCandidateCity) &&
-                firstCandidatePassport.equals(secondCandidatePassport)){
+        boolean isFirstnameEquals = firstCandidateFirstname.equals(secondCandidateFirstname) &&
+                !firstCandidateFirstname.isEmpty();
+        boolean isLastnameEquals = firstCandidateLastname.equals(secondCandidateLastname) &&
+                !firstCandidateLastname.isEmpty();
+        boolean isDateEquals = firstCandidateDate.equals(secondCandidateDate) &&
+                !firstCandidateDate.isEmpty();
+        boolean isCityEquals = firstCandidateCity.equals(secondCandidateCity) &&
+                !firstCandidateCity.isEmpty();
+        boolean isPassportEquals = firstCandidatePassport.equals(secondCandidatePassport) &&
+                !firstCandidatePassport.isEmpty();
+
+        if(isFirstnameEquals && isLastnameEquals &&
+                isDateEquals && isCityEquals && isPassportEquals){
             return 0;
         }
         return -1;

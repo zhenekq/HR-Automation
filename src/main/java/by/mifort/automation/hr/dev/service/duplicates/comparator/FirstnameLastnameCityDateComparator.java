@@ -29,10 +29,17 @@ public class FirstnameLastnameCityDateComparator implements Comparator<Candidate
         String secondCandidateDate = DuplicatesStrategyUtils.setValues(o2Attr, DATE_OF_BIRTH_IN_DB);
         String secondCandidateCity = DuplicatesStrategyUtils.setValues(o2Attr, CITY_IN_DB);
 
-        if(firstCandidateFirstname.equals(secondCandidateFirstname) &&
-                firstCandidateLastname.equals(secondCandidateLastname) &&
-                firstCandidateDate.equals(secondCandidateDate) &&
-                firstCandidateCity.equals(secondCandidateCity)){
+        boolean isFirstnameEquals = firstCandidateFirstname.equals(secondCandidateFirstname) &&
+                !firstCandidateFirstname.isEmpty();
+        boolean isLastnameEquals = firstCandidateLastname.equals(secondCandidateLastname) &&
+                !firstCandidateLastname.isEmpty();
+        boolean isDateEquals = firstCandidateDate.equals(secondCandidateDate) &&
+                !firstCandidateDate.isEmpty();
+        boolean isCityEquals = firstCandidateCity.equals(secondCandidateCity) &&
+                !firstCandidateCity.isEmpty();
+
+        if(isFirstnameEquals && isLastnameEquals &&
+                isDateEquals && isCityEquals){
             return 0;
         }
         return -1;

@@ -38,11 +38,4 @@ public class KeyAttributeStrategy implements DuplicatesStrategy {
         return DuplicatesStrategyName.KEY_STRATEGY;
     }
 
-    private List<List<Candidate>> push(List<CandidateAttributes>... attributes){
-        List<List<Candidate>> result = new ArrayList<>();
-        for(int i=0;i<attributes.length;i++){
-            result.addAll(separateService.separateByOneAttribute(attributes[i], new SingleAttributeComparator()));
-        }
-        return result;
-    }
 }
