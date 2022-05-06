@@ -59,3 +59,7 @@ databaseChangeLog:
       file: db/changelog/changeset/fill-attribute-types-new-values.yaml
   - include:
       file: db/changelog/changeset/update-types-data-attribute-types-table.yaml
+  - include:
+      file: db/changelog/changeset/add-to-people-attributes-delete-from-attrubute-types-archived.yaml
+  - include:
+      file: db/changelog/changeset/change-is-archived-name-people-attributes.yaml

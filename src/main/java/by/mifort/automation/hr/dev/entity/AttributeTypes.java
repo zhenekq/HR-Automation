@@ -36,10 +36,6 @@ public class AttributeTypes {
     @Column(name = "isidentifier")
     private Boolean isIdentifier;
 
-    @Column(name = "isarchived")
-    @Value("false")
-    private Boolean isArchived;
-
     @OneToMany(mappedBy = "attributeTypes")
     private List<CandidateAttributes> candidateAttributes;
 
@@ -54,21 +50,19 @@ public class AttributeTypes {
         this.name = name;
     }
 
-    public AttributeTypes(Integer id, String name, String basicType, String validation, Boolean isIdentifier, Boolean isArchived) {
+    public AttributeTypes(Integer id, String name, String basicType, String validation, Boolean isIdentifier) {
         this.id = id;
         this.name = name;
         this.basicType = basicType;
         this.validation = validation;
         this.isIdentifier = isIdentifier;
-        this.isArchived = isArchived;
     }
 
-    public AttributeTypes(String name, String basicType, String validation, Boolean isIdentifier, Boolean isArchived) {
+    public AttributeTypes(String name, String basicType, String validation, Boolean isIdentifier) {
         this.name = name;
         this.basicType = basicType;
         this.validation = validation;
         this.isIdentifier = isIdentifier;
-        this.isArchived = isArchived;
     }
 
     public Integer getId() {
@@ -111,13 +105,6 @@ public class AttributeTypes {
         isIdentifier = identifier;
     }
 
-    public Boolean getArchived() {
-        return isArchived;
-    }
-
-    public void setArchived(Boolean archived) {
-        isArchived = archived;
-    }
 
     @JsonIgnore
     public List<CandidateAttributes> getCandidateAttributes() {
@@ -146,7 +133,6 @@ public class AttributeTypes {
         sb.append(", basicType='").append(basicType).append('\'');
         sb.append(", validation='").append(validation).append('\'');
         sb.append(", isIdentifier=").append(isIdentifier);
-        sb.append(", isArchived=").append(isArchived);
         sb.append(", candidateAttributes=").append(candidateAttributes);
         sb.append('}');
         return sb.toString();

@@ -31,6 +31,10 @@ public class AsserDifferencesCandidateListAttributes {
                 dbBody = db.get(j);
                 Integer dbBodyId = dbBody.getAttributeTypes().getId();
                 if(dbBodyId.equals(dbDtoId)){
+                    dbBody.setValueSource(dbDto.getValueSource());
+                    dbBody.setValue(dbDto.getValue());
+                    dbBody.setAttributeTypes(dbDto.getAttributeTypes());
+                    resultDto.add(dbBody);
                     isExists = true;
                     break;
                 }

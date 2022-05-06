@@ -47,21 +47,21 @@ public class H2Database {
 
     public List<AttributeTypes> initializeAttributeTypes(){
         return List.of(
-                new AttributeTypes(1, "phone","string", RandomString.make(), true, Boolean.FALSE),
-                new AttributeTypes(2, "twitter","string", RandomString.make(), true, Boolean.FALSE),
-                new AttributeTypes(3, "linkedin","string", RandomString.make(), true, Boolean.FALSE),
-                new AttributeTypes(4, "githubid","string", RandomString.make(), true, Boolean.FALSE),
-                new AttributeTypes(5, "company","string", RandomString.make(), false, Boolean.FALSE),
-                new AttributeTypes(6, "date_of_birth","date", RandomString.make(), false, Boolean.FALSE),
-                new AttributeTypes(7, "firstname","string", RandomString.make(), false, Boolean.TRUE),
-                new AttributeTypes(8, "lastname","string", RandomString.make(), false, Boolean.FALSE),
-                new AttributeTypes(9, "email","string", RandomString.make(), true, Boolean.FALSE),
-                new AttributeTypes(10, "facebookid","string", RandomString.make(), false, Boolean.FALSE),
-                new AttributeTypes(11, "passport_number","string", RandomString.make(), false, Boolean.FALSE),
-                new AttributeTypes(12, "city","string", RandomString.make(), false, Boolean.FALSE),
-                new AttributeTypes(13, "cityzenship","string", RandomString.make(), false, Boolean.FALSE),
-                new AttributeTypes(14, "gender","boolean", RandomString.make(), false, Boolean.FALSE),
-                new AttributeTypes(15, "telegram","string", RandomString.make(), true, Boolean.FALSE)
+                new AttributeTypes(1, "phone","string", RandomString.make(), true),
+                new AttributeTypes(2, "twitter","string", RandomString.make(), true),
+                new AttributeTypes(4, "githubid","string", RandomString.make(), true),
+                new AttributeTypes(5, "company","string", RandomString.make(), false),
+                new AttributeTypes(6, "date_of_birth","date", RandomString.make(), false),
+                new AttributeTypes(7, "firstname","string", RandomString.make(), false),
+                new AttributeTypes(8, "lastname","string", RandomString.make(), false),
+                new AttributeTypes(9, "email","string", RandomString.make(), true),
+                new AttributeTypes(10, "facebookid","string", RandomString.make(), false),
+                new AttributeTypes(11, "passport_number","string", RandomString.make(), false),
+                new AttributeTypes(12, "city","string", RandomString.make(), false),
+                new AttributeTypes(13, "cityzenship","string", RandomString.make(), false),
+                new AttributeTypes(14, "gender","boolean", RandomString.make(), false),
+                new AttributeTypes(15, "telegram","string", RandomString.make(), true),
+                new AttributeTypes(3, "linkedin","string", RandomString.make(), true)
         );
     }
 
@@ -194,7 +194,6 @@ public class H2Database {
          return new AttributeTypes(RandomString.make(),
                                    RandomString.make(),
                                    RandomString.make(),
-                                   RandomUtils.nextBoolean(),
                                    RandomUtils.nextBoolean());
     }
 

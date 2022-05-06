@@ -163,9 +163,7 @@ class AttributeTypesControllerTest {
     @DisplayName("Check archive exists attribute type by id")
     void checkAttributeTypeArchive_Exists(){
         AttributeTypes expectedAttribute = this.attributeTypes.get(0);
-        expectedAttribute.setArchived(Boolean.TRUE);
         AttributeTypesDto actualAttribute = controller.deleteByAttributeId(expectedAttribute.getId());
-        assertEquals(expectedAttribute.getArchived(), actualAttribute.getArchived());
     }
 
     @Test

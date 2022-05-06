@@ -66,7 +66,7 @@ public class CandidateAttributesServiceImpl implements CandidateAttributesServic
         if(validator.isValidParams(attributes)){
             List<CandidateAttributes> attr = AsserDifferencesCandidateListAttributes.assertDiff(
                     candidateAttributes, attributes);
-            return repository.saveAll(attr);
+            return attr;
         }
         throw new IllegalArgumentException("Entity params couldn't be nullable!");
     }
