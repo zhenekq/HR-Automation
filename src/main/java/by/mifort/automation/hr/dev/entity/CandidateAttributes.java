@@ -54,11 +54,12 @@ public class CandidateAttributes {
         this.valueSource = valueSource;
     }
 
-    public CandidateAttributes(String value, Integer valueSource, Candidate candidate, AttributeTypes attributeTypes) {
+    public CandidateAttributes(String value, Integer valueSource, Candidate candidate, AttributeTypes attributeTypes, Boolean isArchived) {
         this.value = value;
         this.valueSource = valueSource;
         this.candidate = candidate;
         this.attributeTypes = attributeTypes;
+        this.isArchived = isArchived;
     }
 
     public Integer getId() {

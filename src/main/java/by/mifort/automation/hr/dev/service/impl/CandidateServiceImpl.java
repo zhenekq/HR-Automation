@@ -15,9 +15,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.*;
 
 @Service
 public class CandidateServiceImpl implements CandidateService {
@@ -58,32 +60,37 @@ public class CandidateServiceImpl implements CandidateService {
     @Transactional
     public Candidate create(Candidate candidate) {
         if(validator.isValidParams(candidate)){
-            candidate = candidateRepository
+            boolean isCandidateExists = candidateRepository
                     .findById(candidate.getId())
-                    .orElse(candidateRepository.save(candidate));
-            candidateAttributesRepository.saveAll(emptyList(candidate));
-            return candidate;
+                    .isPresent();
+            if(!isCandidateExists){
+                candidateRepository.save(candidate);
+                candidateAttributesRepository.saveAll(emptyList(candidate));
+                return candidate;
+            }else{
+                throw new EntityExistsException("Candidate with id: " + candidate.getId() + " exists!");
+            }
         }
         throw new IllegalArgumentException("Fields cannot be nullable");
     }
 
     private List<CandidateAttributes> emptyList(Candidate candidate){
         return new ArrayList<>(List.of(
-                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(1)),
-                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(2)),
-                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(3)),
-                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(4)),
-                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(5)),
-                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(6)),
-                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(7)),
-                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(8)),
-                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(9)),
-                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(10)),
-                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(11)),
-                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(12)),
-                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(13)),
-                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(14)),
-                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(15))
+                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(1), Boolean.FALSE),
+                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(2), Boolean.FALSE),
+                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(3), Boolean.FALSE),
+                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(4), Boolean.FALSE),
+                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(5), Boolean.FALSE),
+                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(6), Boolean.FALSE),
+                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(7), Boolean.FALSE),
+                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(8), Boolean.FALSE),
+                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(9), Boolean.FALSE),
+                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(10), Boolean.FALSE),
+                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(11), Boolean.FALSE),
+                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(12), Boolean.FALSE),
+                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(13), Boolean.FALSE),
+                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(14), Boolean.FALSE),
+                new CandidateAttributes("", 0,new Candidate(candidate.getId()), new AttributeTypes(15), Boolean.FALSE)
         ));
     }
 }
