@@ -3,6 +3,7 @@ package by.mifort.automation.hr.dev.controller;
 import by.mifort.automation.hr.dev.dto.CandidateAttributesDto;
 import by.mifort.automation.hr.dev.entity.CandidateAttributes;
 import by.mifort.automation.hr.dev.service.CandidateAttributesService;
+import by.mifort.automation.hr.dev.util.converter.EntityConverter;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,12 @@ import java.util.List;
 public class CandidateAttributeController {
 
     private final CandidateAttributesService service;
+    private final EntityConverter<CandidateAttributes, CandidateAttributesDto> converter;
 
     @Autowired
-    public CandidateAttributeController(CandidateAttributesService service) {
+    public CandidateAttributeController(CandidateAttributesService service, EntityConverter<CandidateAttributes, CandidateAttributesDto> converter) {
         this.service = service;
+        this.converter = converter;
     }
 
     /**
@@ -38,7 +41,8 @@ public class CandidateAttributeController {
     @ApiOperation("Get attributes of candidate by his id")
     @GetMapping
     public List<CandidateAttributesDto> getByCandidateId(@PathVariable String id) {
-        return service.getByCandidateId(id);
+        List<CandidateAttributes> candidateAttributes = service.getByCandidateId(id);
+        return converter.convertToListEntityDto(candidateAttributes);
     }
 
     /**
@@ -51,10 +55,10 @@ public class CandidateAttributeController {
      */
     @ApiOperation("Create new attributes with candidate by his id")
     @PostMapping
-    public String createByCandidateId(@PathVariable String id,
-                                      @RequestBody CandidateAttributes attributes,
-                                      @RequestParam Integer type) {
-        service.createByCandidateIdAndAttributeTypeId(id, type, attributes);
-        return id;
+    public CandidateAttributesDto createByCandidateId(@PathVariable String id,
+                                                      @RequestBody CandidateAttributes attributes,
+                                                      @RequestParam Integer type) {
+        CandidateAttributes candidateAttributes = service.createByCandidateIdAndAttributeTypeId(id, type, attributes);
+        return converter.convertToEntityDto(candidateAttributes);
     }
 }

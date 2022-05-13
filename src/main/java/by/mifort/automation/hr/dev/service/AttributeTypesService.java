@@ -2,6 +2,7 @@ package by.mifort.automation.hr.dev.service;
 
 import by.mifort.automation.hr.dev.dto.AttributeTypesDto;
 import by.mifort.automation.hr.dev.dto.FilterDto;
+import by.mifort.automation.hr.dev.entity.AttributeTypes;
 
 import java.util.List;
 
@@ -20,28 +21,28 @@ public interface AttributeTypesService {
      * @return List of all exists paginated attribute types
      * @see FilterDto
      */
-    List<AttributeTypesDto> getAll(FilterDto filterDto);
+    List<AttributeTypes> getAll(FilterDto filterDto);
 
     /**
      * Create new attribute type in database
      *
-     * @param dto body of our attribute type
+     * @param attributeTypes body of our attribute type
      */
-    AttributeTypesDto create(AttributeTypesDto dto);
+    AttributeTypes create(AttributeTypes attributeTypes);
 
     /**
      * Update exists attribute type
      *
-     * @param id  attribute's type identifier
-     * @param dto body of attribute's type
+     * @param id             attribute's type identifier
+     * @param attributeTypes body of attribute's type
      */
-    AttributeTypesDto updateById(Integer id, AttributeTypesDto dto);
+    AttributeTypes updateById(Integer id, AttributeTypesDto attributeTypes);
 
     /**
      * Archive exists attribute's type
      *
      * @param id attribute's type identifier
      */
-    AttributeTypesDto archiveById(Integer id);
+    AttributeTypes archiveById(Integer id);
 
 }

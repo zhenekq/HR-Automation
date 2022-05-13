@@ -26,14 +26,14 @@ public class CandidateAttributesServiceImpl implements CandidateAttributesServic
     }
 
     @Override
-    public List<CandidateAttributesDto> getByCandidateId(String candidateId) {
+    public List<CandidateAttributes> getByCandidateId(String candidateId) {
         List<CandidateAttributes> attributes = repository.findCandidateAttributesByCandidateId(candidateId);
-        return converter.convertToListEntityDto(attributes);
+        return attributes;
     }
 
     @Override
     @Transactional
-    public CandidateAttributesDto createByCandidateIdAndAttributeTypeId(String candidateId, Integer attributeTypeId, CandidateAttributes attributes) {
+    public CandidateAttributes createByCandidateIdAndAttributeTypeId(String candidateId, Integer attributeTypeId, CandidateAttributes attributes) {
         Candidate candidate = new Candidate();
         candidate.setId(candidateId);
         attributes.setCandidate(candidate);
@@ -41,6 +41,6 @@ public class CandidateAttributesServiceImpl implements CandidateAttributesServic
         types.setId(attributeTypeId);
         attributes.setAttributeTypes(types);
         repository.save(attributes);
-        return converter.convertToEntityDto(attributes);
+        return attributes;
     }
 }

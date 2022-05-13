@@ -1,8 +1,10 @@
 package by.mifort.automation.hr.dev.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.util.List;
@@ -34,6 +36,7 @@ public class AttributeTypes {
     private Boolean isIdentifier;
 
     @Column(name = "isarchived")
+    @Value("false")
     private Boolean isArchived;
 
     @OneToMany(mappedBy = "attributeTypes")
@@ -98,6 +101,7 @@ public class AttributeTypes {
         isArchived = archived;
     }
 
+    @JsonIgnore
     public List<CandidateAttributes> getCandidateAttributes() {
         return candidateAttributes;
     }

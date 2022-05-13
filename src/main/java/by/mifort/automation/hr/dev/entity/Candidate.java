@@ -76,6 +76,10 @@ public class Candidate implements Serializable {
     public Candidate() {
     }
 
+    public Candidate(String id) {
+        this.id = id;
+    }
+
     public Candidate(String id, Timestamp lastContact, String status) {
         this.id = id;
         this.lastContact = lastContact;

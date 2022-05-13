@@ -2,7 +2,11 @@ package by.mifort.automation.hr.dev.controller;
 
 import by.mifort.automation.hr.dev.dto.CandidateDto;
 import by.mifort.automation.hr.dev.dto.FilterDto;
+import by.mifort.automation.hr.dev.entity.Candidate;
+import by.mifort.automation.hr.dev.entity.Keyword;
 import by.mifort.automation.hr.dev.service.CandidateService;
+import by.mifort.automation.hr.dev.service.KeywordService;
+import by.mifort.automation.hr.dev.util.converter.EntityConverter;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -22,13 +27,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/candidates")
 @Api("Candidate controller for searching and creating new")
+@Transactional
 public class CandidateController {
 
     private final CandidateService candidateService;
+    private final KeywordService keywordService;
+    private final EntityConverter<Candidate, CandidateDto> converter;
 
     @Autowired
-    public CandidateController(CandidateService candidateService) {
+    public CandidateController(CandidateService candidateService, KeywordService keywordService, EntityConverter<Candidate, CandidateDto> converter) {
         this.candidateService = candidateService;
+        this.keywordService = keywordService;
+        this.converter = converter;
     }
 
     /**
@@ -47,7 +57,8 @@ public class CandidateController {
         if (pageNumber == null || pageSize == null || pageNumber <= 0 || pageSize <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parameters cannot be nullable");
         }
-        return candidateService.getAll(filterDto);
+        List<Candidate> candidateList = candidateService.getAll(filterDto);
+        return converter.convertToListEntityDto(candidateList);
     }
 
     /**
@@ -59,7 +70,8 @@ public class CandidateController {
     @ApiOperation("Get full information about user by id")
     @GetMapping("/{id}")
     public CandidateDto getById(@PathVariable String id) {
-        return candidateService.getById(id);
+        Candidate candidate = candidateService.getById(id);
+        return converter.convertToEntityDto(candidate);
     }
 
     /**
@@ -70,8 +82,16 @@ public class CandidateController {
      */
     @ApiOperation("Create new candidate")
     @PostMapping
-    public String create(@RequestBody CandidateDto candidate) {
-        candidateService.create(candidate);
-        return candidate.getId();
+    public CandidateDto create(@RequestBody Candidate candidate) {
+        Candidate createdCandidate = candidateService.create(candidate);
+        return converter.convertToEntityDto(createdCandidate);
+    }
+
+    @ApiOperation("Connect keywords to candidate")
+    @PostMapping("/{id}")
+    public List<Keyword> addKeywords(@PathVariable String id,
+                                     FilterDto filterDto){
+        Candidate candidateDto = candidateService.getById(id);
+        return keywordService.createByCandidateId(id, filterDto);
     }
 }
