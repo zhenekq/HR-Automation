@@ -1,7 +1,10 @@
 package by.mifort.automation.hr.dev.service.duplicates;
 
+import by.mifort.automation.hr.dev.entity.Candidate;
 import by.mifort.automation.hr.dev.entity.CandidateAttributes;
+
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -13,33 +16,14 @@ import java.util.List;
  */
 public class DuplicatesStrategyUtils {
 
-    private DuplicatesStrategyUtils(){}
-
-    /**
-     * @author yauheni_vozny
-     * @return Arrays of arrays duplicates by one similar attribute
-     */
-    public static List<List<CandidateAttributes>> separate(List<CandidateAttributes> attributes){
-        List<List<CandidateAttributes>> result = new ArrayList<>();
+    public static String setValues(List<CandidateAttributes> attributes, String type){
+        String res = "";
         for(int i=0;i<attributes.size();i++){
-            List<CandidateAttributes> logCandidates = new ArrayList<>();
-            logCandidates.add(attributes.get(i));
-            for(int j=i+1;j<attributes.size();j++){
-                if(attributes.get(i).getValue().equals(attributes.get(j).getValue()) && i!=j){
-                    logCandidates.add(attributes.get(j));
-                    i++;
-                }
-            }
-            result.add(logCandidates);
-        }
-        return result;
-    }
-
-    public static void isEnumContainsValue(String value){
-        for(DuplicatesStrategyName name: DuplicatesStrategyName.values()){
-            if(!name.name().equals(value)){
-                throw new IllegalArgumentException("Cannot find strategy like this");
+            if(attributes.get(i).getAttributeTypes().getName().equals(type)){
+                res = attributes.get(i).getValue();
+                break;
             }
         }
+        return res;
     }
 }

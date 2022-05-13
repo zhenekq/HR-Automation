@@ -60,7 +60,7 @@ public class Candidate {
      *
      * @see CandidateAttributes
      */
-    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<CandidateAttributes> attributes;
 
 

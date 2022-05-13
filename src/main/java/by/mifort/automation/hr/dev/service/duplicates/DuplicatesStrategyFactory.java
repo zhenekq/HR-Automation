@@ -3,6 +3,7 @@ package by.mifort.automation.hr.dev.service.duplicates;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,7 +24,7 @@ public class DuplicatesStrategyFactory {
     }
 
     public DuplicatesStrategy findStrategy(DuplicatesStrategyName strategyName){
-        DuplicatesStrategyUtils.isEnumContainsValue(strategyName.name());
+        isStrategyExists(strategyName);
         return duplicatesStrategies.get(strategyName);
     }
 
@@ -32,6 +33,19 @@ public class DuplicatesStrategyFactory {
         strategies.forEach(
                 strategy -> duplicatesStrategies.put(strategy.getStrategyName(), strategy)
         );
+    }
+
+    private void isStrategyExists(DuplicatesStrategyName strategyName){
+        boolean isExists = false;
+        for(DuplicatesStrategyName strategy: DuplicatesStrategyName.values()){
+            if(strategy.equals(strategyName)){
+                isExists = true;
+                break;
+            }
+        }
+        if(!isExists){
+            throw new IllegalArgumentException("Strategy with name: " + strategyName.name() + " not exists!");
+        }
     }
 
 }

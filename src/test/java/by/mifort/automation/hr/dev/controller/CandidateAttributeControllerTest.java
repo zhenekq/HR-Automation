@@ -1,11 +1,7 @@
-///*
 //package by.mifort.automation.hr.dev.controller;
 //
 //import by.mifort.automation.hr.dev.db.H2Database;
-//import by.mifort.automation.hr.dev.dto.AttributeTypesDto;
 //import by.mifort.automation.hr.dev.dto.CandidateAttributesDto;
-//import by.mifort.automation.hr.dev.entity.AttributeTypes;
-//import by.mifort.automation.hr.dev.entity.Candidate;
 //import by.mifort.automation.hr.dev.entity.CandidateAttributes;
 //import by.mifort.automation.hr.dev.util.converter.EntityConverter;
 //import net.bytebuddy.utility.RandomString;
@@ -19,6 +15,7 @@
 //import org.springframework.test.context.junit.jupiter.SpringExtension;
 //
 //import javax.persistence.EntityNotFoundException;
+//import java.util.ArrayList;
 //import java.util.Collections;
 //import java.util.List;
 //
@@ -50,19 +47,28 @@
 //        h2Database.initializeCandidates().forEach(candidateController::create);
 //        h2Database.initializeAttributeTypes().forEach(typesController::create);
 //        attributesList = h2Database.initializeCandidateAttributes();
-//        attributesList
-//                .forEach((p) -> controller.createByCandidateId(p.getCandidate().getId(), p, p.getAttributeTypes().getId()));
+//        List<CandidateAttributes> yauheni_attributes = attributesList.subList(0, 14);
+//        controller.createByCandidateId("yauheni_vozny", yauheni_attributes);
+//        List<CandidateAttributes> uliana_attributes = h2Database.initializeCandidateAttributes().subList(15, 29);
+//        controller.createByCandidateId("uliana_fomina", uliana_attributes);
+//
+//        List<CandidateAttributes> artem_attributes = h2Database.initializeCandidateAttributes().subList(30, 44);
+//        controller.createByCandidateId("artem_skrebets", artem_attributes);
+//
+//        List<CandidateAttributes> yauheni_clone_attributes = h2Database.initializeCandidateAttributes().subList(45, 59);
+//        controller.createByCandidateId("yauheni_vozny_clone", yauheni_clone_attributes);
+//
+//        List<CandidateAttributes> vladimir_zelmanchuk = h2Database.initializeCandidateAttributes().subList(60, 74);
+//        controller.createByCandidateId("vladimir_zelmanchuk", vladimir_zelmanchuk);
 //    }
 //
 //
 //    @Test
 //    @DisplayName("Check candidate attributes by identifier exists")
 //    void checkCandidateAttributesById_ExistsCandidate() {
-//        List<CandidateAttributes> attributes = List.of(
-//                attributesList.get(0),
-//                attributesList.get(5)
-//        );
+//        List<CandidateAttributes> attributes = attributesList.subList(0, 14);
 //        List<CandidateAttributesDto> actualAttributes = controller.getByCandidateId("yauheni_vozny");
+//        actualAttributes.forEach(name -> name.setName(null));
 //        List<CandidateAttributesDto> expectedAttributes = converter.convertToListEntityDto(attributes);
 //
 //        assertEquals(actualAttributes, expectedAttributes);
@@ -72,8 +78,8 @@
 //    @DisplayName("Check candidate attributes by identifier exists not equals")
 //    void checkCandidateAttributesById_ExistsCandidate_Fake() {
 //        List<CandidateAttributes> attributes = List.of(
-//                attributesList.get(1),
-//                attributesList.get(3)
+//                attributesList.get(0),
+//                attributesList.get(15)
 //        );
 //        List<CandidateAttributesDto> actualAttributes = controller.getByCandidateId("yauheni_vozny");
 //        List<CandidateAttributesDto> expectedAttributes = converter.convertToListEntityDto(attributes);
@@ -99,25 +105,15 @@
 //    }
 //
 //    @Test
-//    @DisplayName("Create candidate attribute by identifier exists and exists type")
-//    void checkCandidateAttributeCreateById_CandidateExists_AttributeTypeExists(){
-//        String existCandidateId = "yauheni_vozny";
-//        Integer attributeType = 2;
-//        CandidateAttributes createAttribute = h2Database.getCandidateAttributesWithRandomValues(existCandidateId, attributeType);
-//        CandidateAttributesDto actualAttribute = controller.createByCandidateId(existCandidateId, createAttribute, attributeType);
-//        CandidateAttributesDto expectedAttribute = converter.convertToEntityDto(createAttribute);
-//
-//        assertEquals(actualAttribute, expectedAttribute);
-//    }
-//
-//    @Test
 //    @DisplayName("Create candidate attribute by identifier not exists and exists type")
 //    void checkCandidateAttributeCreateById_CandidateNotExists_AttributeTypeExists(){
 //        String existCandidateId = RandomString.make();
 //        Integer attributeType = 2;
-//        CandidateAttributes createAttribute = h2Database.getCandidateAttributesWithRandomValues(existCandidateId, attributeType);
+//        List<CandidateAttributes> createAttribute = new ArrayList<>();
+//        CandidateAttributes attributes = h2Database.getCandidateAttributesWithRandomValues(existCandidateId, attributeType);
+//        createAttribute.add(attributes);
 //        assertThrows(EntityNotFoundException.class,
-//                () -> controller.createByCandidateId(existCandidateId, createAttribute, attributeType),
+//                () -> controller.createByCandidateId(existCandidateId, createAttribute),
 //                "Candidate not found!");
 //    }
 //
@@ -126,9 +122,10 @@
 //    void checkCandidateAttributeCreateById_CandidateNotExists_AttributeTypeNotExists(){
 //        String existCandidateId = RandomString.make();
 //        Integer attributeType = Integer.MAX_VALUE;
-//        CandidateAttributes createAttribute = h2Database.getCandidateAttributesWithRandomValues(existCandidateId, attributeType);
+//        List<CandidateAttributes> createAttribute = new ArrayList<>();
+//        createAttribute.add(h2Database.getCandidateAttributesWithRandomValues(existCandidateId, attributeType));
 //        assertThrows(EntityNotFoundException.class,
-//                () -> controller.createByCandidateId(existCandidateId, createAttribute, attributeType),
+//                () -> controller.createByCandidateId(existCandidateId, createAttribute),
 //                "Attribute type not found!");
 //    }
 //
@@ -137,10 +134,12 @@
 //    void checkCandidateAttributeCreateById_CandidateNullableFields_AttributeTypeExists(){
 //        String existCandidateId = "yauheni_vozny";
 //        Integer attributeType = 1;
-//        CandidateAttributes createAttribute = h2Database.getCandidateAttributesWithRandomValues(existCandidateId, attributeType);
-//        createAttribute.setValue(null);
+//        List<CandidateAttributes> createAttribute = new ArrayList<>();
+//        CandidateAttributes attributes = h2Database.getCandidateAttributesWithRandomValues(existCandidateId, attributeType);;
+//        attributes.setValue(null);
+//        createAttribute.add(attributes);
 //        assertThrows(IllegalArgumentException.class,
-//                () -> controller.createByCandidateId(existCandidateId, createAttribute, attributeType),
+//                () -> controller.createByCandidateId(existCandidateId, createAttribute),
 //                "Fields cannot be nullable");
 //    }
-//}*/
+//}

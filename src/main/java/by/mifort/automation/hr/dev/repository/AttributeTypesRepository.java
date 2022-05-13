@@ -18,13 +18,6 @@ import java.util.List;
 @Repository
 public interface AttributeTypesRepository extends JpaRepository<AttributeTypes, Integer> {
     /**
-     * @param pageable settings to pagination
-     * @param archived is attribute archived
-     * @return Paginated information about attribute types
-     */
-    List<AttributeTypes> findAllByIsArchivedEquals(Pageable pageable, Boolean archived);
-
-    /**
      * @param name of attribute
      * @return Paginated information about attribute types
      */

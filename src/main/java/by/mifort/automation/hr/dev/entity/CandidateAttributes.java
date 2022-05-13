@@ -27,6 +27,9 @@ public class CandidateAttributes {
     @Column(name = "valuesource")
     private Integer valueSource;
 
+    @Column(name = "is_archived")
+    private Boolean isArchived;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private Candidate candidate;
@@ -51,6 +54,14 @@ public class CandidateAttributes {
         this.valueSource = valueSource;
     }
 
+    public CandidateAttributes(String value, Integer valueSource, Candidate candidate, AttributeTypes attributeTypes, Boolean isArchived) {
+        this.value = value;
+        this.valueSource = valueSource;
+        this.candidate = candidate;
+        this.attributeTypes = attributeTypes;
+        this.isArchived = isArchived;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -73,6 +84,14 @@ public class CandidateAttributes {
 
     public void setValueSource(Integer valueSource) {
         this.valueSource = valueSource;
+    }
+
+    public Boolean getIsArchived() {
+        return isArchived;
+    }
+
+    public void setIsArchived(Boolean isArchived) {
+        this.isArchived = isArchived;
     }
 
     @JsonIgnore
@@ -109,12 +128,14 @@ public class CandidateAttributes {
 
     @Override
     public String toString() {
-        return "CandidateAttributes{" +
-                "id=" + id +
-                ", value='" + value + '\'' +
-                ", valueSource=" + valueSource +
-                ", candidate=" + candidate +
-                ", attributeTypes=" + attributeTypes +
-                '}' + "\n";
+        final StringBuilder sb = new StringBuilder("CandidateAttributes{");
+        sb.append("id=").append(id);
+        sb.append(", value='").append(value).append('\'');
+        sb.append(", valueSource=").append(valueSource);
+        sb.append(", isArchived=").append(isArchived);
+        sb.append(", candidate=").append(candidate);
+        sb.append(", attributeTypes=").append(attributeTypes);
+        sb.append('}');
+        return sb.toString();
     }
 }

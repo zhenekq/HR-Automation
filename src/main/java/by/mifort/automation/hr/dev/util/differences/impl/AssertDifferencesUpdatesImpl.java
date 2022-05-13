@@ -11,6 +11,7 @@ import java.util.List;
 
 @Component
 public class AssertDifferencesUpdatesImpl implements AssertDifferencesUpdates {
+
     @Override
     public CommunicationHistory assertCommunicationHistoryAndDto(CommunicationHistory history, CommunicationHistoryDto historyDto) {
         if (historyDto.getComment() != null) {

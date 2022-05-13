@@ -17,6 +17,7 @@ public class CandidateAttributesDto {
     private String value;
     private Integer valueSource;
     private String name;
+    private Boolean isArchived;
 
     public CandidateAttributesDto() {
     }
@@ -53,6 +54,14 @@ public class CandidateAttributesDto {
         this.name = name;
     }
 
+    public Boolean getArchived() {
+        return isArchived;
+    }
+
+    public void setArchived(Boolean archived) {
+        isArchived = archived;
+    }
+
     @Override
     public boolean equals(Object o) {
         return EqualsBuilder.reflectionEquals(this, o);
@@ -70,6 +79,7 @@ public class CandidateAttributesDto {
         sb.append(", value='").append(value).append('\'');
         sb.append(", valueSource=").append(valueSource);
         sb.append(", name='").append(name).append('\'');
+        sb.append(", isArchived=").append(isArchived);
         sb.append('}');
         return sb.toString();
     }

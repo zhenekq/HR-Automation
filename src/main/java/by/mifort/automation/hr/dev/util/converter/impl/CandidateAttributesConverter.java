@@ -20,6 +20,7 @@ public class CandidateAttributesConverter implements EntityConverter<CandidateAt
         dto.setValue(attributes.getValue());
         dto.setValueSource(attributes.getValueSource());
         dto.setName(attributes.getAttributeTypes().getName());
+        dto.setArchived(attributes.getIsArchived());
         return dto;
     }
 

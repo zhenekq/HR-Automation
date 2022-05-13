@@ -7,6 +7,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,9 +21,22 @@ public class CandidateUpdateDto {
     private Integer id;
     private String source;
     private Timestamp updateDate;
-    private Map<String, String> changeSet;
+    private List<ChangeSet> changeSet;
 
     public CandidateUpdateDto() {
+    }
+
+    public CandidateUpdateDto(Integer id, String source, Timestamp updateDate, List<ChangeSet> changeSet) {
+        this.id = id;
+        this.source = source;
+        this.updateDate = updateDate;
+        this.changeSet = changeSet;
+    }
+
+    public CandidateUpdateDto(String source, Timestamp updateDate, List<ChangeSet> changeSet) {
+        this.source = source;
+        this.updateDate = updateDate;
+        this.changeSet = changeSet;
     }
 
     public Integer getId() {
@@ -49,13 +63,11 @@ public class CandidateUpdateDto {
         this.updateDate = updateDate;
     }
 
-    @JsonAnyGetter
-    public Map<String, String> getChangeSet() {
+    public List<ChangeSet> getChangeSet() {
         return changeSet;
     }
 
-    @JsonAnySetter
-    public void setChangeSet(Map<String, String> changeSet) {
+    public void setChangeSet(List<ChangeSet> changeSet) {
         this.changeSet = changeSet;
     }
 

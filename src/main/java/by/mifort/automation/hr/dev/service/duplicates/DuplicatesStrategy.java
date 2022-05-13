@@ -1,4 +1,5 @@
 package by.mifort.automation.hr.dev.service.duplicates;
+import by.mifort.automation.hr.dev.entity.Candidate;
 import by.mifort.automation.hr.dev.entity.CandidateAttributes;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  */
 public interface DuplicatesStrategy {
 
-    List<List<CandidateAttributes>> getDuplicates();
+    List<List<Candidate>> getDuplicates();
 
     DuplicatesStrategyName getStrategyName();
 }
