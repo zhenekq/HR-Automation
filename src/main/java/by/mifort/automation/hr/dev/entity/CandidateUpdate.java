@@ -1,16 +1,20 @@
 package by.mifort.automation.hr.dev.entity;
 
+import by.mifort.automation.hr.dev.dto.ChangeSet;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,7 +26,10 @@ import java.util.Map;
 
 @Entity
 @Table(name = "peopleupdates")
-@TypeDef(name = "json", typeClass = JsonStringType.class)
+@TypeDefs({
+        @TypeDef(name = "json", typeClass = JsonStringType.class),
+        @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class),
+})
 public class CandidateUpdate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,9 +41,9 @@ public class CandidateUpdate {
     @Column(name = "updatedate")
     private Timestamp updateDate;
 
+    @Type(type = "jsonb")
     @Column(name = "changeset", columnDefinition = "json")
-    @Type(type = "json")
-    private Map<String, String> changeSet;
+    private List<ChangeSet> changeSet;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -45,8 +52,15 @@ public class CandidateUpdate {
     public CandidateUpdate() {
     }
 
-    public CandidateUpdate(Integer id, String source, Timestamp updateDate, Map<String, String> changeSet, Candidate candidate) {
+    public CandidateUpdate(Integer id, String source, Timestamp updateDate, List<ChangeSet> changeSet, Candidate candidate) {
         this.id = id;
+        this.source = source;
+        this.updateDate = updateDate;
+        this.changeSet = changeSet;
+        this.candidate = candidate;
+    }
+
+    public CandidateUpdate(String source, Timestamp updateDate, List<ChangeSet> changeSet, Candidate candidate) {
         this.source = source;
         this.updateDate = updateDate;
         this.changeSet = changeSet;
@@ -78,11 +92,11 @@ public class CandidateUpdate {
     }
 
     @JsonAnyGetter
-    public Map<String, String> getChangeSet() {
+    public List<ChangeSet> getChangeSet() {
         return changeSet;
     }
 
-    public void setChangeSet(Map<String, String> changeSet) {
+    public void setChangeSet(List<ChangeSet> changeSet) {
         this.changeSet = changeSet;
     }
 
