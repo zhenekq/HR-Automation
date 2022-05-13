@@ -1,10 +1,12 @@
 package by.mifort.automation.hr.dev.util.converter.impl;
 
 import by.mifort.automation.hr.dev.dto.CandidateUpdateDto;
+import by.mifort.automation.hr.dev.dto.ChangeSet;
 import by.mifort.automation.hr.dev.entity.CandidateUpdate;
 import by.mifort.automation.hr.dev.util.converter.EntityConverter;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component

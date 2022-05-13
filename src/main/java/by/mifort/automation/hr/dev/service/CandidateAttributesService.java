@@ -25,8 +25,7 @@ public interface CandidateAttributesService {
      * Create new attributes with candidate
      *
      * @param candidateId     candidate's identifier
-     * @param attributes      body of attributes
-     * @param attributeTypeId attribute type identifier
+     * @param attributes      body of list attributes
      */
-    CandidateAttributes createByCandidateIdAndAttributeTypeId(String candidateId, Integer attributeTypeId, CandidateAttributes attributes);
+    List<CandidateAttributes> createByCandidateId(String candidateId, List<CandidateAttributes> attributes);
 }

@@ -53,3 +53,17 @@ databaseChangeLog:
       file: db/changelog/changeset/drop-merge-candidates-table.yaml
   - include:
       file: db/changelog/changeset/create-merge-candidates-table-new-version.yaml
+  - include:
+      file: db/changelog/changeset/fill-merge-fake-candidates.yaml
+  - include:
+      file: db/changelog/changeset/fill-attribute-types-new-values.yaml
+  - include:
+      file: db/changelog/changeset/update-types-data-attribute-types-table.yaml
+  - include:
+      file: db/changelog/changeset/add-to-people-attributes-delete-from-attrubute-types-archived.yaml
+  - include:
+      file: db/changelog/changeset/change-is-archived-name-people-attributes.yaml
+  - include:
+      file: db/changelog/changeset/change-column-names-att-types.yaml
+  - include:
+      file: db/changelog/changeset/i-dont-know-how-to-name.yaml

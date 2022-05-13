@@ -36,12 +36,7 @@ public class AttributeTypesServiceImpl implements AttributeTypesService {
         Integer page = filterDto.getPageNumber();
         Integer amount = filterDto.getPageSize();
         Pageable pageable = PageRequest.of(page - 1, amount);
-        if (filterDto.getIsArchived() == null || !filterDto.getIsArchived()) {
-            types = repository
-                    .findAllByIsArchivedEquals(pageable, Boolean.FALSE);
-            return types;
-        }
-        types = repository.findAllByIsArchivedEquals(pageable, Boolean.TRUE);
+        types = repository.findAll(pageable).stream().toList();
         return types;
     }
 
@@ -53,9 +48,6 @@ public class AttributeTypesServiceImpl implements AttributeTypesService {
 
     @Override
     public AttributeTypes create(AttributeTypes attributeTypes) {
-        if(attributeTypes.getArchived() == null){
-            attributeTypes.setArchived(Boolean.FALSE);
-        }
         if(validator.isValidParams(attributeTypes)) {
             repository.save(attributeTypes);
             return attributeTypes;
@@ -79,7 +71,6 @@ public class AttributeTypesServiceImpl implements AttributeTypesService {
         AttributeTypes attributeTypes = repository
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Attribute type with id: " + id + " not found!"));
-        attributeTypes.setArchived(Boolean.TRUE);
         repository.save(attributeTypes);
         return attributeTypes;
     }

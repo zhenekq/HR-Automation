@@ -50,15 +50,13 @@ public class CandidateAttributeController {
      *
      * @param id         candidate identifier
      * @param attributes body of attributes
-     * @param type       attribute type
      * @return Candidate's id
      */
     @ApiOperation("Create new attributes with candidate by his id")
     @PostMapping
-    public CandidateAttributesDto createByCandidateId(@PathVariable String id,
-                                                      @RequestBody CandidateAttributes attributes,
-                                                      @RequestParam Integer type) {
-        CandidateAttributes candidateAttributes = service.createByCandidateIdAndAttributeTypeId(id, type, attributes);
-        return converter.convertToEntityDto(candidateAttributes);
+    public List<CandidateAttributesDto> createByCandidateId(@PathVariable String id,
+                                                            @RequestBody List<CandidateAttributes> attributes) {
+        List<CandidateAttributes> attributesList = service.createByCandidateId(id, attributes);
+        return converter.convertToListEntityDto(attributesList);
     }
 }

@@ -27,6 +27,9 @@ public class CandidateAttributes {
     @Column(name = "valuesource")
     private Integer valueSource;
 
+    @Column(name = "is_archived")
+    private Boolean isArchived;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private Candidate candidate;
@@ -49,6 +52,14 @@ public class CandidateAttributes {
     public CandidateAttributes(String value, Integer valueSource) {
         this.value = value;
         this.valueSource = valueSource;
+    }
+
+    public CandidateAttributes(String value, Integer valueSource, Candidate candidate, AttributeTypes attributeTypes, Boolean isArchived) {
+        this.value = value;
+        this.valueSource = valueSource;
+        this.candidate = candidate;
+        this.attributeTypes = attributeTypes;
+        this.isArchived = isArchived;
     }
 
     public Integer getId() {
@@ -75,6 +86,14 @@ public class CandidateAttributes {
         this.valueSource = valueSource;
     }
 
+    public Boolean getIsArchived() {
+        return isArchived;
+    }
+
+    public void setIsArchived(Boolean isArchived) {
+        this.isArchived = isArchived;
+    }
+
     @JsonIgnore
     public Candidate getCandidate() {
         return candidate;
@@ -94,17 +113,29 @@ public class CandidateAttributes {
 
     @Override
     public boolean equals(Object o) {
-        return EqualsBuilder.reflectionEquals(this, o);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CandidateAttributes that = (CandidateAttributes) o;
+
+        return attributeTypes.equals(that.attributeTypes);
     }
 
     @Override
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
+        return attributeTypes.getId().hashCode();
     }
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+        final StringBuilder sb = new StringBuilder("CandidateAttributes{");
+        sb.append("id=").append(id);
+        sb.append(", value='").append(value).append('\'');
+        sb.append(", valueSource=").append(valueSource);
+        sb.append(", isArchived=").append(isArchived);
+        sb.append(", candidate=").append(candidate);
+        sb.append(", attributeTypes=").append(attributeTypes);
+        sb.append('}');
+        return sb.toString();
     }
-
 }

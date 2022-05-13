@@ -35,5 +35,4 @@ public interface CandidateService {
      * @param candidate body of our candidate
      */
     Candidate create(Candidate candidate);
-
 }
