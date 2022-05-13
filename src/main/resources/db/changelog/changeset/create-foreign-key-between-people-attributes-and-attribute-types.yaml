@@ -4,11 +4,11 @@ databaseChangeLog:
       author: yauheni_vozny
       changes:
         - addColumn:
-              tableName: peopleattributes
-              columns:
-                  - column:
-                        name: type
-                        type: integer
+            tableName: peopleattributes
+            columns:
+              - column:
+                  name: type
+                  type: integer
         - addForeignKeyConstraint:
             baseColumnNames: type
             baseTableCatalogName: hr-automation

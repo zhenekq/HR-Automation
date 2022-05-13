@@ -1,46 +1,28 @@
-package by.mifort.automation.hr.dev.entity;
+package by.mifort.automation.hr.dev.dto;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import javax.persistence.*;
+
 import java.sql.Timestamp;
+import java.util.Map;
 
 /**
- * Updates about candidate
+ * Data transfer object for entity CandidateUpdates
+ *
  * @author yauheni_vozny
  * @version 1.0
- * */
-
-@Entity
-@Table(name = "peopleupdates")
-public class PeopleUpdate {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+ * @see by.mifort.automation.hr.dev.entity.CandidateUpdate
+ */
+public class CandidateUpdateDto {
     private Integer id;
-
-    @Column(name = "source", nullable = false)
     private String source;
-
-    @Column(name = "updatedate")
     private Timestamp updateDate;
+    private Map<String, String> changeSet;
 
-    @Column(name = "changeset", columnDefinition = "json")
-    private String changeSet;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private People human;
-
-    public PeopleUpdate() {
-    }
-
-    public PeopleUpdate(Integer id, String source, Timestamp updateDate, String changeSet, People human) {
-        this.id = id;
-        this.source = source;
-        this.updateDate = updateDate;
-        this.changeSet = changeSet;
-        this.human = human;
+    public CandidateUpdateDto() {
     }
 
     public Integer getId() {
@@ -67,20 +49,14 @@ public class PeopleUpdate {
         this.updateDate = updateDate;
     }
 
-    public String getChangeSet() {
+    @JsonAnyGetter
+    public Map<String, String> getChangeSet() {
         return changeSet;
     }
 
-    public void setChangeSet(String changeSet) {
+    @JsonAnySetter
+    public void setChangeSet(Map<String, String> changeSet) {
         this.changeSet = changeSet;
-    }
-
-    public People getHuman() {
-        return human;
-    }
-
-    public void setHuman(People human) {
-        this.human = human;
     }
 
     @Override

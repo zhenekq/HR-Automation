@@ -1,5 +1,6 @@
 package by.mifort.automation.hr.dev.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -8,40 +9,40 @@ import javax.persistence.*;
 
 /**
  * People attributes that connected with candidate
- * @see AttributeTypes connected attributes with types
+ *
  * @author yauheni_vozny
  * @version 1.0
+ * @see AttributeTypes connected attributes with types
  */
-
 @Entity
 @Table(name = "peopleattributes")
-public class PeopleAttributes {
+public class CandidateAttributes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "value")
-    private String name;
+    private String value;
 
     @Column(name = "valuesource")
     private Integer valueSource;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private People human;
+    private Candidate candidate;
 
     @ManyToOne
     @JoinColumn(name = "type", nullable = false)
     private AttributeTypes attributeTypes;
 
-    public PeopleAttributes() {
+    public CandidateAttributes() {
     }
 
-    public PeopleAttributes(Integer id, Integer type, String name, Integer valueSource, People human) {
+    public CandidateAttributes(Integer id, Integer type, String value, Integer valueSource, Candidate candidate) {
         this.id = id;
-        this.name = name;
+        this.value = value;
         this.valueSource = valueSource;
-        this.human = human;
+        this.candidate = candidate;
     }
 
     public Integer getId() {
@@ -52,12 +53,12 @@ public class PeopleAttributes {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getValue() {
+        return value;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public Integer getValueSource() {
@@ -68,12 +69,21 @@ public class PeopleAttributes {
         this.valueSource = valueSource;
     }
 
-    public People getHuman() {
-        return human;
+    @JsonIgnore
+    public Candidate getCandidate() {
+        return candidate;
     }
 
-    public void setHuman(People human) {
-        this.human = human;
+    public void setCandidate(Candidate candidate) {
+        this.candidate = candidate;
+    }
+
+    public AttributeTypes getAttributeTypes() {
+        return attributeTypes;
+    }
+
+    public void setAttributeTypes(AttributeTypes attributeTypes) {
+        this.attributeTypes = attributeTypes;
     }
 
     @Override

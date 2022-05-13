@@ -1,20 +1,20 @@
 package by.mifort.automation.hr.dev.service.impl;
 
+import by.mifort.automation.hr.dev.dto.FilterDto;
+import by.mifort.automation.hr.dev.entity.Candidate;
 import by.mifort.automation.hr.dev.entity.Keyword;
 import by.mifort.automation.hr.dev.repository.KeywordRepository;
 import by.mifort.automation.hr.dev.service.KeywordService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class KeywordServiceImpl implements KeywordService {
 
     private final KeywordRepository repository;
-    private final Integer AMOUNT_OF_RESULTS_ON_ONE_PAGE = 2;
 
     @Autowired
     public KeywordServiceImpl(KeywordRepository repository) {
@@ -22,16 +22,22 @@ public class KeywordServiceImpl implements KeywordService {
     }
 
     @Override
-    public List<Keyword> getAllKeywords(Integer page) {
-        if (page == null) {
-            return repository.findAll();
+    public List<Keyword> createByCandidateId(String id, FilterDto dto) {
+        List<Keyword> requestKeywords = dto.getKeyword()
+                .stream()
+                .map(Keyword::new)
+                .toList();
+        List<Keyword> distinctKeywords = new ArrayList<>();
+        for (Keyword keyword : requestKeywords) {
+            Keyword dbKeyword = repository.findById(keyword.getId()).orElse(null);
+            if (dbKeyword == null) {
+                distinctKeywords.add(keyword);
+            }
         }
-        Pageable pageable = PageRequest.of(page - 1, AMOUNT_OF_RESULTS_ON_ONE_PAGE);
-        return repository.findAllKeywords(pageable).toList();
+        distinctKeywords.forEach((el) -> el.setCandidate(new Candidate(id)));
+        repository.saveAll(distinctKeywords);
+        return distinctKeywords;
     }
 
-    @Override
-    public List<Keyword> getAllKeywordsById(String id) {
-        return repository.findById(id).stream().toList();
-    }
+
 }

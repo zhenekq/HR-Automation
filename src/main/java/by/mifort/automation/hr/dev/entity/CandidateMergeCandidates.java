@@ -9,16 +9,18 @@ import java.io.Serializable;
 
 /**
  * People merge candidates entity
+ *
  * @author yauheni_vozny
  * @version 1.0
  */
 
 @Entity
 @Table(name = "people_merge_candidates")
-public class PeopleMergeCandidates implements Serializable {
+public class CandidateMergeCandidates implements Serializable {
 
-    @EmbeddedId
-    private MergeCandidates mergeCandidates;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
     @Column(name = "status")
     private String status;
@@ -30,10 +32,10 @@ public class PeopleMergeCandidates implements Serializable {
     private String reasonComment;
 
     /**
-     * @see People Join 2 primary keys like a foreign key for 1 primary key
-     * */
+     * @see Candidate Join 2 primary keys like a foreign key for 1 primary key
+     */
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    /*@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
             @JoinColumn(
                     name = "user1Id",
@@ -50,23 +52,22 @@ public class PeopleMergeCandidates implements Serializable {
                     updatable = false
             )
     })
-    private People human;
+    private Candidate candidate;*/
+    public CandidateMergeCandidates() {
+    }
 
-    public PeopleMergeCandidates() {}
-
-    public PeopleMergeCandidates(MergeCandidates mergeCandidates, String status, String reason, String reasonComment) {
-        this.mergeCandidates = mergeCandidates;
+    public CandidateMergeCandidates(String status, String reason, String reasonComment) {
         this.status = status;
         this.reason = reason;
         this.reasonComment = reasonComment;
     }
 
-    public MergeCandidates getMergeCandidates() {
-        return mergeCandidates;
+    public Integer getId() {
+        return id;
     }
 
-    public void setMergeCandidates(MergeCandidates mergeCandidates) {
-        this.mergeCandidates = mergeCandidates;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getStatus() {
@@ -93,13 +94,6 @@ public class PeopleMergeCandidates implements Serializable {
         this.reasonComment = reasonComment;
     }
 
-    public People getHuman() {
-        return human;
-    }
-
-    public void setHuman(People human) {
-        this.human = human;
-    }
 
     @Override
     public boolean equals(Object o) {

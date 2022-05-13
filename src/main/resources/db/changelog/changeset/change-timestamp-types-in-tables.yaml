@@ -10,11 +10,11 @@ databaseChangeLog:
             schemaName: public
             tableName: communication_history
         - modifyDataType:
-              catalogName: hr-automation
-              columnName: updatedate
-              newDataType: timestamptz(6)
-              schemaName: public
-              tableName: communication_history
+            catalogName: hr-automation
+            columnName: updatedate
+            newDataType: timestamptz(6)
+            schemaName: public
+            tableName: communication_history
         - modifyDataType:
             catalogName: hr-automation
             columnName: lastcontact

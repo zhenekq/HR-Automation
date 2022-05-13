@@ -1,14 +1,15 @@
 package by.mifort.automation.hr.dev.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 /**
  * Keywords that connected to candidate
+ *
  * @author yauheni_vozny
  * @version 1.0
  */
@@ -17,18 +18,22 @@ import java.util.UUID;
 @Table(name = "keywords", schema = "public")
 public class Keyword {
     @Id
-    private String id = UUID.randomUUID().toString();
+    private String id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private People human;
+    private Candidate candidate;
 
     public Keyword() {
     }
 
-    public Keyword(String id, People human) {
+    public Keyword(String id) {
         this.id = id;
-        this.human = human;
+    }
+
+    public Keyword(String id, Candidate candidate) {
+        this.id = id;
+        this.candidate = candidate;
     }
 
     public String getId() {
@@ -39,12 +44,13 @@ public class Keyword {
         this.id = id;
     }
 
-    public People getHuman() {
-        return human;
+    @JsonIgnore
+    public Candidate getCandidate() {
+        return candidate;
     }
 
-    public void setHuman(People human) {
-        this.human = human;
+    public void setCandidate(Candidate candidate) {
+        this.candidate = candidate;
     }
 
     @Override

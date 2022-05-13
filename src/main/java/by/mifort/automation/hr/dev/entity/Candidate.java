@@ -9,13 +9,11 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * Head entity "people" that has all information
+ *
  * @author yauheni_vozny
  * @version 1.0
  */
@@ -23,10 +21,10 @@ import java.util.UUID;
 @Entity
 @Table(name = "people", schema = "public")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class People implements Serializable {
+public class Candidate implements Serializable {
 
     @Id
-    private String id = UUID.randomUUID().toString();
+    private String id;
 
     @Column(name = "lastcontact")
     private Timestamp lastContact;
@@ -36,44 +34,53 @@ public class People implements Serializable {
 
     /**
      * Information about candidate updates
-     * @see PeopleUpdate
+     *
+     * @see CandidateUpdate
      */
-    @OneToMany(mappedBy = "human")
-    private List<PeopleUpdate> humanUpdates;
+    @OneToMany(mappedBy = "candidate")
+    private List<CandidateUpdate> updates;
 
     /**
      * Keyboards that connection with candidate
+     *
      * @see Keyword
      */
-    @OneToMany(mappedBy = "human")
-    private List<Keyword> humanKeywords;
+    @OneToMany(mappedBy = "candidate")
+    private List<Keyword> keywords;
 
     /**
      * Communication history with candidate
+     *
      * @see CommunicationHistory
      */
-    @OneToMany(mappedBy = "human")
+    @OneToMany(mappedBy = "candidate")
     private List<CommunicationHistory> communicationHistory;
 
     /**
      * Attributes that connected with candidate
-     * @see PeopleAttributes
+     *
+     * @see CandidateAttributes
      */
-    @OneToMany(mappedBy = "human")
-    private List<PeopleAttributes> humanAttributes;
+    @OneToMany(mappedBy = "candidate")
+    private List<CandidateAttributes> attributes;
 
 
     /**
      * Merged candidates
-     * @see PeopleMergeCandidates
-     * */
-    @OneToMany(mappedBy = "human")
-    private List<PeopleMergeCandidates> candidates;
+     *
+     * @see CandidateMergeCandidates
+     */
+    @OneToMany(mappedBy = "candidate")
+    private List<CandidateMergeCandidates> mergeCandidates;
 
-    public People() {
+    public Candidate() {
     }
 
-    public People(String id, Timestamp lastContact, String status) {
+    public Candidate(String id) {
+        this.id = id;
+    }
+
+    public Candidate(String id, Timestamp lastContact, String status) {
         this.id = id;
         this.lastContact = lastContact;
         this.status = status;
@@ -105,21 +112,21 @@ public class People implements Serializable {
     }
 
     @JsonIgnore
-    public List<PeopleUpdate> getHumanUpdates() {
-        return humanUpdates;
+    public List<CandidateUpdate> getUpdates() {
+        return updates;
     }
 
-    public void setHumanUpdates(List<PeopleUpdate> humanUpdates) {
-        this.humanUpdates = humanUpdates;
+    public void setUpdates(List<CandidateUpdate> updates) {
+        this.updates = updates;
     }
 
     @JsonIgnore
-    public List<Keyword> getHumanKeywords() {
-        return humanKeywords;
+    public List<Keyword> getKeywords() {
+        return keywords;
     }
 
-    public void setHumanKeywords(List<Keyword> humanKeywords) {
-        this.humanKeywords = humanKeywords;
+    public void setKeywords(List<Keyword> keywords) {
+        this.keywords = keywords;
     }
 
     @JsonIgnore
@@ -132,21 +139,21 @@ public class People implements Serializable {
     }
 
     @JsonIgnore
-    public List<PeopleAttributes> getHumanAttributes() {
-        return humanAttributes;
+    public List<CandidateAttributes> getAttributes() {
+        return attributes;
     }
 
-    public void setHumanAttributes(List<PeopleAttributes> humanAttributes) {
-        this.humanAttributes = humanAttributes;
+    public void setAttributes(List<CandidateAttributes> attributes) {
+        this.attributes = attributes;
     }
 
     @JsonIgnore
-    public List<PeopleMergeCandidates> getCandidates() {
-        return candidates;
+    public List<CandidateMergeCandidates> getMergeCandidates() {
+        return mergeCandidates;
     }
 
-    public void setCandidates(List<PeopleMergeCandidates> candidates) {
-        this.candidates = candidates;
+    public void setMergeCandidates(List<CandidateMergeCandidates> mergeCandidates) {
+        this.mergeCandidates = mergeCandidates;
     }
 
     @Override

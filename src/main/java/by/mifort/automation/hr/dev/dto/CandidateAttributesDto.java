@@ -1,33 +1,47 @@
 package by.mifort.automation.hr.dev.dto;
 
-import by.mifort.automation.hr.dev.entity.People;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import java.util.Objects;
-import java.util.Set;
-
 /**
- * Data transfer object for entity Keyword
- * @see by.mifort.automation.hr.dev.entity.Keyword
+ * Data transfer object for entity CandidateAttributes
+ *
  * @author yauheni_vozny
  * @version 1.0
+ * @see by.mifort.automation.hr.dev.entity.CandidateAttributes
  */
+public class CandidateAttributesDto {
 
-public class KeywordDto {
+    private Integer id;
+    private String value;
+    private Integer valueSource;
 
-    private String id;
-
-    public KeywordDto() {
+    public CandidateAttributesDto() {
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public Integer getValueSource() {
+        return valueSource;
+    }
+
+    public void setValueSource(Integer valueSource) {
+        this.valueSource = valueSource;
     }
 
     @Override
